@@ -2,7 +2,8 @@
 #ifndef GRAPH_H_
 #define GRAPH_H_
 
-#include <list>
+#include <map>
+#include <set>
 
 class Graph {
 public:
@@ -12,10 +13,11 @@ public:
 	void addEdge(int, int);
 	void removeVertex(int);
 	void removeEdge(int,int);
-	std::list<int> getNeighbours(int);
+	std::set<int> getNeighbours(int vertex);
 
 protected:
-	std::list<std::list<int>> m_graph;
+	std::map<int,std::set<int> > m_graph;
+	int m_vertexCount;
 };
 
 #endif /* GRAPH_H_ */
