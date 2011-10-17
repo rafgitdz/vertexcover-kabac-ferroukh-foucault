@@ -10,8 +10,9 @@
 
 #include "Graph.h"
 
-class SimpleGraph: protected Graph {
+class SimpleGraph: public Graph {
 public:
+	SimpleGraph();
 	SimpleGraph(int vertexNum, float edgeProba);
 	virtual ~SimpleGraph();
 };

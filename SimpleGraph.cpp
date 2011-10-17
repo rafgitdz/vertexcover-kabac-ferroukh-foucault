@@ -7,6 +7,10 @@
 
 #include "SimpleGraph.h"
 
+SimpleGraph::SimpleGraph() {
+
+}
+
 SimpleGraph::SimpleGraph(int vertexCount, float edgeProba):Graph() {
 	//creer sommets
 	//pour chaque paire de sommets

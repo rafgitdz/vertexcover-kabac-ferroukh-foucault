@@ -1,13 +1,6 @@
-/*
- * SmallCoverGraph.cpp
- *
- *  Created on: 13 oct. 2011
- *      Author: mfoucaul
- */
-
 #include "SmallCoverGraph.h"
 
-SmallCoverGraph::SmallCoverGraph() {
+SmallCoverGraph::SmallCoverGraph() : SimpleGraph() {
 	// TODO Auto-generated constructor stub
 
 }

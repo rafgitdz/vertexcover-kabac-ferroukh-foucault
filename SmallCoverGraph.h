@@ -10,7 +10,7 @@
 
 #include "SimpleGraph.h"
 
-class SmallCoverGraph: protected SimpleGraph {
+class SmallCoverGraph: public SimpleGraph {
 public:
 	SmallCoverGraph();
 	virtual ~SmallCoverGraph();

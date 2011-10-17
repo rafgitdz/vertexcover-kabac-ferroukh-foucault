@@ -4,6 +4,7 @@
 
 #include <map>
 #include <set>
+#include <iostream>
 
 class Graph {
 public:
@@ -14,10 +15,16 @@ public:
 	void removeVertex(int);
 	void removeEdge(int,int);
 	std::set<int> getNeighbours(int vertex);
+	std::set<int> getVertices();
 
-protected:
+	friend std::ostream &operator<< (std::ostream &out, const Graph&);
+
+private:
 	std::map<int,std::set<int> > m_graph;
 	int m_vertexCount;
 };
+
+std::ostream &operator<< (std::ostream &out, const Graph&);
+
 
 #endif /* GRAPH_H_ */

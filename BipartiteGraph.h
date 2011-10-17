@@ -9,6 +9,7 @@
 #define BIPARTITEGRAPH_H_
 
 #include "Graph.h"
+#include <list>
 
 class BipartiteGraph: protected Graph {
 	public:
