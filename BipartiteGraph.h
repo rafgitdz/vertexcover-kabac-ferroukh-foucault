@@ -1,23 +1,11 @@
-/*
- * BipartiteGraph.h
- *
- *  Created on: 13 oct. 2011
- *      Author: mfoucaul
- */
-
 #ifndef BIPARTITEGRAPH_H_
 #define BIPARTITEGRAPH_H_
 
 #include "Graph.h"
-#include <list>
 
-class BipartiteGraph: protected Graph {
+class BipartiteGraph: public Graph {
 	public:
-		BipartiteGraph(); // add params
-		virtual ~BipartiteGraph();
-	private:
-		std::list<int> m_partA;
-		std::list<int> m_partB;
+		BipartiteGraph(int vertexNumber, float edgeProba);
 };
 
 #endif /* BIPARTITEGRAPH_H_ */
