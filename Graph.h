@@ -14,6 +14,8 @@ public:
 	void addEdge(int, int);
 	void removeVertex(int);
 	void removeEdge(int,int);
+	bool hasEdge(int,int);
+	bool hasPath(int,int,int);
 	std::set<int> getNeighbours(int vertex);
 	std::set<int> getVertices();
 
