@@ -31,6 +31,29 @@ void Graph::removeVertex(int vertex) {
 	m_graph.erase(vertex);
 }
 
+bool Graph::hasEdge(int vertex1, int vertex2) {
+
+	return m_graph[vertex1].find(vertex2) != m_graph[vertex1].end();
+
+}
+
+bool Graph::hasPath(int vertex1, int vertex2, int precedentVertex) {
+
+	for (set<int>::iterator currentVertex = m_graph[vertex1].begin(); currentVertex != m_graph[vertex1].end(); ++currentVertex ) {
+
+		if(*currentVertex!=precedentVertex) {
+
+			if(!hasEdge(*currentVertex, vertex2))
+					hasPath(*currentVertex,vertex2,vertex1); // recursive call
+			else return true; // detect that this edge will create a cycle in the graph
+		}
+
+	}
+	return false;
+
+}
+
+
 
 set<int> Graph::getNeighbours(int vertex) {
 	return m_graph[vertex];
