@@ -1,19 +1,19 @@
-/*
- * Tree.h
- *
- *  Created on: 13 oct. 2011
- *      Author: mfoucaul
- */
-
 #ifndef TREE_H_
 #define TREE_H_
 
 #include "Graph.h"
 
-class Tree: protected Graph {
+class Tree: public Graph {
 public:
 	Tree();
+	Tree(int VertexCount);
 	virtual ~Tree();
+
+	void createTree();
+
+private :
+	int vertexCount;
+
 };
 
 #endif /* TREE_H_ */
