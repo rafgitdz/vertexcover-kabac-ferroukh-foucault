@@ -1,24 +1,19 @@
-/*
- * SimpleGraph.cpp
- *
- *  Created on: 13 oct. 2011
- *      Author: mfoucaul
- */
-
 #include "SimpleGraph.h"
+#include <cstdlib>
 
-SimpleGraph::SimpleGraph() {
-
-}
+using namespace std;
 
 SimpleGraph::SimpleGraph(int vertexCount, float edgeProba):Graph() {
-	//creer sommets
-	//pour chaque paire de sommets
-	// si randnum < proba,
-	// creer arete
+	for(int i = 0; i < vertexCount; i++)
+		addVertex();
 
+	srand((unsigned)time(0));
+	int prob = (int)(edgeProba*100);
+
+	for(int i = 1; i < vertexCount; i++)
+		for(int j = i+1; j <= vertexCount; j++)
+			if (rand() % 100 < prob)
+				addEdge(i,j);
 }
 
-SimpleGraph::~SimpleGraph() {
-	// TODO Auto-generated destructor stub
-}
+SimpleGraph::~SimpleGraph() {}

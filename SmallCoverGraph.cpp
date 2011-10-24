@@ -1,6 +1,6 @@
 #include "SmallCoverGraph.h"
 
-SmallCoverGraph::SmallCoverGraph() : SimpleGraph() {
+SmallCoverGraph::SmallCoverGraph() {
 	// TODO Auto-generated constructor stub
 
 }
