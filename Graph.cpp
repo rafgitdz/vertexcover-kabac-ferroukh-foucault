@@ -53,8 +53,6 @@ bool Graph::hasPath(int vertex1, int vertex2, int precedentVertex) {
 
 }
 
-
-
 set<int> Graph::getNeighbours(int vertex) {
 	return m_graph[vertex];
 }
@@ -63,6 +61,10 @@ set<int> Graph::getVertices() {
     set<int> vertices;
 
     return vertices;
+}
+
+map<int,set<int> > Graph::getGraph() {
+	return m_graph;
 }
 
 Graph::~Graph() {

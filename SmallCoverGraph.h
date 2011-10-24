@@ -10,10 +10,12 @@
 
 #include "SimpleGraph.h"
 
-class SmallCoverGraph {
+class SmallCoverGraph : public SimpleGraph {
 public:
-	SmallCoverGraph();
-	virtual ~SmallCoverGraph();
+	SmallCoverGraph(int vertexCount, float edgeProba, unsigned int coverSize);
+	~SmallCoverGraph();
+private:
+	std::set<int> vertexCover;
 };
 
 #endif /* SMALLCOVERGRAPH_H_ */

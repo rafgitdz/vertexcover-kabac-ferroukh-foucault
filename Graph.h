@@ -18,6 +18,7 @@ public:
 	bool hasPath(int,int,int);
 	std::set<int> getNeighbours(int vertex);
 	std::set<int> getVertices();
+	std::map<int,std::set<int> > getGraph();
 
 	friend std::ostream &operator<< (std::ostream &out, const Graph&);
 

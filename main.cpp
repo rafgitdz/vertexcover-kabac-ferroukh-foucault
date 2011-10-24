@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Graph.h"
-#include "SimpleGraph.h"
+#include "SmallCoverGraph.h"
 
 using namespace std;
 
@@ -12,7 +12,7 @@ int main()
     g.addEdge(v,v2);
     cout << g << endl;
 
-    SimpleGraph g1(10, 0.3);
+    SmallCoverGraph g1(10, 0.25, 3);
     cout << g1;
 
     return 0;
