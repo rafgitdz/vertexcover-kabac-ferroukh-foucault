@@ -1,16 +1,22 @@
 #include "Graph.h"
 #include <algorithm>
+#include <limits>
 
 
 using namespace std;
 
-Graph::Graph() : m_graph(), m_vertexCount(0) {}
+Graph::Graph() : m_graph() {
+	srand(time(NULL));
+}
 
 int Graph::addVertex() {
-	m_vertexCount++;
 	set<int> s;
-	m_graph[m_vertexCount] = s;
-	return m_vertexCount;
+	int vertex = rand()%numeric_limits<int>::max();
+	while (m_graph.find(vertex) != m_graph.end()) {
+		vertex = rand()%numeric_limits<int>::max();
+	}
+	m_graph[vertex] = s;
+	return vertex;
 }
 
 void Graph::addEdge(int vertex1, int vertex2) {
