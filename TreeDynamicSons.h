@@ -8,10 +8,10 @@
 #ifndef TREE_DYNAMIC_SONS_AND_ROOTS_H_
 #define	TREE_DYNAMIC_SONS_AND_ROOTS_H_
 
-#include "TreeSpecial.h"
+#include "Tree.h"
 #include <vector>
 
-class TreeDynamicSonsAndRoots : public TreeSpecial {
+class TreeDynamicSonsAndRoots : public Tree{
 public:
     TreeDynamicSonsAndRoots(int VertexCount);
     virtual ~TreeDynamicSonsAndRoots();

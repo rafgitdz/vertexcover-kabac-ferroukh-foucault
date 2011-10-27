@@ -3,7 +3,7 @@
 
 using namespace std;
 
-TreeDynamicSonsAndRoots::TreeDynamicSonsAndRoots(int vertexC) : TreeSpecial() {
+TreeDynamicSonsAndRoots::TreeDynamicSonsAndRoots(int vertexC) : Tree() {
     
     vertexCount = vertexC;
     

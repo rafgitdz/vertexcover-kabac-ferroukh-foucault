@@ -2,9 +2,9 @@
 #ifndef TREE_STATIC_SONS_AND_ROOTS_H
 #define	TREE_STATIC_SONS_AND_ROOTS_H
 
-#include "TreeSpecial.h"
+#include "Tree.h"
 
-class TreeStaticSonsAndRoots : public TreeSpecial {
+class TreeStaticSonsAndRoots : public Tree {
 public:
 	TreeStaticSonsAndRoots(int VertexCount, int numOfSons);
 	virtual ~TreeStaticSonsAndRoots();
