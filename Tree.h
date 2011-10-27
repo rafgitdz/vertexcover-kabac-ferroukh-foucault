@@ -1,19 +1,16 @@
-#ifndef TREE_H_
-#define TREE_H_
+#ifndef TREE_H
+#define	TREE_H
 
 #include "Graph.h"
+#include <vector>
 
 class Tree: public Graph {
 public:
-	Tree();
-	Tree(int VertexCount);
-	virtual ~Tree();
-
-	void createTree();
-
-private :
-	int vertexCount;
+    Tree(int vertexCount);
+    virtual ~Tree();
+    
+private:
 
 };
 
-#endif /* TREE_H_ */
+#endif	/* TREE_H */

@@ -5,8 +5,10 @@
 
 using namespace std;
 
-Graph::Graph() : m_graph() {
-	srand(time(NULL));
+Graph::Graph(int vertexCount) : m_graph(), m_vertexCount(0) {
+    srand(time(NULL));
+    for (int i = 0; i < vertexCount; i++) 
+        addVertex();
 }
 
 int Graph::addVertex() {
@@ -37,30 +39,35 @@ void Graph::removeVertex(int vertex) {
 	m_graph.erase(vertex);
 }
 
+
 bool Graph::hasEdge(int vertex1, int vertex2) {
-
 	return m_graph[vertex1].find(vertex2) != m_graph[vertex1].end();
-
 }
 
 bool Graph::hasPath(int vertex1, int vertex2, int precedentVertex) {
 
-	for (set<int>::iterator currentVertex = m_graph[vertex1].begin(); currentVertex != m_graph[vertex1].end(); ++currentVertex ) {
 
-		if(*currentVertex!=precedentVertex) {
+    if (hasEdge(vertex1, vertex2))
+        return true;
 
-			if(!hasEdge(*currentVertex, vertex2))
-					hasPath(*currentVertex,vertex2,vertex1); // recursive call
-			else return true; // detect that this edge will create a cycle in the graph
-		}
+    else {
 
-	}
-	return false;
+        for (set<int>::iterator currentVertex = m_graph[vertex1].begin(); currentVertex != m_graph[vertex1].end(); ++currentVertex) {
+
+            if (*currentVertex != precedentVertex) {
+                if (hasPath(*currentVertex, vertex2, vertex1))
+                    return true;
+            }
+        }
+        return false;
+
+    }
 
 }
 
 set<int> Graph::getNeighbours(int vertex) {
 	return m_graph[vertex];
+
 }
 
 set<int> Graph::getVertices() {

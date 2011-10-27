@@ -5,10 +5,13 @@
 #include <map>
 #include <set>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 
 class Graph {
 public:
-	Graph();
+	Graph(int vertexCount = 0);
 	virtual ~Graph();
 	int addVertex();
 	void addEdge(int, int);
@@ -22,8 +25,10 @@ public:
 
 	friend std::ostream &operator<< (std::ostream &out, const Graph&);
 
-private:
+protected:
 	std::map<int,std::set<int> > m_graph;
+	int m_vertexCount;
+
 };
 
 std::ostream &operator<< (std::ostream &out, const Graph&);
