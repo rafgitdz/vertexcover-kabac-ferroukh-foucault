@@ -59,6 +59,11 @@ set<int> Graph::getNeighbours(int vertex) {
 
 set<int> Graph::getVertices() {
     set<int> vertices;
+    std::map<int,std::set<int> >::iterator it;
+
+    for(it = m_graph.begin(); it != m_graph.end(); it++){
+    	vertices.insert(it->first);
+    }
 
     return vertices;
 }

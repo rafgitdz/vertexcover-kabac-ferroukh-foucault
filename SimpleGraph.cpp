@@ -8,11 +8,11 @@ SimpleGraph::SimpleGraph(int vertexCount, float edgeProba):Graph() {
 		addVertex();
 
 	srand((unsigned)time(0));
-	int prob = (int)(edgeProba*100);
+	probability = (int)(edgeProba*100);
 
 	for(int i = 1; i < vertexCount; i++)
 		for(int j = i+1; j <= vertexCount; j++)
-			if (rand() % 100 < prob)
+			if (rand() % 100 < probability)
 				addEdge(i,j);
 }
 
