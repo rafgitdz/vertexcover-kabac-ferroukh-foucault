@@ -1,19 +1,20 @@
-#ifndef TREE_H_
-#define TREE_H_
+#ifndef TREE_H
+#define	TREE_H
 
 #include "Graph.h"
+#include <vector>
 
 class Tree: public Graph {
 public:
-	Tree();
-	Tree(int VertexCount);
-	virtual ~Tree();
+    Tree(int vertexCount = 0);
 
-	void createTree();
+    void constructEdgesTree(int numberOfSons, int vertexCount, int indexOfRoot, int &end, std::vector<int> &list, std::vector<int> &list2);
+    void updateList(std::vector<int> &list, std::vector<int> &list2);
 
-private :
-	int vertexCount;
+    virtual ~Tree();
+    
+private:
 
 };
 
-#endif /* TREE_H_ */
+#endif	/* TREE_H */
