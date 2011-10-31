@@ -28,8 +28,6 @@ public:
 
 protected:
     std::map<int, std::set<int> > m_graph;
-    int m_vertexCount;
-
 };
 
 std::ostream &operator<<(std::ostream &out, const Graph&);

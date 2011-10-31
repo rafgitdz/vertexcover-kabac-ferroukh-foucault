@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Graph::Graph(int vertexCount) : m_graph(), m_vertexCount(0) {
+Graph::Graph(int vertexCount) : m_graph() {
 
     srand(time(NULL));
     for (int i = 0; i < vertexCount; i++) 
@@ -89,7 +89,7 @@ set<int> Graph::getVertices() {
 }
 
 int Graph::getVertexCount() {
-    return m_vertexCount;
+    return m_graph.size();
 }
 
 map<int, set<int> >::const_iterator Graph::getBeginGraph() {
