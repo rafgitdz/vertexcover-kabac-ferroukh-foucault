@@ -2,7 +2,7 @@
 #include "Algorithm.h"
 
 Algorithm::Algorithm(Graph g) {
-    graph = g;
+    m_graph = g;
 }
 
 Algorithm::~Algorithm() {

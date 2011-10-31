@@ -12,7 +12,7 @@ public:
     std::set<int> getCover(); // abstract class
 
 protected:
-    Graph graph;
+    Graph m_graph;
 };
 
 #endif /* ALGORITHM_H_ */
