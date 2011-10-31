@@ -14,6 +14,7 @@ public:
 	Graph(int vertexCount = 0);
 	virtual ~Graph();
 	int addVertex();
+	void addVertex(int vertexNum);
 	void addEdge(int, int);
 	void removeVertex(int);
 	void removeEdge(int,int);

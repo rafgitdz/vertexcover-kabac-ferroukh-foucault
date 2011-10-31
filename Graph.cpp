@@ -1,6 +1,7 @@
 #include "Graph.h"
 #include <algorithm>
 #include <limits>
+#include <cassert>
 
 
 using namespace std;
@@ -19,6 +20,14 @@ int Graph::addVertex() {
 	}
 	m_graph[vertex] = s;
 	return vertex;
+}
+
+void Graph::addVertex(int vertexNum) {
+	assert(m_graph.find(vertexNum) == m_graph.end());
+
+	set<int> s;
+
+	m_graph[vertexNum] = s;
 }
 
 void Graph::addEdge(int vertex1, int vertex2) {
@@ -72,7 +81,8 @@ set<int> Graph::getNeighbours(int vertex) {
 
 set<int> Graph::getVertices() {
     set<int> vertices;
-
+    for (map<int, set<int> >::const_iterator ii = m_graph.begin(); ii!= m_graph.end(); ++ii )
+    	vertices.insert((*ii).first);
     return vertices;
 }
 
