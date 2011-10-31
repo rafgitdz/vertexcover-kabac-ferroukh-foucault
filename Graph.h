@@ -13,6 +13,7 @@ public:
     Graph(int vertexCount = 0);
     virtual ~Graph();
     int addVertex();
+    void addVertex(int vertexNum);
     void addEdge(int, int);
     void removeVertex(int);
     void removeEdge(int, int);
@@ -28,6 +29,7 @@ public:
 protected:
     std::map<int, std::set<int> > m_graph;
     int m_vertexCount;
+
 };
 
 std::ostream &operator<<(std::ostream &out, const Graph&);

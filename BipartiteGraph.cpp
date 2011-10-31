@@ -1,21 +1,27 @@
 #include "BipartiteGraph.h"
 #include <cstdlib>
 #include <ctime>
-
+#include <cassert>
 
 using namespace std;
 
-BipartiteGraph::BipartiteGraph(int vertexNumber, float edgeProba) :Graph() {
+BipartiteGraph::BipartiteGraph(int graphSize, float edgeProba, float partRatio) :
+		Graph() {
+	assert(edgeProba >= 0);
+	assert(edgeProba <= 1);
+	assert(partRatio >= 0);
+	assert(partRatio <= 1);
+
 	srand(time(NULL));
 
-	int vertices[vertexNumber];
-	for(int i = 0; i < vertexNumber; ++i) {
+	int vertices[graphSize];
+	for (int i = 0; i < graphSize; ++i) {
 		vertices[i] = addVertex();
 	}
-	for (int i = 0; i < vertexNumber; i+=2) {
-		for(int j = 1; j < vertexNumber; j+=2) {
-			if (rand() % 100 < edgeProba*100)
-				addEdge(i,j);
+	for (int i = 0; i < graphSize * partRatio; ++i) {
+		for (int j = graphSize - 1; j >= graphSize * partRatio; --j) {
+			if (rand() % 100 < edgeProba * 100)
+				addEdge(vertices[i], vertices[j]);
 		}
 	}
 }

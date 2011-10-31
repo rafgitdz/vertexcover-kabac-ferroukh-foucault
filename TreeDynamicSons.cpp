@@ -1,4 +1,3 @@
-
 #include "TreeDynamicSons.h"
 
 using namespace std;
@@ -26,4 +25,3 @@ TreeDynamicSonsAndRoots::TreeDynamicSonsAndRoots(int vertexC) : Tree() {
 
 TreeDynamicSonsAndRoots::~TreeDynamicSonsAndRoots() {
 }
-

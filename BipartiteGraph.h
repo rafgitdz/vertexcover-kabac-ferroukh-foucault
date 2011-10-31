@@ -5,7 +5,7 @@
 
 class BipartiteGraph: public Graph {
 	public:
-		BipartiteGraph(int vertexNumber, float edgeProba);
+		BipartiteGraph(int graphSize, float edgeProba, float partRatio = 0.5);
 };
 
 #endif /* BIPARTITEGRAPH_H_ */

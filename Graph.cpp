@@ -1,19 +1,34 @@
 #include "Graph.h"
 #include <algorithm>
+#include <limits>
+#include <cassert>
 
 using namespace std;
 
 Graph::Graph(int vertexCount) : m_graph(), m_vertexCount(0) {
 
-    for (int i = 0; i < vertexCount; i++)
+    srand(time(NULL));
+    for (int i = 0; i < vertexCount; i++) 
         addVertex();
 }
 
 int Graph::addVertex() {
-    m_vertexCount++;
-    set<int> s;
-    m_graph[m_vertexCount] = s;
-    return m_vertexCount;
+
+	set<int> s;
+	int vertex = rand()%numeric_limits<int>::max();
+	while (m_graph.find(vertex) != m_graph.end()) {
+		vertex = rand()%numeric_limits<int>::max();
+	}
+	m_graph[vertex] = s;
+	return vertex;
+}
+
+void Graph::addVertex(int vertexNum) {
+	assert(m_graph.find(vertexNum) == m_graph.end());
+
+	set<int> s;
+
+	m_graph[vertexNum] = s;
 }
 
 void Graph::addEdge(int vertex1, int vertex2) {
@@ -36,12 +51,13 @@ void Graph::removeVertex(int vertex) {
     m_graph.erase(vertex);
 }
 
+
 bool Graph::hasEdge(int vertex1, int vertex2) {
-     
-    return m_graph[vertex1].find(vertex2) != m_graph[vertex1].end();
+	return m_graph[vertex1].find(vertex2) != m_graph[vertex1].end();
 }
 
 bool Graph::hasPath(int vertex1, int vertex2, int precedentVertex) {
+
 
     if (hasEdge(vertex1, vertex2))
         return true;
@@ -59,18 +75,16 @@ bool Graph::hasPath(int vertex1, int vertex2, int precedentVertex) {
 }
 
 set<int> Graph::getNeighbours(int vertex) {
-    return m_graph[vertex];
+
+	return m_graph[vertex];
 }
 
 set<int> Graph::getVertices() {
 
     set<int> vertices;
-    std::map<int, std::set<int> >::iterator it;
-
-    for (it = m_graph.begin(); it != m_graph.end(); it++) {
-        vertices.insert(it->first);
-    }
-
+    for (map<int, set<int> >::const_iterator ii = m_graph.begin(); ii!= m_graph.end(); ++ii )
+    	vertices.insert((*ii).first);
+    	
     return vertices;
 }
 
