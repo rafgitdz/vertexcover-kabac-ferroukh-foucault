@@ -5,29 +5,31 @@
 #include <map>
 #include <set>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 class Graph {
 public:
-	Graph();
-	virtual ~Graph();
-	int addVertex();
-	void addEdge(int, int);
-	void removeVertex(int);
-	void removeEdge(int,int);
-	bool hasEdge(int,int);
-	bool hasPath(int,int,int);
-	std::set<int> getNeighbours(int vertex);
-	std::set<int> getVertices();
-	std::map<int,std::set<int> > getGraph();
+    Graph(int vertexCount = 0);
+    virtual ~Graph();
+    int addVertex();
+    void addEdge(int, int);
+    void removeVertex(int);
+    void removeEdge(int, int);
+    bool hasEdge(int, int);
+    bool hasPath(int, int, int);
+    std::set<int> getNeighbours(int vertex);
+    std::set<int> getVertices();
+    int getVertexCount();
+    std::map<int, std::set<int> >::const_iterator getBeginGraph();
+    std::map<int, std::set<int> >::const_iterator getEndGraph();
+    friend std::ostream &operator<<(std::ostream &out, const Graph&);
 
-	friend std::ostream &operator<< (std::ostream &out, const Graph&);
-
-private:
-	std::map<int,std::set<int> > m_graph;
-	int m_vertexCount;
+protected:
+    std::map<int, std::set<int> > m_graph;
+    int m_vertexCount;
 };
 
-std::ostream &operator<< (std::ostream &out, const Graph&);
-
+std::ostream &operator<<(std::ostream &out, const Graph&);
 
 #endif /* GRAPH_H_ */
