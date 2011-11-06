@@ -16,6 +16,7 @@ public:
     void addVertex(int vertexNum);
     void addEdge(int, int);
     void removeVertex(int);
+    void removeVertexAndIsolatedNeighbour(int);
     void removeEdge(int, int);
     bool hasEdge(int, int);
     bool hasPath(int, int, int);

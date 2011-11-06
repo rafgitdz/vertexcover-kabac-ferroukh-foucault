@@ -51,6 +51,17 @@ void Graph::removeVertex(int vertex) {
     m_graph.erase(vertex);
 }
 
+void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
+
+    set<int> neigh = m_graph[vertex];
+    for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {
+        m_graph[*ii].erase(vertex);
+        if(m_graph[*ii].empty())
+        	m_graph.erase(*ii);
+    }
+
+    m_graph.erase(vertex);
+}
 
 bool Graph::hasEdge(int vertex1, int vertex2) {
 	return m_graph[vertex1].find(vertex2) != m_graph[vertex1].end();
