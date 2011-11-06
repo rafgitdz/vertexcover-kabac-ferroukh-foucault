@@ -6,7 +6,7 @@ using namespace std;
 
 SmallCoverGraph::SmallCoverGraph(unsigned vertexCount, float edgeProba, unsigned coverSize): SimpleGraph(coverSize, edgeProba) {
 
-	cout << "Size VCin :" << (getVertices()).size();
+	cout << "Size VC_In :" << getVertexCount() << endl;
 	verticesInVC = getVertices();
 	for(unsigned i = 0; i < (vertexCount - coverSize); i++)
 		verticesOutOfVC.insert(addVertex());
@@ -18,10 +18,12 @@ SmallCoverGraph::SmallCoverGraph(unsigned vertexCount, float edgeProba, unsigned
 	 */
 	srand((unsigned)time(0));
 
-	for(set<int>::iterator it = verticesOutOfVC.begin(); it != verticesOutOfVC.end(); it++)
-		for(set<int>::iterator it2 = verticesInVC.begin(); it2 != verticesInVC.end(); it2++) {
+	set<int>::iterator it1;
+	set<int>::iterator it2;
+	for(it1 = verticesOutOfVC.begin(); it1 != verticesOutOfVC.end(); it1++)
+		for(it2 = verticesInVC.begin(); it2 != verticesInVC.end(); it2++) {
 			if (rand() % 100 < probability)
-				addEdge(*it,*it2);
+				addEdge(*it1,*it2);
 		}
 
 	cout << "Vertices out of vertex cover" << endl;
@@ -30,12 +32,11 @@ SmallCoverGraph::SmallCoverGraph(unsigned vertexCount, float edgeProba, unsigned
 	}
 	cout << endl;
 
-
 	cout << "Vertices in vertex cover" << endl;
 		for(set<int>::iterator it2 = verticesInVC.begin(); it2 != verticesInVC.end(); it2++) {
 			cout << "" << *it2 << " , " ;
 		}
-	cout << "End of set !" << endl;
+	cout << endl << "End of set !" << endl << endl;
 	/*
 
 	std::map<int,std::set<int> > tmp_graph = getGraph();

@@ -82,8 +82,9 @@ set<int> Graph::getNeighbours(int vertex) {
 set<int> Graph::getVertices() {
 
     set<int> vertices;
-    for (map<int, set<int> >::const_iterator ii = m_graph.begin(); ii!= m_graph.end(); ++ii )
-    	vertices.insert((*ii).first);
+    map<int, set<int> >::const_iterator it;
+    for (it = m_graph.begin(); it!= m_graph.end(); ++it)
+    	vertices.insert((*it).first);
     	
     return vertices;
 }
