@@ -56,11 +56,14 @@ void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
     set<int> neigh = m_graph[vertex];
     for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {
         m_graph[*ii].erase(vertex);
-        if(m_graph[*ii].empty())
+        if(m_graph[*ii].empty()) {
         	m_graph.erase(*ii);
+        	cout << "Removed isolated neighbor. Graph size is : " << getVertexCount() << endl;
+        }
     }
 
     m_graph.erase(vertex);
+    cout << "Removed VC node. Graph size is : " << getVertexCount() << endl;
 }
 
 bool Graph::hasEdge(int vertex1, int vertex2) {
