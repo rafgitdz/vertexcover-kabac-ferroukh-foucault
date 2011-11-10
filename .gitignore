@@ -8,3 +8,4 @@ Makefile
 *.stackdump
 *.exe
 main.cpp
+.metadata
