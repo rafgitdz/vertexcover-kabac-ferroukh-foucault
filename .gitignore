@@ -1,0 +1,10 @@
+.project
+.cproject
+[Bb]uild/
+[Dd]ist/
+nbproject/
+.dep.inc
+Makefile
+*.stackdump
+*.exe
+main.cpp
