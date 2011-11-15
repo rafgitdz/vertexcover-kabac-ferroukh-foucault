@@ -3,7 +3,11 @@
 
 using namespace std;
 
+<<<<<<< HEAD
 TreeStaticSonsAndRoots::TreeStaticSonsAndRoots(int vertexC, int numOfSons) : Tree() {
+=======
+TreeStaticSons::TreeStaticSons(int vertexC, int numOfSons) : Tree() {
+>>>>>>> myRepos/master
     vertexCount = vertexC;
     numberOfSons = numOfSons;
     
@@ -22,6 +26,10 @@ TreeStaticSonsAndRoots::TreeStaticSonsAndRoots(int vertexC, int numOfSons) : Tre
     }
 }
 
+<<<<<<< HEAD
 TreeStaticSonsAndRoots::~TreeStaticSonsAndRoots() {
+=======
+TreeStaticSons::~TreeStaticSons() {
+>>>>>>> myRepos/master
 }
 

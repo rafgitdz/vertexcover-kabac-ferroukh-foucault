@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> myRepos/master
 #ifndef TREE_H
 #define	TREE_H
 
@@ -18,3 +22,7 @@ private:
 };
 
 #endif	/* TREE_H */
+<<<<<<< HEAD
+=======
+
+>>>>>>> myRepos/master

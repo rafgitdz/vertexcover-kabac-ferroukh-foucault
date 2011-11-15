@@ -1,8 +1,16 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> myRepos/master
 #include "TreeDynamicSons.h"
 
 using namespace std;
 
+<<<<<<< HEAD
 TreeDynamicSonsAndRoots::TreeDynamicSonsAndRoots(int vertexC) : Tree() {
+=======
+TreeDynamicSons::TreeDynamicSons(int vertexC) : Tree() {
+>>>>>>> myRepos/master
     
     vertexCount = vertexC;
     
@@ -23,5 +31,11 @@ TreeDynamicSonsAndRoots::TreeDynamicSonsAndRoots(int vertexC) : Tree() {
     }
 }
 
+<<<<<<< HEAD
 TreeDynamicSonsAndRoots::~TreeDynamicSonsAndRoots() {
 }
+=======
+TreeDynamicSons::~TreeDynamicSons() {
+}
+
+>>>>>>> myRepos/master

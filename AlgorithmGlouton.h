@@ -1,10 +1,3 @@
-/*
- * AlgorithmGlouton.h
- *
- *  Created on: 6 nov. 2011
- *      Author: milan
- */
-
 #ifndef ALGORITHMGLOUTON_H_
 #define ALGORITHMGLOUTON_H_
 
