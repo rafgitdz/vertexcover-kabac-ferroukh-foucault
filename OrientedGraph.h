@@ -2,10 +2,8 @@
 #define ORIENTEDGRAPH_H_
 #include "Graph.h"
 
-class OrientedGraph : public Graph{
+class OrientedGraph : public Graph {
 public:
-	OrientedGraph(int vertexCount = 0);
-	virtual ~OrientedGraph();
 	virtual void addEdge(int src,int dest);
 };
 

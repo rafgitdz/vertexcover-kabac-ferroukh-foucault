@@ -1,12 +1,11 @@
 #ifndef BIPARTITEOPTIMALCOVER_H_
 #define BIPARTITEOPTIMALCOVER_H_
 
-class OrientedGraph;
+#include "OrientedGraph.h"
 class BipartiteGraph;
 class BipartiteOptimalCover {
 public:
-	BipartiteOptimalCover(BipartiteGraph&);
-	virtual ~BipartiteOptimalCover();
+	explicit BipartiteOptimalCover(BipartiteGraph&);
 
 private :
 	OrientedGraph m_flowGraph;
