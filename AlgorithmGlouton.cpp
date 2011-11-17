@@ -1,10 +1,3 @@
-/*
- * AlgorithmGlouton.cpp
- *
- *  Created on: 6 nov. 2011
- *      Author: milan
- */
-
 #include "AlgorithmGlouton.h"
 
 using namespace std;
@@ -42,9 +35,16 @@ AlgorithmGlouton::~AlgorithmGlouton() {
 
 void AlgorithmGlouton::removeIsolatedVertices() {
 	std::map<int,std::set<int> >::const_iterator it;
-	for(it = graph_.getBeginGraph(); it != graph_.getEndGraph(); it++)
-		if((it->second).empty())
-			graph_.removeVertex(it->first);
+	for(it = graph_.getBeginGraph(); it != graph_.getEndGraph();) {
+		cout << "Vertex : " << it->first << endl;
+		cout << "NeighSize : " << (it->second).size() << endl;
+
+		if((it->second).empty()) {
+			graph_.removeVertex((it++)->first);
+			cout << "Vertex Removed. Graph size : " << graph_.getVertexCount() << endl;
+		}else
+			++it;
+	}
 }
 
 int AlgorithmGlouton::addEdgeToVC() {
@@ -60,7 +60,6 @@ int AlgorithmGlouton::addEdgeToVC() {
 	}
 	vertexCover_.insert(vertexPosition);
 	cout <<"Inserted the vertex " << vertexPosition << " into the VC set" << endl;
-
 	return vertexPosition;
 }
 
