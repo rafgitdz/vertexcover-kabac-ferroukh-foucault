@@ -11,8 +11,7 @@ public:
 	virtual void findMinimalVertexCover();
 	int addVertexToVC();
 
-private:
-	Graph graph_;
+protected:
 	std::set<int> vertexCover_;
 };
 

@@ -4,10 +4,8 @@ using namespace std;
 
 AlgorithmGlouton::AlgorithmGlouton(Graph graph) : Algorithm(graph) {
 
-	graph_ = graph;
-	findMinimalVertexCover();
+	m_graph = graph;
 	/* removing isolated vertices from the graph */
-
 }
 
 AlgorithmGlouton::~AlgorithmGlouton() {
@@ -16,13 +14,13 @@ AlgorithmGlouton::~AlgorithmGlouton() {
 
 void AlgorithmGlouton::removeIsolatedVertices() {
 	std::map<int,std::set<int> >::const_iterator it;
-	for(it = graph_.getBeginGraph(); it != graph_.getEndGraph();) {
+	for(it = m_graph.getBeginGraph(); it != m_graph.getEndGraph();) {
 		cout << "Vertex : " << it->first << endl;
 		cout << "NeighSize : " << (it->second).size() << endl;
 
 		if((it->second).empty()) {
-			graph_.removeVertex((it++)->first);
-			cout << "Vertex Removed. Graph size : " << graph_.getVertexCount() << endl;
+			m_graph.removeVertex((it++)->first);
+			cout << "Vertex Removed. Graph size : " << m_graph.getVertexCount() << endl;
 		}else
 			++it;
 	}
@@ -33,7 +31,7 @@ int AlgorithmGlouton::addVertexToVC() {
 	unsigned int maxDegree(0);
 
 	std::map<int,std::set<int> >::const_iterator it;
-	for(it = graph_.getBeginGraph(); it != graph_.getEndGraph(); it++){
+	for(it = m_graph.getBeginGraph(); it != m_graph.getEndGraph(); it++){
 		if (maxDegree < ((it->second).size())) {
 			maxDegree = ((it->second).size());
 			vertexPosition = it->first;
@@ -56,8 +54,8 @@ void AlgorithmGlouton::findMinimalVertexCover() {
 		 * the program stops when there are no more vertices in the graph
 		 */
 
-		while(graph_.getVertexCount() > 0) {
-			graph_.removeVertexAndIsolatedNeighbour(addVertexToVC());
+		while(m_graph.getVertexCount() > 0) {
+			m_graph.removeVertexAndIsolatedNeighbour(addVertexToVC());
 		}
 
 		cout << "The found vertex cover has size : " << vertexCover_.size() << endl

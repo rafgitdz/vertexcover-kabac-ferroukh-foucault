@@ -17,11 +17,9 @@ class AlgorithmGloutonSimple : public AlgorithmGlouton {
 public:
 	AlgorithmGloutonSimple(Graph graph);
 	virtual ~AlgorithmGloutonSimple();
-	void findMinimalVertexCover();
+	virtual void findMinimalVertexCover();
 private:
-	Graph graph_;
-	set<int> vertexCover_;
-	map<int, int> vertexDegree;
+	multimap<int, int> vertexDegree;
 };
 
 #endif /* ALGORITHMGLOUTONSIMPLE_H_ */
