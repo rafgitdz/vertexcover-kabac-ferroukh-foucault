@@ -6,6 +6,12 @@
 class BipartiteGraph: public Graph {
 	public:
 		BipartiteGraph(int graphSize, float edgeProba, float partRatio = 0.5);
+		inline const std::list<int>& getLeftPart() {return m_leftPart;}
+		inline const std::list<int>& getRightPart() {return m_rightPart;}
+
+	private:
+		std::list<int> m_leftPart;
+		std::list<int> m_rightPart;
 };
 
 #endif /* BIPARTITEGRAPH_H_ */

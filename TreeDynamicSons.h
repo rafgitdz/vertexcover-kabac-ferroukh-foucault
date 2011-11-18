@@ -1,25 +1,21 @@
-/* 
- * File:   Tree4.h
- * Author: Rafik
- *
- * Created on 25 octobre 2011, 19:08
- */
+#ifndef TREE_DYNAMIC_SONS_H_
+#define	TREE_DYNAMIC_SONS_H_
 
-#ifndef TREE_DYNAMIC_SONS_AND_ROOTS_H_
-#define	TREE_DYNAMIC_SONS_AND_ROOTS_H_
 
 #include "Tree.h"
 #include <vector>
 
-class TreeDynamicSonsAndRoots : public Tree{
+
+class TreeDynamicSons : public Tree{
 public:
-    TreeDynamicSonsAndRoots(int VertexCount);
-    virtual ~TreeDynamicSonsAndRoots();
+    TreeDynamicSons(int VertexCount);
+    virtual ~TreeDynamicSons();
+
 
 private:
     int vertexCount;
 
 };
 
-#endif	/* TREE_DYNAMIC_SONS_AND_ROOTS_H_ */
 
+#endif	/* TREE_DYNAMIC_SONS_H_ */

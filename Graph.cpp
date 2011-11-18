@@ -14,6 +14,7 @@ Graph::Graph(int vertexCount) : m_graph() {
 
 int Graph::addVertex() {
 
+
 	set<int> s;
 	int vertex = rand()%numeric_limits<int>::max();
 	while (m_graph.find(vertex) != m_graph.end()) {
@@ -68,34 +69,24 @@ void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
 
 bool Graph::hasEdge(int vertex1, int vertex2) {
 	return m_graph[vertex1].find(vertex2) != m_graph[vertex1].end();
+
 }
 
-bool Graph::hasPath(int vertex1, int vertex2, int precedentVertex) {
 
+list<int> Graph::getNeighboursList(int vertex) {
 
-    if (hasEdge(vertex1, vertex2))
-        return true;
-    else {
+    list<int> list;
+    for (set<int>::iterator it = m_graph[vertex].begin(); it != m_graph[vertex].end(); ++it)
+        list.push_front(*it);
 
-        for (set<int>::iterator currentVertex = m_graph[vertex1].begin(); currentVertex != m_graph[vertex1].end(); ++currentVertex) {
+    return list;
 
-            if (*currentVertex != precedentVertex) {
-                if (hasPath(*currentVertex, vertex2, vertex1))
-                    return true;
-            }
-        }
-        return false;
-    }
-}
-
-set<int> Graph::getNeighbours(int vertex) {
-
-	return m_graph[vertex];
 }
 
 set<int> Graph::getVertices() {
 
     set<int> vertices;
+
     map<int, set<int> >::const_iterator it;
     for (it = m_graph.begin(); it!= m_graph.end(); ++it)
     	vertices.insert((*it).first);
@@ -105,6 +96,7 @@ set<int> Graph::getVertices() {
 
 int Graph::getVertexCount() {
     return m_graph.size();
+
 }
 
 map<int, set<int> >::const_iterator Graph::getBeginGraph() {

@@ -1,17 +1,16 @@
-
-#ifndef TREE_STATIC_SONS_AND_ROOTS_H
-#define	TREE_STATIC_SONS_AND_ROOTS_H
+#ifndef TREE_STATIC_SONS_H
+#define	TREE_STATIC_SONS_H
 
 #include "Tree.h"
 
-class TreeStaticSonsAndRoots : public Tree {
+class TreeStaticSons : public Tree {
 public:
-	TreeStaticSonsAndRoots(int VertexCount, int numOfSons);
-	virtual ~TreeStaticSonsAndRoots();
+	TreeStaticSons(int VertexCount, int numOfSons);
+	virtual ~TreeStaticSons();
 
 private:
         int vertexCount;
 	int numberOfSons;
 };
 
-#endif /* TREESTATICSONSANSROOTS_H_ */
+#endif /* TREE_STATIC_SONS_H_ */

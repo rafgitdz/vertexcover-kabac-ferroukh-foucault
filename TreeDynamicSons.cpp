@@ -2,7 +2,8 @@
 
 using namespace std;
 
-TreeDynamicSonsAndRoots::TreeDynamicSonsAndRoots(int vertexC) : Tree() {
+TreeDynamicSons::TreeDynamicSons(int vertexC) : Tree() {
+
     
     vertexCount = vertexC;
     
@@ -23,5 +24,7 @@ TreeDynamicSonsAndRoots::TreeDynamicSonsAndRoots(int vertexC) : Tree() {
     }
 }
 
-TreeDynamicSonsAndRoots::~TreeDynamicSonsAndRoots() {
+
+TreeDynamicSons::~TreeDynamicSons() {
 }
+

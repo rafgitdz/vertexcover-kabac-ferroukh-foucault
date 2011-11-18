@@ -1,10 +1,3 @@
-/*
- * AlgorithmGlouton.cpp
- *
- *  Created on: 6 nov. 2011
- *      Author: milan
- */
-
 #include "AlgorithmGlouton.h"
 
 using namespace std;

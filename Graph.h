@@ -6,7 +6,7 @@
 #include <set>
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
+#include <list>
 
 class Graph {
 public:
@@ -14,13 +14,15 @@ public:
     virtual ~Graph();
     int addVertex();
     void addVertex(int vertexNum);
-    void addEdge(int, int);
+    virtual void addEdge(int, int);
     void removeVertex(int);
     void removeVertexAndIsolatedNeighbour(int);
+
     void removeEdge(int, int);
     bool hasEdge(int, int);
-    bool hasPath(int, int, int);
-    std::set<int> getNeighbours(int vertex);
+    inline const std::set<int>& getNeighbours(int vertex) { return m_graph[vertex]; }
+    std::list<int> getNeighboursList(int vertex);
+
     std::set<int> getVertices();
     int getVertexCount();
     std::map<int, std::set<int> >::const_iterator getBeginGraph();
@@ -29,8 +31,10 @@ public:
 
 protected:
     std::map<int, std::set<int> > m_graph;
+
 };
 
 std::ostream &operator<<(std::ostream &out, const Graph&);
+
 
 #endif /* GRAPH_H_ */

@@ -6,23 +6,25 @@
 using namespace std;
 
 BipartiteGraph::BipartiteGraph(int graphSize, float edgeProba, float partRatio) :
-		Graph() {
-	assert(edgeProba >= 0);
-	assert(edgeProba <= 1);
-	assert(partRatio >= 0);
-	assert(partRatio <= 1);
-
+		Graph(), m_leftPart(), m_rightPart() {
 	srand(time(NULL));
 
-	int vertices[graphSize];
-	for (int i = 0; i < graphSize; ++i) {
-		vertices[i] = addVertex();
+	int leftPartSize = graphSize * partRatio;
+	int rightPartSize = graphSize - leftPartSize;
+
+	for (int i = 0; i<leftPartSize; ++i) {
+		m_leftPart.push_front(addVertex());
 	}
-	for (int i = 0; i < graphSize * partRatio; ++i) {
-		for (int j = graphSize - 1; j >= graphSize * partRatio; --j) {
-			if (rand() % 100 < edgeProba * 100)
-				addEdge(vertices[i], vertices[j]);
+
+	for (int i = 0; i < rightPartSize; ++i) {
+		m_rightPart.push_front(addVertex());
+		for (list<int>::iterator jj = m_leftPart.begin() ;  jj != m_leftPart.end() ; ++jj) {
+			if (rand() % 100 < edgeProba * 100) {
+				addEdge(m_rightPart.front(), *jj);
+			}
 		}
+
 	}
 }
+
 
