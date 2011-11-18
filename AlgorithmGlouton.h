@@ -15,7 +15,8 @@ public:
 	AlgorithmGlouton(Graph graph);
 	virtual ~AlgorithmGlouton();
 	void removeIsolatedVertices();
-	int addEdgeToVC();
+	virtual void findMinimalVertexCover();
+	int addVertexToVC();
 
 private:
 	Graph graph_;
