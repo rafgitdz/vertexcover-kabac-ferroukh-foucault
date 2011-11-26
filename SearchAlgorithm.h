@@ -1,9 +1,3 @@
-/* 
- * File:   SearchAlgorithm.h
- * Author: Rafik
- *
- * Created on 10 novembre 2011, 14:22
- */
 
 #ifndef SEARCHALGORITHM_H
 #define	SEARCHALGORITHM_H
@@ -22,7 +16,7 @@ public:
     SearchAlgorithm();
     virtual ~SearchAlgorithm();
 
-    std::list<int> breadhtFirstSearch(Graph g, int v);
+    std::list<int> breadhtFirstSearch(Graph g, int root, int target);
     void depthFirstSearch(Graph g, Graph &tree, int vertex);
     std::list<int> depthFirstSearch(Graph g, int vertex);
 
