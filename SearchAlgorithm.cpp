@@ -1,9 +1,3 @@
-/* 
- * File:   SearchAlgorithm.cpp
- * Author: Rafik
- * 
- * Created on 10 novembre 2011, 14:22
- */
 
 #include "Graph.h"
 #include "SearchAlgorithm.h"
@@ -12,7 +6,7 @@ using namespace std;
 SearchAlgorithm::SearchAlgorithm() {
 }
 
-list<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root) {
+list<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target) {
 
     int k = 0;
     int head;
@@ -33,9 +27,10 @@ list<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root) {
         head = *(m_queue.begin());
         m_queue.pop_front();
 
-        searchedVertices.push_back(head);
         setColor(head, BLACK);
         setNumVertexSearch(head, k);
+        searchedVertices.push_back(head);
+        if (target == head) break; // attempt the target
         ++k;
         vertices = graph.getNeighbours(head);
 
