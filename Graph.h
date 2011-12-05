@@ -22,6 +22,7 @@ public:
     bool hasEdge(int, int);
     inline const std::set<int>& getNeighbours(int vertex) { return m_graph[vertex]; }
     std::list<int> getNeighboursList(int vertex);
+    int getVertexDegree(int vertex);
 
     std::set<int> getVertices();
     int getVertexCount();

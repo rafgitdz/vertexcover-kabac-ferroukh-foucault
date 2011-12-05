@@ -12,6 +12,7 @@ TreeDynamicSons::TreeDynamicSons(int vertexC) : Tree() {
     vector<int> list2(0);
     
     list.push_back(addVertex()); // create the root ;)
+    setRoot(list.back());
 
     int end = 1;
 

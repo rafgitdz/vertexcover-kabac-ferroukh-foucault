@@ -17,11 +17,12 @@ public:
     virtual ~SearchAlgorithm();
 
     std::list<int> breadhtFirstSearch(Graph g, int root, int target);
+    std::list<int> breadthFirstSearchWithoutLeaves(Graph g, int root);
     void depthFirstSearch(Graph g, Graph &tree, int vertex);
     std::list<int> depthFirstSearch(Graph g, int vertex);
+    int pi(int vertex);
 
 private:
-    int pi(int vertex);
     void setPi(int vertex, int father);
     int color(int vertex);
     void setColor(int vertex, int color);

@@ -12,6 +12,7 @@ TreeStaticSons::TreeStaticSons(int vertexC, int numOfSons) : Tree() {
     vector<int> list2(0);
 
     list.push_back(addVertex()); // create the root ;)
+    setRoot(list.back());
 
     int end = 1;
 

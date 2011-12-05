@@ -45,6 +45,47 @@ list<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target)
     return searchedVertices;
 }
 
+list<int> SearchAlgorithm::breadthFirstSearchWithoutLeaves(Graph graph, int root) {
+
+    int k = 0;
+    int head;
+    list<int> searchedVertices;
+
+    set<int> vertices = graph.getVertices();
+
+    for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
+        setPi(*ii, NULLE);
+        setColor(*ii, WHITE);
+    }
+
+    setColor(root, GREY);
+    m_queue.push_back(root);
+
+    while (m_queue.size() > 0) {
+
+        head = *(m_queue.begin());
+        m_queue.pop_front();
+
+        setColor(head, BLACK);
+        setNumVertexSearch(head, k);
+        if((graph.getVertexDegree(head) > 1) ||
+           (root == head))
+        	searchedVertices.push_back(head);
+        //if (target == head) break; // attempt the target
+        ++k;
+        vertices = graph.getNeighbours(head);
+
+        for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
+            if (color(*ii) == WHITE) {
+                setColor(*ii, GREY);
+                setPi(*ii, head);
+                m_queue.push_back(*ii);
+            }
+        }
+    }
+    return searchedVertices;
+}
+
 void SearchAlgorithm::depthFirstSearch(Graph graph, Graph &tree, int vertex) {
 
     m_markedVertices.insert(vertex);

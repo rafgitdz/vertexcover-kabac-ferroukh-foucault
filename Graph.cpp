@@ -99,6 +99,10 @@ int Graph::getVertexCount() {
 
 }
 
+int Graph::getVertexDegree(int vertex) {
+	return m_graph[vertex].size();
+}
+
 map<int, set<int> >::const_iterator Graph::getBeginGraph() {
     return m_graph.begin();
 }
