@@ -3,11 +3,11 @@
 #include "SearchAlgorithm.h"
 using namespace std;
 
-SearchAlgorithm::SearchAlgorithm() {
+SearchAlgorithm::SearchAlgorithm() : m_queue(){
 }
 
 list<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target) {
-
+	m_queue.clear();
     int k = 0;
     int head;
     list<int> searchedVertices;
@@ -26,7 +26,6 @@ list<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target)
 
         head = *(m_queue.begin());
         m_queue.pop_front();
-
         setColor(head, BLACK);
         setNumVertexSearch(head, k);
         searchedVertices.push_back(head);
@@ -43,6 +42,24 @@ list<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target)
         }
     }
     return searchedVertices;
+}
+
+list<int> SearchAlgorithm::getImprovingPath(Graph graph, int root, int target) {
+	list<int> search = breadhtFirstSearch(graph,root,target);
+	cout << "recherche" << endl;
+	for (list<int>::iterator ii = search.begin(); ii != search.end() ; ++ii)
+		cout << *ii << endl;
+	list<int> path;
+	int vertex = search.back();
+	path.push_front(vertex);
+	cout << "path" << endl;
+	while (path.front() != root) {
+		cout << "vertex : " << endl << vertex << endl;
+		vertex = pi(vertex);
+		path.push_front(vertex);
+	}
+
+	return path;
 }
 
 void SearchAlgorithm::depthFirstSearch(Graph graph, Graph &tree, int vertex) {

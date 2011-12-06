@@ -19,6 +19,7 @@ public:
     std::list<int> breadhtFirstSearch(Graph g, int root, int target);
     void depthFirstSearch(Graph g, Graph &tree, int vertex);
     std::list<int> depthFirstSearch(Graph g, int vertex);
+    std::list<int> getImprovingPath(Graph g, int root, int target);
 
 private:
     int pi(int vertex);

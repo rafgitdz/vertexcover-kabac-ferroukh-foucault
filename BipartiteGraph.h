@@ -5,13 +5,14 @@
 
 class BipartiteGraph: public Graph {
 	public:
+		BipartiteGraph();
 		BipartiteGraph(int graphSize, float edgeProba, float partRatio = 0.5);
-		inline const std::list<int>& getLeftPart() {return m_leftPart;}
-		inline const std::list<int>& getRightPart() {return m_rightPart;}
+		inline const std::set<int>& getLeftPart() {return m_leftPart;}
+		inline const std::set<int>& getRightPart() {return m_rightPart;}
 
 	private:
-		std::list<int> m_leftPart;
-		std::list<int> m_rightPart;
+		std::set<int> m_leftPart;
+		std::set<int> m_rightPart;
 };
 
 #endif /* BIPARTITEGRAPH_H_ */
