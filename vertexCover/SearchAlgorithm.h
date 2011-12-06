@@ -4,6 +4,7 @@
 
 class Graph;
 #include <list>
+#include <set>
 
 #define WHITE 1
 #define BLACK 2
@@ -16,7 +17,7 @@ public:
     SearchAlgorithm();
     virtual ~SearchAlgorithm();
 
-    std::list<int> breadhtFirstSearch(Graph g, int root, int target);
+    std::set<int> breadhtFirstSearch(Graph g, int root, int target);
     std::list<int> breadthFirstSearchWithoutLeaves(Graph g, int root);
     void depthFirstSearch(Graph g, Graph &tree, int vertex);
     std::list<int> depthFirstSearch(Graph g, int vertex);

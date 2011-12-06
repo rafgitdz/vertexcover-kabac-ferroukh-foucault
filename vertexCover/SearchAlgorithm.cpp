@@ -6,11 +6,11 @@ using namespace std;
 SearchAlgorithm::SearchAlgorithm() : m_queue(){
 }
 
-list<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target) {
+set<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target) {
 	m_queue.clear();
     int k = 0;
     int head;
-    list<int> searchedVertices;
+    set<int> searchedVertices;
 
     set<int> vertices = graph.getVertices();
 
@@ -28,7 +28,7 @@ list<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target)
         m_queue.pop_front();
         setColor(head, BLACK);
         setNumVertexSearch(head, k);
-        searchedVertices.push_back(head);
+        searchedVertices.insert(head);
         if (target == head) break; // attempt the target
         ++k;
         vertices = graph.getNeighbours(head);
@@ -45,20 +45,16 @@ list<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target)
 }
 
 list<int> SearchAlgorithm::getImprovingPath(Graph graph, int root, int target) {
-	list<int> search = breadhtFirstSearch(graph,root,target);
-	cout << "recherche" << endl;
-	for (list<int>::iterator ii = search.begin(); ii != search.end() ; ++ii)
-		cout << *ii << endl;
+	breadhtFirstSearch(graph,root,target);
 	list<int> path;
-	int vertex = search.back();
+	if (pi(target) == -1)
+		return path;
+	int vertex = target;
 	path.push_front(vertex);
-	cout << "path" << endl;
 	while (path.front() != root) {
-		cout << "vertex : " << endl << vertex << endl;
 		vertex = pi(vertex);
 		path.push_front(vertex);
 	}
-
 	return path;
 }
 

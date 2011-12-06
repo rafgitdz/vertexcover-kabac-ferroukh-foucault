@@ -111,6 +111,19 @@ map<int, set<int> >::const_iterator Graph::getEndGraph() {
     return m_graph.end();
 }
 
+bool Graph::isCover(set<int> cover) {
+
+	map<int, set<int> >::const_iterator ii;
+	set<int>::const_iterator jj;
+	for (ii = m_graph.begin(); ii!=m_graph.end(); ++ii)
+		for(jj = ii->second.begin(); jj!= ii->second.end(); ++jj) {
+			if (cover.find(ii-> first) == cover.end() && cover.find(*jj) == cover.end())
+				return false;
+		}
+
+	return true;
+}
+
 Graph::~Graph() {
 }
 

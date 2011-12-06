@@ -26,6 +26,9 @@ public:
 
     std::set<int> getVertices();
     int getVertexCount();
+
+    bool isCover(std::set<int> cover);
+
     std::map<int, std::set<int> >::const_iterator getBeginGraph();
     std::map<int, std::set<int> >::const_iterator getEndGraph();
     friend std::ostream &operator<<(std::ostream &out, const Graph&);

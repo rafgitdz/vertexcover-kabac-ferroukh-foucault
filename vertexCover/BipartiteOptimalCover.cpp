@@ -1,31 +1,34 @@
 #include "BipartiteOptimalCover.h"
 #include "SearchAlgorithm.h"
-#include <list>
-#include <cassert>
 
 using namespace std;
 
-BipartiteOptimalCover::BipartiteOptimalCover(BipartiteGraph &graph) : m_flowGraph(), m_S(), m_T(), m_search(){
+BipartiteOptimalCover::BipartiteOptimalCover(BipartiteGraph &graph) : m_flowGraph(), m_search(){
 
 	set<int> vertices = graph.getVertices();
+	/*
+	 * on ajoute au graphe orienté tous les sommets du graphe bipartit
+	 */
 	for (set<int>::const_iterator ii = vertices.begin();
 			ii != vertices.end();
 			++ii) {
 		m_flowGraph.addVertex(*ii);
 	}
 
-	/* On construit le graphe orienté à partir du graphe bipartit */
+	/*
+	 * on ajoute un sommet source et un sommet cible
+	 */
 	m_sourceVertex = m_flowGraph.addVertex();
+	m_targetVertex = m_flowGraph.addVertex();
 
-	// on construit les aretes entre la source et la premiere partie
+	// on crée les aretes entre la source et la premiere partie
 	for (set<int>::const_iterator ii = graph.getLeftPart().begin();
 			ii != graph.getLeftPart().end();
 			++ii) {
 		m_flowGraph.addEdge(m_sourceVertex, *ii);
 	}
 
-	m_targetVertex = m_flowGraph.addVertex();
-	// on construit les aretes entre la deuxieme partie et la destination
+	// on crée les aretes entre la deuxième partie et la destination
 	for (set<int>::const_iterator ii = graph.getRightPart().begin();
 			ii != graph.getRightPart().end();
 			++ii) {
@@ -42,66 +45,52 @@ BipartiteOptimalCover::BipartiteOptimalCover(BipartiteGraph &graph) : m_flowGrap
 }
 
 set<int> BipartiteOptimalCover::getCover(BipartiteGraph &graph){
+	// on construit le flot max, en inversant les aretes remplies
 	buildMaxFlow();
-	cout << "flow built" << endl;
-	buildMinCut();
+
+	//on fait un dernier parcours en profondeur pour en déduire la coupe min
+	set<int> S = m_search.breadhtFirstSearch(m_flowGraph, m_sourceVertex, m_targetVertex);
 
 	set<int> cover;
-	for (list<int>::const_iterator ii = m_S.begin();
-			ii != m_S.end(); ++ii) {
+
+	/*
+	 * On ajoute à la couverture les sommets
+	 * de la partie droite qui sont dans T
+	 */
+	for (set<int>::const_iterator ii = S.begin();
+			ii != S.end(); ++ii) {
 		if (graph.getRightPart().find(*ii) != graph.getRightPart().end())
 			cover.insert(*ii);
 	}
-	for (list<int>::const_iterator ii = m_T.begin();
-				ii != m_T.end(); ++ii) {
-			if (graph.getLeftPart().find(*ii) != graph.getLeftPart().end())
-				cover.insert(*ii);
-		}
+
+	/*
+	 * plutot que de créer le sous ensemble T de la coupe min, on se contente
+	 * d'ajouter à la couverture les sommets de la partie gauche qui ne sont pas dans S
+	 */
+	for(set<int>::const_iterator ii = graph.getLeftPart().begin(); ii != graph.getLeftPart().end() ; ++ii)
+		if (S.find(*ii) == S.end())
+			cover.insert(*ii);
+
 	return cover;
 }
 
 void BipartiteOptimalCover::buildMaxFlow() {
-	//list<int> searchResult;
 	list<int> improvingPath;
-	list<int> searchResult;
+		// tant qu'on trouve un chemin améliorant
+		for(improvingPath = m_search.getImprovingPath(m_flowGraph, m_sourceVertex, m_targetVertex);
+				improvingPath.size() > 0;
+				improvingPath = m_search.getImprovingPath(m_flowGraph, m_sourceVertex, m_targetVertex))
 
-	for (searchResult = m_search.breadhtFirstSearch(m_flowGraph,m_sourceVertex,m_targetVertex);
-			searchResult.back() == m_targetVertex;
-			searchResult = m_search.breadhtFirstSearch(m_flowGraph,m_sourceVertex,m_targetVertex)) {
-		cout << "graphe : " << endl << m_flowGraph << endl;
-		cout << "on reconstruit le chemin à partir du résultat du parcours en largeur" << endl;
+		/*
+		 * on remplit/vide les aretes par lequelles on est passé,
+		 * en inversant les aretes du graphe
+		 */
 
-		improvingPath = m_search.getImprovingPath(m_flowGraph, m_sourceVertex, m_targetVertex);
-
-		// on remplit/vide les aretes par lequelles on est passé
 		while (improvingPath.size() > 1) {
 			int src = improvingPath.front();
 			improvingPath.pop_front();
 			int dest = improvingPath.front();
 			m_flowGraph.reverseEdge(src, dest);
 		}
-	}
-}
-
-void BipartiteOptimalCover::buildMinCut() {
-	list<int> searchResult = m_search.breadhtFirstSearch(m_flowGraph, m_sourceVertex, m_targetVertex);
-	searchResult.pop_back();
-	m_S.push_front(m_targetVertex);
-	while (searchResult.size() > 0) {
-		cout << "test" << endl;
-		int vertex = searchResult.back();
-		if (m_flowGraph.hasEdge(searchResult.back(), m_S.front()))
-			m_S.push_front(vertex);
-		 else
-			m_T.push_front(vertex);
-
-
-		searchResult.pop_back();
-	}
-	cout << "min cut" << endl;
-	for (list<int>::iterator ii = m_S.begin(); ii != m_S.end(); ++ii) {
-		cout << *ii << endl;
-	}
-
 }
 
