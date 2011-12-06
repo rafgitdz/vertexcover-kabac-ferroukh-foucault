@@ -9,3 +9,4 @@ Makefile
 *.exe
 main.cpp
 .metadata
+.directory
