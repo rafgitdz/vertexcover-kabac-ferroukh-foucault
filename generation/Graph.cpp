@@ -12,13 +12,19 @@ Graph::Graph(int vertexCount) : m_graph() {
         addVertex();
 }
 
+Graph::Graph(const Graph& graph) : m_graph() {
+	set<int> vertices = graph.getVertices();
+	for (set<int>::const_iterator ii = vertices.begin();ii != vertices.end(); ++ii)
+		m_graph[*ii] = graph.getNeighbours(*ii);
+}
+
 int Graph::addVertex() {
 
 
 	set<int> s;
-	int vertex = rand()%numeric_limits<int>::max();
+	int vertex = rand()%100;
 	while (m_graph.find(vertex) != m_graph.end()) {
-		vertex = rand()%numeric_limits<int>::max();
+		vertex = rand()%100;
 	}
 	m_graph[vertex] = s;
 	return vertex;
@@ -59,17 +65,9 @@ void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
         m_graph[*ii].erase(vertex);
         if(m_graph[*ii].empty()) {
         	m_graph.erase(*ii);
-        	cout << "Removed isolated neighbor. Graph size is : " << getVertexCount() << endl;
         }
     }
-
     m_graph.erase(vertex);
-    cout << "Removed VC node. Graph size is : " << getVertexCount() << endl;
-}
-
-bool Graph::hasEdge(int vertex1, int vertex2) {
-	return m_graph[vertex1].find(vertex2) != m_graph[vertex1].end();
-
 }
 
 
@@ -83,7 +81,7 @@ list<int> Graph::getNeighboursList(int vertex) {
 
 }
 
-set<int> Graph::getVertices() {
+set<int> Graph::getVertices() const {
 
     set<int> vertices;
 
@@ -92,11 +90,6 @@ set<int> Graph::getVertices() {
     	vertices.insert((*it).first);
     	
     return vertices;
-}
-
-int Graph::getVertexCount() {
-    return m_graph.size();
-
 }
 
 int Graph::getVertexDegree(int vertex) {
@@ -122,6 +115,17 @@ bool Graph::isCover(set<int> cover) {
 		}
 
 	return true;
+}
+
+void Graph::trim() {
+	for (map<int, set<int> >::const_iterator ii = m_graph.begin(); ii != m_graph.end();) {
+		if (ii->second.size() == 0) {
+			int vertex = ii->first;
+			++ii;
+			m_graph.erase(vertex);
+		}
+		++ii;
+	}
 }
 
 Graph::~Graph() {
