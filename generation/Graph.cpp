@@ -66,8 +66,8 @@ void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
         m_graph[*ii].erase(vertex);
         if(m_graph[*ii].empty()) {
         	m_graph.erase(*ii);
-        	--m_edgeCount;
         }
+        --m_edgeCount;
     }
     m_graph.erase(vertex);
 }
