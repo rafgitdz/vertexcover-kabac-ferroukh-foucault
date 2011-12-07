@@ -3,13 +3,13 @@
 
 #include "Graph.h"
 
-class SimpleGraph: public Graph {
+class SimpleGraph : public Graph {
 public:
-	SimpleGraph(int vertexCount, float edgeProba);
-	virtual ~SimpleGraph();
+    SimpleGraph(int vertexCount, float edgeProba);
+    virtual ~SimpleGraph();
 
 protected:
-	int probability;
+    int probability;
 };
 
 #endif /* SIMPLEGRAPH_H_ */

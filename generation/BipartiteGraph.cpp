@@ -6,6 +6,7 @@
 using namespace std;
 
 BipartiteGraph::BipartiteGraph() : Graph(), m_leftPart(), m_rightPart() {
+    
 	for (int i = 1; i < 8 ; ++i) {
 		addVertex(i);
 		addVertex(i+10);
@@ -32,14 +33,12 @@ BipartiteGraph::BipartiteGraph() : Graph(), m_leftPart(), m_rightPart() {
 	addEdge(6,16);
 	addEdge(6,17);
 	addEdge(7,16);
-
-
 }
 
 BipartiteGraph::BipartiteGraph(int graphSize, float edgeProba, float partRatio) :
 		Graph(), m_leftPart(), m_rightPart() {
+    
 	srand(time(NULL));
-
 	int leftPartSize = graphSize * partRatio;
 	int rightPartSize = graphSize - leftPartSize;
 
@@ -48,6 +47,7 @@ BipartiteGraph::BipartiteGraph(int graphSize, float edgeProba, float partRatio) 
 	}
 
 	for (int i = 0; i < rightPartSize; ++i) {
+            
 		int vertex = addVertex();
 		m_rightPart.insert(vertex);
 		for (set<int>::iterator jj = m_leftPart.begin() ;  jj != m_leftPart.end() ; ++jj) {
@@ -55,7 +55,6 @@ BipartiteGraph::BipartiteGraph(int graphSize, float edgeProba, float partRatio) 
 				addEdge(vertex, *jj);
 			}
 		}
-
 	}
 }
 

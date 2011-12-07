@@ -37,7 +37,7 @@ std::string Minisat::getSAT(Graph graph) {
 
 void Minisat::launchMinisat(char * inFile, char *outFile, Graph graph) {
 
-    ofstream file("cnf.in", ios::out | ios::trunc);
+    ofstream file(inFile, ios::out | ios::trunc);
     if (file) {
         cout << "Success to open file !" << endl;
     } else cerr << "Failed to open file!";
