@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> myRepos/master
 #ifndef TREE_STATIC_SONS_H
 #define	TREE_STATIC_SONS_H
 

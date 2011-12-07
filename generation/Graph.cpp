@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <limits>
 #include <cassert>
-#include "SearchAlgorithm.h"
 
 using namespace std;
 

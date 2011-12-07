@@ -1,10 +1,3 @@
-/* 
- * File:   Minisat.cpp
- * Author: Rafik
- * 
- * Created on 4 décembre 2011, 21:15
- */
-
 #include "Minisat.h"
 #include <string>
 #include <sstream>

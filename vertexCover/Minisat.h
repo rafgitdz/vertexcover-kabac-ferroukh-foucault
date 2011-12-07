@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include"Graph.h"
+#include "../generation/Graph.h"
 
 class Minisat {
 public:

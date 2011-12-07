@@ -3,10 +3,6 @@
 
 using namespace std;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> myRepos/master
 TreeStaticSons::TreeStaticSons(int vertexC, int numOfSons) : Tree() {
     vertexCount = vertexC;
     numberOfSons = numOfSons;
@@ -15,11 +11,7 @@ TreeStaticSons::TreeStaticSons(int vertexC, int numOfSons) : Tree() {
     vector<int> list2(0);
 
     list.push_back(addVertex()); // create the root ;)
-<<<<<<< HEAD
     setRoot(list.back());
-=======
->>>>>>> myRepos/master
-
     int end = 1;
 
     while (end < vertexCount) {
@@ -30,10 +22,6 @@ TreeStaticSons::TreeStaticSons(int vertexC, int numOfSons) : Tree() {
     }
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> myRepos/master
 TreeStaticSons::~TreeStaticSons() {
 }
 
