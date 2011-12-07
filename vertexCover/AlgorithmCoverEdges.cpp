@@ -1,4 +1,3 @@
-
 #include "AlgorithmCoverEdges.h"
 
 using namespace std;
@@ -21,13 +20,11 @@ std::set<int> AlgorithmCoverEdges::getCover() {
 
         for (std::set<int>::iterator ii = coverTemp.begin(); ii != coverTemp.end(); ii++) {
 
-            std::cout << "The selected edge is : " << *ii << std::endl;
             cover.insert(*ii);
             verticesToCover.erase(*ii);
             eraseCoveredEdges(*ii);
         }
     }
-
     return cover;
 }
 
@@ -43,7 +40,6 @@ std::set<int> AlgorithmCoverEdges::getSelectedEdge() {
     for (std::set<int>::iterator ii = verticesToCover.begin(); ii != verticesToCover.end(); ++ii) {
 
         if (jj == firstSelectedVertex) {
-
             firstSelectedVertex = *ii;
             break;
         }
@@ -65,7 +61,6 @@ void AlgorithmCoverEdges::eraseCoveredEdges(int coveredVertex) {
 
     for (std::set<int>::iterator ii = erasedVertex.begin(); ii != erasedVertex.end(); ii++) {
 
-        std::cout << "The erased : " << *ii << std::endl;
         verticesToCover.erase(*ii);
         graphTemp.removeEdge(*ii, coveredVertex);
     }

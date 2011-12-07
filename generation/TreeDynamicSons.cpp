@@ -4,15 +4,14 @@ using namespace std;
 
 TreeDynamicSons::TreeDynamicSons(int vertexC) : Tree() {
 
-    
     vertexCount = vertexC;
-    
+
     int numberOfSons = 0;
     vector<int> list(0);
     vector<int> list2(0);
-    
-    list.push_back(addVertex()); // create the root ;)
-    setRoot(list.back());
+
+    root = addVertex();
+    list.push_back(root); // create the root ;)
 
     int end = 1;
 
@@ -25,6 +24,9 @@ TreeDynamicSons::TreeDynamicSons(int vertexC) : Tree() {
     }
 }
 
+int TreeDynamicSons::getRoot() {
+    return root;
+}
 
 TreeDynamicSons::~TreeDynamicSons() {
 }

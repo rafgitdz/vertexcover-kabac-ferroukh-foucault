@@ -5,10 +5,10 @@
 
 using namespace std;
 
-Graph::Graph(int vertexCount) : m_graph() {
+Graph::Graph(int vertexCount) : m_graph(), m_vertexCount(0), m_edgeCount(0) {
 
-    srand(time(NULL));
-    for (int i = 0; i < vertexCount; i++) 
+	srand(time(NULL));
+    for (int i = 0; i < vertexCount; i++)
         addVertex();
 }
 
@@ -20,7 +20,6 @@ Graph::Graph(const Graph& graph) : m_graph() {
 
 int Graph::addVertex() {
 
-
 	set<int> s;
 	int vertex = rand()%100;
 	while (m_graph.find(vertex) != m_graph.end()) {
@@ -31,21 +30,22 @@ int Graph::addVertex() {
 }
 
 void Graph::addVertex(int vertexNum) {
-	assert(m_graph.find(vertexNum) == m_graph.end());
 
-	set<int> s;
-
-	m_graph[vertexNum] = s;
+    assert(m_graph.find(vertexNum) == m_graph.end());
+    set<int> s;
+    m_graph[vertexNum] = s;
 }
 
 void Graph::addEdge(int vertex1, int vertex2) {
     m_graph[vertex1].insert(vertex2);
     m_graph[vertex2].insert(vertex1);
+    ++m_edgeCount;
 }
 
 void Graph::removeEdge(int vertex1, int vertex2) {
     m_graph[vertex1].erase(vertex2);
     m_graph[vertex2].erase(vertex1);
+    --m_edgeCount;
 }
 
 void Graph::removeVertex(int vertex) {
@@ -53,6 +53,7 @@ void Graph::removeVertex(int vertex) {
     set<int> neigh = m_graph[vertex];
     for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {
         m_graph[*ii].erase(vertex);
+        --m_edgeCount;
     }
 
     m_graph.erase(vertex);
@@ -65,11 +66,11 @@ void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
         m_graph[*ii].erase(vertex);
         if(m_graph[*ii].empty()) {
         	m_graph.erase(*ii);
+        	--m_edgeCount;
         }
     }
     m_graph.erase(vertex);
 }
-
 
 list<int> Graph::getNeighboursList(int vertex) {
 
@@ -78,7 +79,6 @@ list<int> Graph::getNeighboursList(int vertex) {
         list.push_front(*it);
 
     return list;
-
 }
 
 set<int> Graph::getVertices() const {
@@ -88,7 +88,6 @@ set<int> Graph::getVertices() const {
     map<int, set<int> >::const_iterator it;
     for (it = m_graph.begin(); it!= m_graph.end(); ++it)
     	vertices.insert((*it).first);
-    	
     return vertices;
 }
 
@@ -113,7 +112,6 @@ bool Graph::isCover(set<int> cover) {
 			if (cover.find(ii-> first) == cover.end() && cover.find(*jj) == cover.end())
 				return false;
 		}
-
 	return true;
 }
 
@@ -126,6 +124,10 @@ void Graph::trim() {
 		}
 		++ii;
 	}
+}
+
+int Graph::getEdgeCount() {
+    return m_edgeCount;
 }
 
 Graph::~Graph() {
@@ -143,7 +145,6 @@ std::ostream &operator<<(std::ostream &out, const Graph& g) {
         out << endl;
 
     }
-
     return out;
 }
 

@@ -1,4 +1,3 @@
-
 #include "../generation/Graph.h"
 #include "SearchAlgorithm.h"
 using namespace std;
