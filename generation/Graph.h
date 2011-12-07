@@ -17,28 +17,23 @@ public:
     virtual void addEdge(int, int);
     void removeVertex(int);
     void removeVertexAndIsolatedNeighbour(int);
-
     void removeEdge(int, int);
     bool hasEdge(int, int);
     inline const std::set<int>& getNeighbours(int vertex) { return m_graph[vertex]; }
     std::list<int> getNeighboursList(int vertex);
     int getVertexDegree(int vertex);
-
     std::set<int> getVertices();
     int getVertexCount();
-
     bool isCover(std::set<int> cover);
-
     std::map<int, std::set<int> >::const_iterator getBeginGraph();
     std::map<int, std::set<int> >::const_iterator getEndGraph();
     friend std::ostream &operator<<(std::ostream &out, const Graph&);
+	int getEdgeCount();
 
 protected:
     std::map<int, std::set<int> > m_graph;
-
+    int m_vertexCount;
+    int m_edgeCount;
 };
-
-std::ostream &operator<<(std::ostream &out, const Graph&);
-
 
 #endif /* GRAPH_H_ */
