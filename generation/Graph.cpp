@@ -65,11 +65,10 @@ void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
         m_graph[*ii].erase(vertex);
         if(m_graph[*ii].empty()) {
         	m_graph.erase(*ii);
-        	--m_edgeCount;
         }
+        --m_edgeCount;
     }
     m_graph.erase(vertex);
-    cout << "Removed VC node. Graph size is : " << getVertexCount() << endl;
 }
 
 list<int> Graph::getNeighboursList(int vertex) {
@@ -128,10 +127,6 @@ void Graph::trim() {
 
 int Graph::getEdgeCount() {
     return m_edgeCount;
-}
-
-void Graph::incrementEdgeCount() {
-    m_edgeCount++;
 }
 
 Graph::~Graph() {

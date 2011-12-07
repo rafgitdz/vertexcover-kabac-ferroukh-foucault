@@ -10,7 +10,8 @@
  * --------------------------------------------------------------
  * Goal : gives the vertex cover of the graph given as enter
  * Parameters : the graph to be handled
- * Description : 
+ * Description : get two first vertices, erase all the neighbours of them
+ * and continue iteratively to do it until it hasn't vertices.
  */
 
 #include "AlgorithmCoverEdges.h"
@@ -27,68 +28,19 @@ AlgorithmCoverEdges::AlgorithmCoverEdges(Graph graph) : Algorithm(graph) {
 std::set<int> AlgorithmCoverEdges::getCover() {
 
     std::set<int> cover;
-    std::set<int> coverTemp;
+    int firstVertex = 0;
+    int secondVertex = 0;
 
-    while (existsEdges()) {
+    while (graphTemp.getVertexCount() > 0) {
 
-        coverTemp = getSelectedEdge();
-
-        for (std::set<int>::iterator ii = coverTemp.begin(); ii != coverTemp.end(); ii++) {
-
-            cover.insert(*ii);
-            verticesToCover.erase(*ii);
-            eraseCoveredEdges(*ii);
-        }
+        firstVertex = graphTemp.getBeginGraph()->first;
+        secondVertex = *(graphTemp.getBeginGraph()->second.begin());
+        cover.insert(firstVertex);
+        cover.insert(secondVertex);
+        graphTemp.removeVertexAndIsolatedNeighbour(firstVertex);
+        graphTemp.removeVertexAndIsolatedNeighbour(secondVertex);
     }
     return cover;
-}
-
-std::set<int> AlgorithmCoverEdges::getSelectedEdge() {
-
-    int firstSelectedVertex = 0;
-    int secondSelectedVertex = 0;
-    std::set<int> selectedEdge;
-
-    firstSelectedVertex = rand() % verticesToCover.size();
-    int jj = 0;
-
-    for (std::set<int>::iterator ii = verticesToCover.begin(); ii != verticesToCover.end(); ++ii) {
-
-        if (jj == firstSelectedVertex) {
-            firstSelectedVertex = *ii;
-            break;
-        }
-        jj++;
-    }
-    selectedEdge = graphTemp.getNeighbours(firstSelectedVertex);
-    secondSelectedVertex = *(selectedEdge.begin()); // choice the first neighbour in the list
-
-    selectedEdge.clear();
-    selectedEdge.insert(firstSelectedVertex);
-    selectedEdge.insert(secondSelectedVertex);
-
-    return selectedEdge;
-}
-
-void AlgorithmCoverEdges::eraseCoveredEdges(int coveredVertex) {
-
-    std::set<int> erasedVertex = graphTemp.getNeighbours(coveredVertex);
-
-    for (std::set<int>::iterator ii = erasedVertex.begin(); ii != erasedVertex.end(); ii++) {
-
-        verticesToCover.erase(*ii);
-        graphTemp.removeEdge(*ii, coveredVertex);
-    }
-}
-
-bool AlgorithmCoverEdges::existsEdges() {
-
-    for (map<int, set<int> >::const_iterator ii = graphTemp.getBeginGraph(); ii != graphTemp.getEndGraph(); ++ii) {
-
-        set<int> neigh = (*ii).second;
-        for (set<int>::iterator jj = neigh.begin(); jj != neigh.end(); ++jj) return true;
-    }
-    return false;
 }
 
 AlgorithmCoverEdges::~AlgorithmCoverEdges() {
