@@ -8,6 +8,7 @@ public:
 	Parametric();
 	virtual ~Parametric();
 	bool tryGetCover(Graph g, unsigned maxCoverSize, std::set<int> &cover);
+	bool tryGetCoverBis(Graph g, unsigned maxCoverSize, std::set<int> &cover);
 };
 
 #endif /* PARAMETRIC_H_ */
