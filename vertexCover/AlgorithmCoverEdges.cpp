@@ -1,3 +1,18 @@
+/*    *Project of Complexity and Applicated Algorithms*
+ * 
+ * Authors : 
+ *      Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)
+ *      Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)
+ *      Ferroukh Rafik (rafik.ferroukh@etu.u-bordeaux1.fr)
+ * 
+ *   University Bordeaux 1, Software Engineering, Master 2
+ *                      *2011/2012*
+ * --------------------------------------------------------------
+ * Goal : gives the vertex cover of the graph given as enter
+ * Parameters : the graph to be handled
+ * Description : 
+ */
+
 #include "AlgorithmCoverEdges.h"
 
 using namespace std;

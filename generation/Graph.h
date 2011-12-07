@@ -19,7 +19,10 @@ public:
     void removeVertexAndIsolatedNeighbour(int);
     void removeEdge(int, int);
     bool hasEdge(int, int);
-    inline const std::set<int>& getNeighbours(int vertex) { return m_graph[vertex]; }
+
+    inline const std::set<int>& getNeighbours(int vertex) {
+        return m_graph[vertex];
+    }
     std::list<int> getNeighboursList(int vertex);
     int getVertexDegree(int vertex);
     std::set<int> getVertices();
@@ -28,7 +31,8 @@ public:
     std::map<int, std::set<int> >::const_iterator getBeginGraph();
     std::map<int, std::set<int> >::const_iterator getEndGraph();
     friend std::ostream &operator<<(std::ostream &out, const Graph&);
-	int getEdgeCount();
+    int getEdgeCount();
+    void incrementEdgeCount();
 
 protected:
     std::map<int, std::set<int> > m_graph;

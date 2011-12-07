@@ -1,5 +1,5 @@
 c this is the SAT instance from the graph 
-p cnf 50 1225
+p cnf 50 0
 1 2 0
 1 3 0
 1 4 0

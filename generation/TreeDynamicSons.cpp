@@ -1,32 +1,51 @@
+/*    *Project of Complexity and Applicated Algorithms*
+ * 
+ * Authors : 
+ *      Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)
+ *      Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)
+ *      Ferroukh Rafik (rafik.ferroukh@etu.u-bordeaux1.fr)
+ * 
+ *   University Bordeaux 1, Software Engineering, Master 2
+ *                      *2011/2012*
+ * --------------------------------------------------------------
+ * Goal : Create a tree graph
+ * Parameters : the number of vertex that the graph will have
+ * Description : Create a tree graph with a dynamic number of sons for each
+ * vertex of the vertexCount vertices
+ */
+
 #include "TreeDynamicSons.h"
 
 using namespace std;
 
-TreeDynamicSons::TreeDynamicSons(int vertexC) : Tree() {
+TreeDynamicSons::TreeDynamicSons(int vertexCnt) : Tree() {
 
-    vertexCount = vertexC;
-
+    // init the data
+    _vertexCount = vertexCnt;
     int numberOfSons = 0;
-    vector<int> list(0);
-    vector<int> list2(0);
+    vector<int> verticesToHaveSons(0);
+    vector<int> newVerticesToHaveSons(0);
 
-    root = addVertex();
-    list.push_back(root); // create the root ;)
+    _root = addVertex();
+    verticesToHaveSons.push_back(_root); // create the root and save it
 
-    int end = 1;
+    int limitCreateVertices = 1;
 
-    while (end < vertexCount) {
-        for (unsigned int i = 0; i < list.size(); ++i) {
-            numberOfSons = rand() % end + 1;
-            constructEdgesTree(numberOfSons, vertexCount, i, end, list, list2);
+    while (limitCreateVertices < _vertexCount) {
+        /* control the limit of the vertices to create */
+        for (unsigned int i = 0; i < verticesToHaveSons.size(); ++i) {
+            
+            /* get a dynamic number of sons to link with the root "i" and
+             build the edges between them */
+            numberOfSons = rand() % limitCreateVertices + 1; 
+            buildEdgesTree(numberOfSons, _vertexCount, i, limitCreateVertices, verticesToHaveSons
+                    , newVerticesToHaveSons);
         }
-        updateList(list, list2);
+        /* put the vertices that don't has again a sons, the list of fixed 
+         vertices */
+        updateList(verticesToHaveSons, newVerticesToHaveSons);
     }
-}
-
-int TreeDynamicSons::getRoot() {
-    return root;
-}
+} // end of TreeDynamicsSons constructor
 
 TreeDynamicSons::~TreeDynamicSons() {
 }
