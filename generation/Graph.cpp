@@ -39,13 +39,13 @@ void Graph::addVertex(int vertexNum) {
 void Graph::addEdge(int vertex1, int vertex2) {
     m_graph[vertex1].insert(vertex2);
     m_graph[vertex2].insert(vertex1);
-    ++m_edgeCount;
+//    m_edgeCount++;
 }
 
 void Graph::removeEdge(int vertex1, int vertex2) {
     m_graph[vertex1].erase(vertex2);
     m_graph[vertex2].erase(vertex1);
-    --m_edgeCount;
+//    --m_edgeCount;
 }
 
 void Graph::removeVertex(int vertex) {
@@ -53,9 +53,8 @@ void Graph::removeVertex(int vertex) {
     set<int> neigh = m_graph[vertex];
     for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {
         m_graph[*ii].erase(vertex);
-        --m_edgeCount;
+//        --m_edgeCount;
     }
-
     m_graph.erase(vertex);
 }
 
@@ -70,6 +69,7 @@ void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
         --m_edgeCount;
     }
     m_graph.erase(vertex);
+    cout << "Removed VC node. Graph size is : " << getVertexCount() << endl;
 }
 
 list<int> Graph::getNeighboursList(int vertex) {
@@ -128,6 +128,10 @@ void Graph::trim() {
 
 int Graph::getEdgeCount() {
     return m_edgeCount;
+}
+
+void Graph::incrementEdgeCount() {
+    m_edgeCount++;
 }
 
 Graph::~Graph() {
