@@ -32,7 +32,7 @@ TreeStaticSons::TreeStaticSons(int vertexCnt, int numOfSons) : Tree() {
     int end = 1;
 
     while (end < _vertexCount) {
-        /* control the limit of the vertices to create */
+        // control the limit of the vertices to create
         for (unsigned int i = 0; i < verticesToHaveSons.size(); ++i)
             /* link the number of sons with the root "i" and
              * build the edges between them */
