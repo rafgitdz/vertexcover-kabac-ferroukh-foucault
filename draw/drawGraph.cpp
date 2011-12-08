@@ -18,7 +18,7 @@ DrawGraph::DrawGraph(Graph graph) {
 
 string DrawGraph::generateTextToDraw() {
 
-    int first, second;
+    int first;
     string text = "";
     text.operator +=("graph G {");
     for (map<int, set<int> >::const_iterator ii = _graph.getBeginGraph(); ii != _graph.getEndGraph(); ++ii) {
@@ -27,7 +27,6 @@ string DrawGraph::generateTextToDraw() {
         set<int> neigh = (*ii).second;
         for (set<int>::iterator jj = neigh.begin(); jj != neigh.end(); ++jj) {
             text.operator +=(convertToString(first));
-            second = *jj;
             text.operator +=(" -- ");
             text.operator +=(convertToString(*jj));
             text.operator +=(";\n");
@@ -46,7 +45,7 @@ void DrawGraph::launchGraphViz(string file) {
 
     graph << file;
     graph.close();
-    system("../../GraphViz/bin/dot -Tpng -o graph.png graph.dot");
+    system("dot -Tpng -o graph.png graph.dot");
 }
 
 string DrawGraph::convertToString(int toConvert) {

@@ -88,6 +88,7 @@ set<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target) 
  * build a tree at the same time */
 void SearchAlgorithm::depthFirstSearch(Graph graph, Graph &tree, int root) {
 
+	m_queue.clear();
     // init data
     int numOrderSearch = 0;
     int head;
@@ -139,12 +140,22 @@ void SearchAlgorithm::depthFirstSearch(Graph graph, Graph &tree, int root) {
         for (list<int>::iterator ii = verticesList.begin(); ii != verticesList.end(); ++ii) {
             if (color(*ii) == WHITE) {
 
+
                 setColor(*ii, GREY);
                 setPi(*ii, head);// set the father for the none-visited vertex
                 m_queue.push_front(*ii);
+            } else if (color(*ii) == GREY) {
+            	setPi(*ii, head);
+            	m_queue.remove(*ii);
+            	m_queue.push_front(*ii);
             }
+
         }
     }
+    cout << endl;
+    for (list<int>::iterator ii = searchedVertices.begin(); ii != searchedVertices.end(); ++ii)
+    	cout << *ii << " ";
+    cout << endl;
 }// end of the depthFirstSearch (graph, &tree, root)
 
 list<int> SearchAlgorithm::getImprovingPath(Graph graph, int root, int target) {
