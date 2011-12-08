@@ -2,13 +2,12 @@
 #define ALGORITHMGLOUTON_H_
 
 #include "Algorithm.h"
+#include <set>
 
 class AlgorithmGlouton : public Algorithm {
 public:
 	AlgorithmGlouton(Graph graph);
-	virtual ~AlgorithmGlouton();
-	void removeIsolatedVertices();
-	virtual void findMinimalVertexCover();
+	virtual std::set<int> getCover();
 	int addVertexToVC();
 
 protected:
