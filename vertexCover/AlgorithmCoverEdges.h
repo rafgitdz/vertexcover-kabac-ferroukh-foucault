@@ -26,8 +26,7 @@ public:
     std::set<int> getCover();
 
 private:
-    Graph graphTemp;
-    std::set<int> verticesToCover;
+    Graph graphTemp; // Copy of the original graph
 };
 
 #endif /* ALGORITHMCOVEREDGES_H_ */
