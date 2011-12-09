@@ -9,4 +9,8 @@ Makefile
 *.exe
 .metadata
 .directory
-instance/pictureGraph/
+instance/
+*.dot
+*.in
+*.out
+*.png

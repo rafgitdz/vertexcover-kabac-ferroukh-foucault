@@ -94,7 +94,6 @@ int main(int argc, char* argv[]) {
             }
             case 3:
             { //TreeDynamic
-
                 graph = new TreeDynamicSons(graphSize);
                 break;
 
