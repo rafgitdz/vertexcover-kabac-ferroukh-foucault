@@ -7,6 +7,5 @@ nbproject/
 Makefile
 *.stackdump
 *.exe
-main.cpp
 .metadata
 .directory
