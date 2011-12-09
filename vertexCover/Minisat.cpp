@@ -37,7 +37,7 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
     // Init of the SAT instance in the file
     SAT.operator =("c this is the SAT instance from the graph \n");
     SAT.operator +=("p cnf ");
-    
+
     unsigned int numberOfClauses = ((maxSizeCover * vertexCount *
             (vertexCount - 1)) / 2) + (((maxSizeCover * (maxSizeCover - 1)) *
             vertexCount) / 2) + (2 * maxSizeCover * graph.getEdgeCount());
@@ -110,9 +110,6 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
     /* end of building the matrix and the SAT instance from the graph to pass
      * for minisat */
 
-    //    cout << "\n The map is : " << endl;
-    //    for (map<int, int>::iterator hh = indexVerticesMatrix.begin(); hh != indexVerticesMatrix.end(); ++hh)
-    //        cout << (*hh).first << " : " << (*hh).second << endl;
     /* ------------------------------------*
      * launch minisat on the SAT instance  *
      * ------------------------------------*/
