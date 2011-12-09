@@ -1,0 +1,38 @@
+.TH VertexCover 1 9/12/2011
+.SH NAME
+VertexCover \- Gets a vertex cover from a randomly generated graph, or from a formatted entry
+.SH SYNOPSIS
+.B VertexCover {[
+.I inputFile
+.B ] | [-g
+.I graphType <args>
+.B ]}
+.SH DESCRIPTION
+.SH OPTIONS
+.IP "-g, --generate-graph"
+Randomly generates a graph, using one of the algorithms, according to the first parameter:
+.br
+.B 0 n p
+: Generates a simple graph, with n vertices and a probability p to draw an edge between two vertices (p must be between 0 an 1)
+.IP "-t, --test"
+Launches a serie of tests to ensure that each algorithm returns a vertex cover
+.SH AUTHOR
+.P
+Written by Milan Kabac, Rafik Ferroukh and Matthieu Foucault 
+.br
+Masters Degrees at University of Bordeaux
+.SH COPYRIGHT
+Copyright (C) 2011  Milan Kabac, Rafik Ferroukh and Matthieu Foucault
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.

@@ -19,11 +19,12 @@
 using namespace std;
 
 void usage() {
-    cout << "usage: VertexCover inputFile -a algorithm" << endl;
-    cout << "read the manual for more details" << endl;
+	cout << "usage: VertexCover inputFile -a algorithm" << endl;
+	cout << "read the manual for more details" << endl;
 }
 
 void testComplexMinisat() {
+
 
     Minisat ms;
     //    TreeDynamicSons t(40);
@@ -55,71 +56,85 @@ void testComplexMinisat() {
 
 int main(int argc, char* argv[]) {
 
-    if (argc == 1) {
-        testComplexMinisat();
-    } else
-        if (argc == 2
-            && (strcmp(argv[1], "-t") == 0 || strcmp(argv[1], "--test") == 0)) {
-        if (testAll())
-            cout << "Everything is working fine" << endl;
+	bool graphGenerated = false;
 
-    } else if (argc >= 4 && (strcmp(argv[1], "-g") == 0)) {
-        int graphType = atoi(argv[2]);
-        int graphSize = atoi(argv[3]);
-        Graph* graph;
-        switch (graphType) {
+	if (argc == 1) {
+		testComplexMinisat();
+	} else if (argc == 2
+			&& (strcmp(argv[1], "-t") == 0 || strcmp(argv[1], "--test") == 0)) {
+		if (testAll())
+			cout << "Everything is working fine" << endl;
 
-            case 0:
-            { //SimpleGraph
-                float edgeProba = atof(argv[4]);
-                graph = new SimpleGraph(graphSize, edgeProba);
+	} else {
+		for (int i = 1; i < argc; ++i)
 
-                break;
-            }
-            case 1:
-            { //SmallCoverGraph
-                float edgeProba = atof(argv[4]);
-                int coverSize = atoi(argv[5]);
-                graph = new SmallCoverGraph(graphSize, edgeProba, coverSize);
+			if (strcmp(argv[i], "-g") == 0
+					|| strcmp(argv[i], "--generate-graph") == 0) {
 
-                break;
-            }
-            case 2:
-            { //BipartiteGraph
-                float edgeProba = atof(argv[4]);
-                float partRatio = atof(argv[5]);
-                graph = new BipartiteGraph(graphSize, edgeProba, partRatio);
+				if (argc < i + 3) {
+					usage();
+					return EXIT_FAILURE;
+				}
 
-                break;
-            }
-            case 3:
-            { //TreeDynamic
-                graph = new TreeDynamicSons(graphSize);
-                break;
+				int graphType = atoi(argv[i + 1]);
+				int graphSize = atoi(argv[i + 2]);
+				Graph* graph;
+				switch (graphType) {
 
-            }
-            case 4:
-            { //TreeStatic
+				case 0: { //SimpleGraph
+					float edgeProba = atof(argv[i + 3]);
+					graph = new SimpleGraph(graphSize, edgeProba);
 
-                int sonsCount = atoi(argv[4]);
-                graph = new TreeStaticSons(graphSize, sonsCount);
-                break;
-            }
-            default:
-            {
-                usage();
-                return EXIT_FAILURE;
-            }
+					break;
+				}
+				case 1: { //SmallCoverGraph
+					float edgeProba = atof(argv[i + 3]);
+					int coverSize = atoi(argv[i + 4]);
+					graph = new SmallCoverGraph(graphSize, edgeProba,
+							coverSize);
 
-        }
+					break;
+				}
+				case 2: { //BipartiteGraph
+					float edgeProba = atof(argv[i + 3]);
+					float partRatio = atof(argv[i + 4]);
+					graph = new BipartiteGraph(graphSize, edgeProba, partRatio);
 
-        cout << *graph << endl;
-        delete (graph);
+					break;
+				}
+				case 3: { //TreeDynamic
 
-    } else {
-        usage();
-        return EXIT_FAILURE;
-    }
+					graph = new TreeDynamicSons(graphSize);
+					break;
 
-    return EXIT_SUCCESS;
+				}
+				case 4: { //TreeStatic
+
+					int sonsCount = atoi(argv[i + 4]);
+					graph = new TreeStaticSons(graphSize, sonsCount);
+					break;
+				}
+				default: {
+					usage();
+					return EXIT_FAILURE;
+				}
+
+				}
+
+				cout << *graph << endl;
+				delete (graph);
+
+			} // endif --generate-graph
+			else if (strcmp(argv[i], "-a") == 0
+					|| strcmp(argv[i], "--algorithm")) {
+
+				if (argc < i + 3) {
+					usage();
+					return EXIT_FAILURE;
+				}
+
+			}
+	}
+
+	return EXIT_SUCCESS;
 }
