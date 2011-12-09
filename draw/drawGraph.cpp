@@ -49,9 +49,6 @@ void DrawGraph::drawGraph(Graph graph, set<int> vertexCover, char *pictureFile) 
     text.operator +=("}");
 
     ofstream graphFile("graph.dot", ios::out | ios::trunc);
-    if (graphFile) {
-        cout << "Success to open file !" << endl;
-    } else cerr << "Failed to open file!";
 
     graphFile << text;
     graphFile.close();

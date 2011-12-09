@@ -31,16 +31,18 @@ void usage() {
 	cout << "read the manual for more details" << endl;
 }
 
-void generateDot(Graph g) {
+void generateDot(Graph g, set<int> cover) {
 	DrawGraph dg;
-	set<int> vc;
-	dg.drawGraph(g,vc, "graph.png");
+	dg.drawGraph(g, cover, "graph.png");
 }
 
 int main(int argc, char* argv[]) {
 
 	bool visualizeGraph = false;
 	bool graphGenerated = false;
+	Graph* graph = NULL;
+	Tree* tree = NULL;
+	BipartiteGraph* bGraph = NULL;
 
 	if (argc == 2
 			&& (strcmp(argv[1], "-t") == 0 || strcmp(argv[1], "--test") == 0)) {
@@ -70,7 +72,6 @@ int main(int argc, char* argv[]) {
 
 				int graphType = atoi(argv[i + 1]);
 				int graphSize = atoi(argv[i + 2]);
-				Graph* graph;
 				switch (graphType) {
 
 				case 0: { //SimpleGraph
@@ -90,20 +91,20 @@ int main(int argc, char* argv[]) {
 				case 2: { //BipartiteGraph
 					float edgeProba = atof(argv[i + 3]);
 					float partRatio = atof(argv[i + 4]);
-					graph = new BipartiteGraph(graphSize, edgeProba, partRatio);
+					bGraph = new BipartiteGraph(graphSize, edgeProba, partRatio);
 
 					break;
 				}
 				case 3: { //TreeDynamic
 
-					graph = new TreeDynamicSons(graphSize);
+					tree = new TreeDynamicSons(graphSize);
 					break;
 
 				}
 				case 4: { //TreeStatic
 
 					int sonsCount = atoi(argv[i + 4]);
-					graph = new TreeStaticSons(graphSize, sonsCount);
+					tree = new TreeStaticSons(graphSize, sonsCount);
 					break;
 				}
 				default: {
@@ -114,24 +115,75 @@ int main(int argc, char* argv[]) {
 				}
 
 				gettimeofday(&t2, NULL);
+				graphGenerated = true;
 				cout << "graph generated in " << diff_ms(t2, t1)
 						<< " miliseconds" << endl;
-				if (visualizeGraph)
-					generateDot(*graph);
 				//cout << *graph << endl;
-				delete (graph);
 
 			} // endif --generate-graph
 			else if (strcmp(argv[i], "-a") == 0
 					|| strcmp(argv[i], "--algorithm") == 0) {
 
-				if (argc < i + 3) {
+				if (argc < i + 1 || !graphGenerated) {
 					usage();
 					return EXIT_FAILURE;
 				}
 
-			}
-	}
+				timeval t3,t4;
 
-	return EXIT_SUCCESS;
+				gettimeofday(&t3, NULL);
+				set<int> cover;
+				int algoType = atoi(argv[i + 1]);
+				switch (algoType) {
+				case 0: {
+					AlgorithmGlouton algo(*graph);
+					cover = algo.getCover();
+					break;
+				}
+				case 1: {
+					break;
+				}
+				case 2: {
+					break;
+				}
+				case 3: {
+					break;
+				}
+				case 4: {
+					break;
+				}
+				case 5: {
+					break;
+				}
+				case 6: {
+					break;
+				}
+				case 7: {
+					break;
+				}
+				case 8: {
+					break;
+				}
+				case 9: {
+					break;
+				}
+				default:{
+					usage();
+					return EXIT_FAILURE;
+				}
+				} // end switch
+
+				gettimeofday(&t4,NULL);
+				cout << "cover found in " << diff_ms(t4,t3) << " milliseconds" << endl;
+				if (visualizeGraph)
+					generateDot(*graph, cover);
+
+
+			} // endif --algorithm
+
+		delete (graph);
+		delete (tree);
+		delete (bGraph);
+		return EXIT_SUCCESS;
+	}
 }

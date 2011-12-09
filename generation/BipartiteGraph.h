@@ -5,6 +5,7 @@
 
 class BipartiteGraph: public Graph {
 	public:
+		BipartiteGraph();
 		BipartiteGraph(int graphSize, float edgeProba, float partRatio = 0.5);
 		inline const std::set<int>& getLeftPart() {return m_leftPart;}
 		inline const std::set<int>& getRightPart() {return m_rightPart;}

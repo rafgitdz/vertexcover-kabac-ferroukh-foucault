@@ -6,6 +6,9 @@
 using namespace std;
 
 
+BipartiteGraph::BipartiteGraph() :
+		Graph(), m_leftPart(), m_rightPart() { }
+
 BipartiteGraph::BipartiteGraph(int graphSize, float edgeProba, float partRatio) :
 		Graph(), m_leftPart(), m_rightPart() {
 	srand(time(NULL));
