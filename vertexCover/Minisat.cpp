@@ -23,229 +23,228 @@ using namespace std;
 Minisat::Minisat() {
 }
 
-list<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover, char * inFile, char *outFile) {
+set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
+		char * inFile, char *outFile) {
 
-    map<int, int> indexVerticesMatrix;
-    set<int> vertices = graph.getVertices();
-    int vertexCount = graph.getVertexCount();
-    string SAT;
+	map<int, int> indexVerticesMatrix;
+	set<int> vertices = graph.getVertices();
+	string SAT;
 
-    // Open the file inFile 
-    ofstream file(inFile, ios::out | ios::trunc);
+	// Open the file inFile
+	ofstream file(inFile, ios::out | ios::trunc);
 
-    // Init of the SAT instance in the file 
-    SAT.operator =("c this is the SAT instance from the graph \n");
-    SAT.operator +=("p cnf ");
+	// Init of the SAT instance in the file
+	SAT.operator =("c this is the SAT instance from the graph \n");
+	SAT.operator +=("p cnf ");
+	this->buildingSAT(SAT, vertices.size(), " ");
+	this->buildingSAT(SAT, graph.getEdgeCount(), "\n");
 
-    this->buildingSAT(SAT, vertices.size() * maxSizeCover, " ");
+	int jj = 0;
 
-    unsigned int numberOfClauses = ((maxSizeCover * vertexCount *
-            (vertexCount - 1)) / 2) + (((maxSizeCover * (maxSizeCover - 1)) *
-            vertexCount) / 2) + (2 * maxSizeCover * graph.getEdgeCount());
+	// build the SAT instance and the matrix
+	for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
+		indexVerticesMatrix[*ii] = jj;
+		++jj;
+	}
+	int vertexCount = graph.getVertexCount();
+	int matrix[maxSizeCover][vertexCount];
+	jj = 1;
+	for (int i = 0; i < maxSizeCover; ++i) {
+		for (int j = 0; j < vertexCount; ++j) {
 
-    cout << "number of clauses = " << numberOfClauses << endl;
+			matrix[i][j] = jj;
+			++jj;
+		}
+	}
 
-    this->buildingSAT(SAT, numberOfClauses, "\n");
+	int k;
+	for (int i = 0; i < maxSizeCover; ++i) {
+		k = 0;
+		for (int j = k; j + 1 < vertexCount; ++j) {
 
-    int jj = 0;
+			this->buildingSAT(SAT, -(matrix[i][k]), " ");
+			this->buildingSAT(SAT, -(matrix[i][j + 1]), " 0\n");
+			if (j + 2 == vertexCount) {
+				++k;
+				if (k + 1 == vertexCount)
+					break;
+				j = k - 1;
+			}
+		}
+	}
 
-    // build the SAT instance and the matrix
-    for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
-        indexVerticesMatrix[*ii] = jj;
-        ++jj;
-    }
+	for (int j = 0; j < vertexCount; ++j) {
+		k = 0;
+		for (int i = k; i + 1 < maxSizeCover; ++i) {
 
-    int matrix[maxSizeCover][vertexCount];
-    jj = 1;
-    for (int i = 0; i < maxSizeCover; ++i) {
-        for (int j = 0; j < vertexCount; ++j) {
+			this->buildingSAT(SAT, -(matrix[k][j]), " ");
+			this->buildingSAT(SAT, -(matrix[i + 1][j]), " 0\n");
+			if (i + 2 == maxSizeCover) {
+				++k;
+				if (k + 1 == maxSizeCover)
+					break;
+				i = k - 1;
+			}
+		}
+	}
 
-//            matrix[i][j] = jj;
-            ++jj;
-        }
-    }
+	int vertex, firstVertex, secondVertex;
+	set<int> markedVertices;
+	Graph temporaryGraph = graph;
 
-    int k;
-    for (int i = 0; i < maxSizeCover; ++i) {
-        k = 0;
-        for (int j = k; j + 1 < vertexCount; ++j) {
+	for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
 
-            this->buildingSAT(SAT, -(matrix[i][k]), " ");
-            this->buildingSAT(SAT, -(matrix[i][j + 1]), " 0\n");
-            if (j + 2 == vertexCount) {
-                ++k;
-                if (k + 1 == vertexCount) break;
-                j = k - 1;
-            }
-        }
-    }
+		vertex = *ii;
+		firstVertex = indexVerticesMatrix[*ii];
+		markedVertices = temporaryGraph.getNeighbours(vertex);
 
-    for (int j = 0; j < vertexCount; ++j) {
-        k = 0;
-        for (int i = k; i + 1 < maxSizeCover; ++i) {
+		for (set<int>::iterator jj = markedVertices.begin();
+				jj != markedVertices.end(); ++jj) {
 
-            this->buildingSAT(SAT, -(matrix[k][j]), " ");
-            this->buildingSAT(SAT, -(matrix[i + 1][j]), " 0\n");
-            if (i + 2 == maxSizeCover) {
-                ++k;
-                if (k + 1 == maxSizeCover) break;
-                i = k - 1;
-            }
-        }
-    }
+			secondVertex = indexVerticesMatrix[*jj];
 
-    int vertex, firstVertex, secondVertex;
-    set<int> markedVertices;
-    Graph temporaryGraph = graph;
+			for (int i = 0; i < maxSizeCover; ++i) {
+				this->buildingSAT(SAT, matrix[i][firstVertex], " ");
+				this->buildingSAT(SAT, matrix[i][secondVertex], " ");
+			}
+			SAT.operator +=("0\n");
+			temporaryGraph.removeEdge(*ii, *jj);
+		}
+	}
+	/* end of building the matrix and the SAT instance from the graph to pass
+	 * for minisat */
 
-    for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
+	//    cout << "\n The map is : " << endl;
+	//    for (map<int, int>::iterator hh = indexVerticesMatrix.begin(); hh != indexVerticesMatrix.end(); ++hh)
+	//        cout << (*hh).first << " : " << (*hh).second << endl;
+	/* ------------------------------------*
+	 * launch minisat on the SAT instance  *
+	 * ------------------------------------*/
+	file << SAT;
+	file.close();
 
-        vertex = *ii;
-        firstVertex = indexVerticesMatrix[*ii];
-        markedVertices = temporaryGraph.getNeighbours(vertex);
+	string in = this->convertToString(inFile);
+	string out = this->convertToString(outFile);
+	string launchMinisat = "minisat -verb=0 " + in + " " + out;
+	system(launchMinisat.c_str());
 
-        for (set<int>::iterator jj = markedVertices.begin();
-                jj != markedVertices.end(); ++jj) {
+	set<int> vertexCover, vertexCoverFromMinisat;
 
-            secondVertex = indexVerticesMatrix[*jj];
+	ifstream fileOut(outFile, ios::in);
+	string get;
+	int getInt;
 
-            for (int i = 0; i < maxSizeCover; ++i) {
-                this->buildingSAT(SAT, matrix[i][firstVertex], " ");
-                this->buildingSAT(SAT, matrix[i][secondVertex], " ");
-            }
-            SAT.operator +=("0\n");
-            temporaryGraph.removeEdge(*ii, *jj);
-        }
-    }
-    /* end of building the matrix and the SAT instance from the graph to pass
-     * for minisat */
+	while (!fileOut.eof()) {
 
-    //    cout << "\n The map is : " << endl;
-    //    for (map<int, int>::iterator hh = indexVerticesMatrix.begin(); hh != indexVerticesMatrix.end(); ++hh)
-    //        cout << (*hh).first << " : " << (*hh).second << endl;
+		fileOut >> get;
+		getInt = atoi(get.c_str());
+		if (getInt > 0)
+			vertexCover.insert(getInt);
+	}
 
-    /* ------------------------------------*
-     * launch minisat on the SAT instance  *
-     * ------------------------------------*/
-    file << SAT;
-    file.close();
+	fileOut.close();
 
-    string in = this->convertToString(inFile);
-    string out = this->convertToString(outFile);
-    string launchMinisat = "minisat " + in + " " + out;
-    system(launchMinisat.c_str());
-
-
-    list<int> vertexCover, vertexCoverFromMinisat;
-
-    ifstream fileOut(outFile, ios::in);
-    string get;
-    int getInt;
-
-    while (!fileOut.eof()) {
-
-        fileOut >> get;
-        getInt = atoi(get.c_str());
-        if (getInt > 0) vertexCover.push_back(getInt);
-    }
-
-    fileOut.close();
-
-    /* ------------------------------------*
-     * get the vertex cover returned bye   *
-     * "minisat" if it exists                *
-     * ------------------------------------*/
-    for (list<int>::iterator ii = vertexCover.begin(); ii != vertexCover.end(); ++ii) {
-        for (map<int, int>::iterator hh = indexVerticesMatrix.begin(); hh != indexVerticesMatrix.end(); ++hh) {
-            if ((*hh).second == ((*ii - 1) % vertexCount)) vertexCoverFromMinisat.push_back((*hh).first);
-        }
-    }
-    return vertexCoverFromMinisat;
+	/* ------------------------------------*
+	 * get the vertex cover returned by   *
+	 * "minisat" if it exists                *
+	 * ------------------------------------*/
+	for (set<int>::iterator ii = vertexCover.begin(); ii != vertexCover.end();
+			++ii) {
+		for (map<int, int>::iterator hh = indexVerticesMatrix.begin();
+				hh != indexVerticesMatrix.end(); ++hh) {
+			if ((*hh).second == ((*ii - 1) % vertexCount))
+				vertexCoverFromMinisat.insert((*hh).first);
+		}
+	}
+	return vertexCoverFromMinisat;
 }
 
 /*------------------------------------------- SIMPLE SAT --------------------------------------------------------------*/
-list<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile, char *outFile) {
+set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
+		char *outFile) {
 
-    set<int> vertices = graph.getVertices();
-    set<int> markedVertices;
-    string SAT;
-    int vertex;
+	set<int> vertices = graph.getVertices();
+	set<int> markedVertices;
+	string SAT;
+	int vertex;
 
-    SAT.operator =("c this is the SAT instance from the graph \n");
-    SAT.operator +=("p cnf ");
+	SAT.operator =("c this is the SAT instance from the graph \n");
+	SAT.operator +=("p cnf ");
 
-    this->buildingSAT(SAT, vertices.size(), " ");
-    this->buildingSAT(SAT, graph.getEdgeCount(), "\n");
+	this->buildingSAT(SAT, vertices.size(), " ");
+	this->buildingSAT(SAT, graph.getEdgeCount(), "\n");
 
-    for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
+	for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
 
-        vertex = *ii;
-        markedVertices = graph.getNeighbours(vertex);
+		vertex = *ii;
+		markedVertices = graph.getNeighbours(vertex);
 
-        for (set<int>::iterator jj = markedVertices.begin(); jj != markedVertices.end(); ++jj) {
+		for (set<int>::iterator jj = markedVertices.begin();
+				jj != markedVertices.end(); ++jj) {
 
-            this->buildingSAT(SAT, *ii, " ");
-            this->buildingSAT(SAT, *jj, " 0\n");
-            graph.removeEdge(*ii, *jj);
-        }
-    }
-    /* ------------------------------------*
-     * launch minisat on the SAT instance  *
-     * ------------------------------------*/
+			this->buildingSAT(SAT, *ii, " ");
+			this->buildingSAT(SAT, *jj, " 0\n");
+			graph.removeEdge(*ii, *jj);
+		}
+	}
+	/* ------------------------------------*
+	 * launch minisat on the SAT instance  *
+	 * ------------------------------------*/
 
-    // Open the file inFile 
-    ofstream file(inFile, ios::out | ios::trunc);
-    file << SAT;
-    file.close();
+	// Open the file inFile
+	ofstream file(inFile, ios::out | ios::trunc);
+	file << SAT;
+	file.close();
 
-    string in = this->convertToString(inFile);
-    string out = this->convertToString(outFile);
-    string launchMinisat = "minisat " + in + " " + out;
-    system(launchMinisat.c_str());
+	string in = this->convertToString(inFile);
+	string out = this->convertToString(outFile);
+	string launchMinisat = "minisat -verb=0 " + in + " " + out;
+	system(launchMinisat.c_str());
 
-    /* ------------------------------------*
-     * get the vertex cover returned bye   *
-     * "minisat" if it exists              *
-     * ------------------------------------*/
-    list<int> vertexCover;
+	/* ------------------------------------*
+	 * get the vertex cover returned bye   *
+	 * "minisat" if it exists              *
+	 * ------------------------------------*/
+	set<int> vertexCover;
 
-    ifstream fileOut(outFile, ios::in);
-    string get;
-    int getInt;
+	ifstream fileOut(outFile, ios::in);
+	string get;
+	int getInt;
 
-    while (!fileOut.eof()) {
+	while (!fileOut.eof()) {
 
-        fileOut >> get;
-        getInt = atoi(get.c_str());
-        if (getInt > 0) vertexCover.push_back(getInt);
-    }
+		fileOut >> get;
+		getInt = atoi(get.c_str());
+		if (getInt > 0)
+			vertexCover.insert(getInt);
+	}
 
-    fileOut.close();
+	fileOut.close();
 
-    return vertexCover;
+	return vertexCover;
 }
 
 void Minisat::buildingSAT(string &SAT, int toConvert, std::string toInsert) {
 
-    std::ostringstream oss;
-    oss << toConvert;
-    string converted = oss.str();
-    SAT.operator +=(converted);
-    SAT.operator +=(toInsert);
+	std::ostringstream oss;
+	oss << toConvert;
+	string converted = oss.str();
+	SAT.operator +=(converted);
+	SAT.operator +=(toInsert);
 }
 
 string Minisat::convertToString(int toConvert) {
-    std::ostringstream oss;
-    oss << toConvert;
+	std::ostringstream oss;
+	oss << toConvert;
 
-    return oss.str();
+	return oss.str();
 }
 
 string Minisat::convertToString(char* toConvert) {
-    std::ostringstream oss;
-    oss << toConvert;
+	std::ostringstream oss;
+	oss << toConvert;
 
-    return oss.str();
+	return oss.str();
 }
 
 Minisat::~Minisat() {

@@ -62,15 +62,14 @@ int main(int argc, char* argv[]) {
         if (testAll())
             cout << "Everything is working fine" << endl;
 
-    } else if (argc >= 5 && (strcmp(argv[1], "-g") == 0)) {
-
+    } else if (argc >= 4 && (strcmp(argv[1], "-g") == 0)) {
         int graphType = atoi(argv[2]);
+        int graphSize = atoi(argv[3]);
         Graph* graph;
         switch (graphType) {
 
             case 0:
             { //SimpleGraph
-                int graphSize = atoi(argv[3]);
                 float edgeProba = atof(argv[4]);
                 graph = new SimpleGraph(graphSize, edgeProba);
 
@@ -78,7 +77,6 @@ int main(int argc, char* argv[]) {
             }
             case 1:
             { //SmallCoverGraph
-                int graphSize = atoi(argv[3]);
                 float edgeProba = atof(argv[4]);
                 int coverSize = atoi(argv[5]);
                 graph = new SmallCoverGraph(graphSize, edgeProba, coverSize);
@@ -87,7 +85,6 @@ int main(int argc, char* argv[]) {
             }
             case 2:
             { //BipartiteGraph
-                int graphSize = atoi(argv[3]);
                 float edgeProba = atof(argv[4]);
                 float partRatio = atof(argv[5]);
                 graph = new BipartiteGraph(graphSize, edgeProba, partRatio);
@@ -97,11 +94,15 @@ int main(int argc, char* argv[]) {
             case 3:
             { //TreeDynamic
 
+                graph = new TreeDynamicSons(graphSize);
                 break;
+
             }
             case 4:
             { //TreeStatic
 
+                int sonsCount = atoi(argv[4]);
+                graph = new TreeStaticSons(graphSize, sonsCount);
                 break;
             }
             default:
@@ -114,6 +115,7 @@ int main(int argc, char* argv[]) {
 
         cout << *graph << endl;
         delete (graph);
+
     } else {
         usage();
         return EXIT_FAILURE;

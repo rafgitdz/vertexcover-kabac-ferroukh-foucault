@@ -30,8 +30,8 @@ public:
     Minisat();
     virtual ~Minisat();
 
-    std::list<int> getMinisatCoverFromSimpleSAT(Graph graph, char * inFile, char *outFile);
-    std::list<int> getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover, char * inFile, char *outFile);
+    std::set<int> getMinisatCoverFromSimpleSAT(Graph graph, char * inFile, char *outFile);
+    std::set<int> getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover, char * inFile, char *outFile);
 
 private:
     void buildingSAT(std::string &SAT, int toConvert, std::string toInsert);
