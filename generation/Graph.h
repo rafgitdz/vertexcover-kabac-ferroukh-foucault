@@ -40,7 +40,7 @@ public:
     std::map<int, std::set<int> >::const_iterator getBeginGraph();
     std::map<int, std::set<int> >::const_iterator getEndGraph();
     friend std::ostream &operator<<(std::ostream &out, const Graph&);
-    int getEdgeCount();
+    int getEdgeCount() const;
 
 protected:
     std::map<int, std::set<int> > m_graph;

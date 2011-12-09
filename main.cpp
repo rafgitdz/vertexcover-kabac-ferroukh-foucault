@@ -13,73 +13,111 @@
 #include "vertexCover/AlgorithmGloutonSimple.h"
 #include "draw/drawGraph.h"
 #include "vertexCover/OptimalTreeAlgorithm.h"
+#include "vertexCover/Minisat.h"
 #include "test.h"
 
 using namespace std;
 
 void usage() {
-	cout << "usage: VertexCover inputFile -a algorithm" << endl;
-	cout << "read the manual for more details" << endl;
+    cout << "usage: VertexCover inputFile -a algorithm" << endl;
+    cout << "read the manual for more details" << endl;
+}
+
+void testComplexMinisat() {
+
+    Minisat ms;
+    //    TreeDynamicSons t(40);
+    //    BipartiteGraph t(80, 0.2, 0.6);
+    SimpleGraph t(100, 0.2);
+    cout << "Edge count : " << t.getEdgeCount() << endl;
+    list<int> vertexCoverComplex;
+
+    vertexCoverComplex = ms.getMinisatCoverFromComplexSAT(t, 40, "instance/satComplex/satComplex.in", "instance/satComplex/vertexCoverFromSatComplex.out");
+
+    cout << "The complex minisat cover is :";
+    for (list<int>::iterator ii = vertexCoverComplex.begin(); ii != vertexCoverComplex.end(); ++ii) {
+        cout << *ii << " , ";
+    }
+    cout << endl;
+
+    list<int> vertexCoverSimple = ms.getMinisatCoverFromSimpleSAT(t, "instance/satSimple/satSimple.in", "instance/satSimple/vertexCoverFromSatSimple.out");
+    cout << "The simple minisat cover is :";
+    for (list<int>::iterator ii = vertexCoverSimple.begin(); ii != vertexCoverSimple.end(); ++ii) {
+        cout << *ii << " , ";
+    }
+    cout << endl;
+
+    DrawGraph dg;
+    dg.drawGraph(t, vertexCoverSimple, "instance/pictureGraph/graphSimple.png");
+    dg.drawGraph(t, vertexCoverComplex, "instance/pictureGraph/graphComplex.png");
 }
 
 int main(int argc, char* argv[]) {
 
-	if (argc == 2
-			&& (strcmp(argv[1], "-t") == 0 || strcmp(argv[1], "--test") == 0)) {
-		if (testAll())
-			cout << "Everything is working fine" << endl;
+    if (argc == 1) {
+        testComplexMinisat();
+    } else
+        if (argc == 2
+            && (strcmp(argv[1], "-t") == 0 || strcmp(argv[1], "--test") == 0)) {
+        if (testAll())
+            cout << "Everything is working fine" << endl;
 
-	} else if (argc >= 5 && (strcmp(argv[1], "-g") == 0)) {
-		int graphType = atoi(argv[2]);
-		Graph* graph;
-		switch (graphType) {
+    } else if (argc >= 5 && (strcmp(argv[1], "-g") == 0)) {
 
-		case 0: { //SimpleGraph
-			int graphSize = atoi(argv[3]);
-			float edgeProba = atof(argv[4]);
-			graph = new SimpleGraph(graphSize, edgeProba);
+        int graphType = atoi(argv[2]);
+        Graph* graph;
+        switch (graphType) {
 
-			break;
-		}
-		case 1: { //SmallCoverGraph
-			int graphSize = atoi(argv[3]);
-			float edgeProba = atof(argv[4]);
-			int coverSize = atoi(argv[5]);
-			graph = new SmallCoverGraph(graphSize, edgeProba, coverSize);
+            case 0:
+            { //SimpleGraph
+                int graphSize = atoi(argv[3]);
+                float edgeProba = atof(argv[4]);
+                graph = new SimpleGraph(graphSize, edgeProba);
 
-			break;
-		}
-		case 2: { //BipartiteGraph
-			int graphSize = atoi(argv[3]);
-			float edgeProba = atof(argv[4]);
-			float partRatio = atof(argv[5]);
-			graph = new BipartiteGraph(graphSize, edgeProba, partRatio);
+                break;
+            }
+            case 1:
+            { //SmallCoverGraph
+                int graphSize = atoi(argv[3]);
+                float edgeProba = atof(argv[4]);
+                int coverSize = atoi(argv[5]);
+                graph = new SmallCoverGraph(graphSize, edgeProba, coverSize);
 
-			break;
-		}
-		case 3: { //TreeDynamic
+                break;
+            }
+            case 2:
+            { //BipartiteGraph
+                int graphSize = atoi(argv[3]);
+                float edgeProba = atof(argv[4]);
+                float partRatio = atof(argv[5]);
+                graph = new BipartiteGraph(graphSize, edgeProba, partRatio);
 
-			break;
-		}
-		case 4: { //TreeStatic
+                break;
+            }
+            case 3:
+            { //TreeDynamic
 
-			break;
-		}
-		default: {
-			usage();
-			return EXIT_FAILURE;
-		}
+                break;
+            }
+            case 4:
+            { //TreeStatic
 
-		}
+                break;
+            }
+            default:
+            {
+                usage();
+                return EXIT_FAILURE;
+            }
 
-		cout << *graph << endl;
-		delete (graph);
-	}
+        }
 
-	else {
-		usage();
-		return EXIT_FAILURE;
-	}
+        cout << *graph << endl;
+        delete (graph);
+    } else {
+        usage();
+        return EXIT_FAILURE;
+    }
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }

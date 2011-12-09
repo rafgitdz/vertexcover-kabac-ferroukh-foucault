@@ -12,7 +12,7 @@
  * Minisat.cpp                                                                 *
  * Goal :                                                                      *
  * Parameters : none                                                           *
- *____________________________________________________________________________*/   
+ *____________________________________________________________________________*/
 
 #include "Minisat.h"
 #include <string>
@@ -27,6 +27,7 @@ list<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover, 
 
     map<int, int> indexVerticesMatrix;
     set<int> vertices = graph.getVertices();
+    int vertexCount = graph.getVertexCount();
     string SAT;
 
     // Open the file inFile 
@@ -35,8 +36,16 @@ list<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover, 
     // Init of the SAT instance in the file 
     SAT.operator =("c this is the SAT instance from the graph \n");
     SAT.operator +=("p cnf ");
-    this->buildingSAT(SAT, vertices.size(), " ");
-    this->buildingSAT(SAT, graph.getEdgeCount(), "\n");
+
+    this->buildingSAT(SAT, vertices.size() * maxSizeCover, " ");
+
+    unsigned int numberOfClauses = ((maxSizeCover * vertexCount *
+            (vertexCount - 1)) / 2) + (((maxSizeCover * (maxSizeCover - 1)) *
+            vertexCount) / 2) + (2 * maxSizeCover * graph.getEdgeCount());
+
+    cout << "number of clauses = " << numberOfClauses << endl;
+
+    this->buildingSAT(SAT, numberOfClauses, "\n");
 
     int jj = 0;
 
@@ -45,13 +54,13 @@ list<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover, 
         indexVerticesMatrix[*ii] = jj;
         ++jj;
     }
-    int vertexCount = graph.getVertexCount();
+
     int matrix[maxSizeCover][vertexCount];
     jj = 1;
     for (int i = 0; i < maxSizeCover; ++i) {
         for (int j = 0; j < vertexCount; ++j) {
 
-            matrix[i][j] = jj;
+//            matrix[i][j] = jj;
             ++jj;
         }
     }
