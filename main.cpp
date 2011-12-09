@@ -28,21 +28,22 @@ void testComplexMinisat() {
     Minisat ms;
     //    TreeDynamicSons t(40);
     //    BipartiteGraph t(80, 0.2, 0.6);
-    SimpleGraph t(100, 0.2);
+    //    SimpleGraph t(100, 0.2);
+    SmallCoverGraph t(20, 0.5, 10);
     cout << "Edge count : " << t.getEdgeCount() << endl;
-    list<int> vertexCoverComplex;
+    set<int> vertexCoverComplex;
 
-    vertexCoverComplex = ms.getMinisatCoverFromComplexSAT(t, 40, "instance/satComplex/satComplex.in", "instance/satComplex/vertexCoverFromSatComplex.out");
+    vertexCoverComplex = ms.getMinisatCoverFromComplexSAT(t, 10, "instance/satComplex/satComplex.in", "instance/satComplex/vertexCoverFromSatComplex.out");
 
     cout << "The complex minisat cover is :";
-    for (list<int>::iterator ii = vertexCoverComplex.begin(); ii != vertexCoverComplex.end(); ++ii) {
+    for (set<int>::iterator ii = vertexCoverComplex.begin(); ii != vertexCoverComplex.end(); ++ii) {
         cout << *ii << " , ";
     }
     cout << endl;
 
-    list<int> vertexCoverSimple = ms.getMinisatCoverFromSimpleSAT(t, "instance/satSimple/satSimple.in", "instance/satSimple/vertexCoverFromSatSimple.out");
+    set<int> vertexCoverSimple = ms.getMinisatCoverFromSimpleSAT(t, "instance/satSimple/satSimple.in", "instance/satSimple/vertexCoverFromSatSimple.out");
     cout << "The simple minisat cover is :";
-    for (list<int>::iterator ii = vertexCoverSimple.begin(); ii != vertexCoverSimple.end(); ++ii) {
+    for (set<int>::iterator ii = vertexCoverSimple.begin(); ii != vertexCoverSimple.end(); ++ii) {
         cout << *ii << " , ";
     }
     cout << endl;

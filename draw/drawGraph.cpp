@@ -24,7 +24,7 @@ using namespace std;
 DrawGraph::DrawGraph() {
 }
 
-void DrawGraph::drawGraph(Graph graph, list<int> vertexCover, char *pictureFile) {
+void DrawGraph::drawGraph(Graph graph, set<int> vertexCover, char *pictureFile) {
 
     int first;
     string text = "";
@@ -34,7 +34,7 @@ void DrawGraph::drawGraph(Graph graph, list<int> vertexCover, char *pictureFile)
         first = (*ii).first;
         set<int> neigh = (*ii).second;
 
-        for (list<int>::iterator ii = vertexCover.begin(); ii != vertexCover.end(); ++ii)
+        for (set<int>::iterator ii = vertexCover.begin(); ii != vertexCover.end(); ++ii)
             text.operator +=(convertToString(*ii) + " [color = red];\n");
 
         for (set<int>::iterator jj = neigh.begin(); jj != neigh.end(); ++jj) {
