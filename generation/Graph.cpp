@@ -7,26 +7,26 @@ using namespace std;
 
 Graph::Graph(int vertexCount) : m_graph(), m_vertexCount(0), m_edgeCount(0) {
 
-	srand(time(NULL));
+    srand(time(NULL));
     for (int i = 0; i < vertexCount; i++)
         addVertex();
 }
 
 Graph::Graph(const Graph& graph) : m_graph() {
-	set<int> vertices = graph.getVertices();
-	for (set<int>::const_iterator ii = vertices.begin();ii != vertices.end(); ++ii)
-		m_graph[*ii] = graph.getNeighbours(*ii);
+    set<int> vertices = graph.getVertices();
+    for (set<int>::const_iterator ii = vertices.begin(); ii != vertices.end(); ++ii)
+        m_graph[*ii] = graph.getNeighbours(*ii);
 }
 
 int Graph::addVertex() {
 
-	set<int> s;
-	int vertex = rand()%100;
-	while (m_graph.find(vertex) != m_graph.end()) {
-		vertex = rand()%100;
-	}
-	m_graph[vertex] = s;
-	return vertex;
+    set<int> s;
+    int vertex = rand() % 100;
+    while (m_graph.find(vertex) != m_graph.end()) {
+        vertex = rand() % 100;
+    }
+    m_graph[vertex] = s;
+    return vertex;
 }
 
 void Graph::addVertex(int vertexNum) {
@@ -39,13 +39,13 @@ void Graph::addVertex(int vertexNum) {
 void Graph::addEdge(int vertex1, int vertex2) {
     m_graph[vertex1].insert(vertex2);
     m_graph[vertex2].insert(vertex1);
-//    m_edgeCount++;
+    //    m_edgeCount++;
 }
 
 void Graph::removeEdge(int vertex1, int vertex2) {
     m_graph[vertex1].erase(vertex2);
     m_graph[vertex2].erase(vertex1);
-//    --m_edgeCount;
+    //    --m_edgeCount;
 }
 
 void Graph::removeVertex(int vertex) {
@@ -53,7 +53,7 @@ void Graph::removeVertex(int vertex) {
     set<int> neigh = m_graph[vertex];
     for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {
         m_graph[*ii].erase(vertex);
-//        --m_edgeCount;
+        //        --m_edgeCount;
     }
     m_graph.erase(vertex);
 }
@@ -63,8 +63,8 @@ void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
     set<int> neigh = m_graph[vertex];
     for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {
         m_graph[*ii].erase(vertex);
-        if(m_graph[*ii].empty()) {
-        	m_graph.erase(*ii);
+        if (m_graph[*ii].empty()) {
+            m_graph.erase(*ii);
         }
         --m_edgeCount;
     }
@@ -85,13 +85,13 @@ set<int> Graph::getVertices() const {
     set<int> vertices;
 
     map<int, set<int> >::const_iterator it;
-    for (it = m_graph.begin(); it!= m_graph.end(); ++it)
-    	vertices.insert((*it).first);
+    for (it = m_graph.begin(); it != m_graph.end(); ++it)
+        vertices.insert((*it).first);
     return vertices;
 }
 
 int Graph::getVertexDegree(int vertex) {
-	return m_graph[vertex].size();
+    return m_graph[vertex].size();
 }
 
 map<int, set<int> >::const_iterator Graph::getBeginGraph() {
@@ -104,25 +104,25 @@ map<int, set<int> >::const_iterator Graph::getEndGraph() {
 
 bool Graph::isCover(set<int> cover) {
 
-	map<int, set<int> >::const_iterator ii;
-	set<int>::const_iterator jj;
-	for (ii = m_graph.begin(); ii!=m_graph.end(); ++ii)
-		for(jj = ii->second.begin(); jj!= ii->second.end(); ++jj) {
-			if (cover.find(ii-> first) == cover.end() && cover.find(*jj) == cover.end())
-				return false;
-		}
-	return true;
+    map<int, set<int> >::const_iterator ii;
+    set<int>::const_iterator jj;
+    for (ii = m_graph.begin(); ii != m_graph.end(); ++ii)
+        for (jj = ii->second.begin(); jj != ii->second.end(); ++jj) {
+            if (cover.find(ii-> first) == cover.end() && cover.find(*jj) == cover.end())
+                return false;
+        }
+    return true;
 }
 
 void Graph::trim() {
-	for (map<int, set<int> >::const_iterator ii = m_graph.begin(); ii != m_graph.end();) {
-		if (ii->second.size() == 0) {
-			int vertex = ii->first;
-			++ii;
-			m_graph.erase(vertex);
-		}
-		++ii;
-	}
+    for (map<int, set<int> >::const_iterator ii = m_graph.begin(); ii != m_graph.end();) {
+        if (ii->second.size() == 0) {
+            int vertex = ii->first;
+            ++ii;
+            m_graph.erase(vertex);
+        }
+        ++ii;
+    }
 }
 
 int Graph::getEdgeCount() {

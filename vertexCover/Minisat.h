@@ -1,3 +1,22 @@
+/*-----------------------------------------------------------------------------*
+ *            *Project of Complexity and Applicated Algorithms*                *
+ *-----------------------------------------------------------------------------*
+ *        Authors :                                                            *
+ *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
+ *             Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)        *
+ *                 Ferroukh Rafik (rafik.ferroukh@etu.u-bordeaux1.fr)          *
+ *-----------------------------------------------------------------------------*
+ *              University Bordeaux 1, Software Engineering, Master 2          *
+ *                                *2011/2012*                                  *
+ * ----------------------------------------------------------------------------*
+ * Minisat.h                                                                   *
+ * Minisat is available at : http://minisat.se/                                *
+ * Goal :                                                                      *
+ * Parameters :                                                                *
+ * ...                                                                         *
+ * Include => class Graph, a Tree is a Graph, inherits all methods from Graph  *
+ *____________________________________________________________________________*/
+
 #ifndef MINISAT_H
 #define	MINISAT_H
 
@@ -11,9 +30,8 @@ public:
     Minisat();
     virtual ~Minisat();
 
-    std::string getSAT(Graph graph);
-    void launchMinisat(char *inFile, char *outFile, Graph graph);
-    std::list<int> getVertexCover(char* path);
+    std::list<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile, char *outFile);
+    std::list<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover, char * inFile, char *outFile);
 
 private:
     void buildingSAT(std::string &SAT, int toConvert, std::string toInsert);

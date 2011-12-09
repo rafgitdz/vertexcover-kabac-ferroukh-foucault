@@ -1,0 +1,5 @@
+c this is the SAT instance from the graph 
+p cnf 10 0
+20 44 0
+20 57 0
+26 56 0
