@@ -1,9 +1,18 @@
-/* 
- * File:   drawGraph.cpp
- * Author: Rafik
- * 
- * Created on 7 décembre 2011, 23:07
- */
+/*-----------------------------------------------------------------------------*
+ *               *Project of Complexity and Applicated Algorithms*             *
+ *-----------------------------------------------------------------------------*
+ *        Authors :                                                            *
+ *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
+ *             Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)        *
+ *                 Ferroukh Rafik (rafik.ferroukh@etu.u-bordeaux1.fr)          *
+ *-----------------------------------------------------------------------------*
+ *              University Bordeaux 1, Software Engineering, Master 2          *
+ *                                *2011/2012*                                  *
+ * ----------------------------------------------------------------------------*
+ * DrawGraph.cpp                                                               *
+ * Goal :                                                                      *
+ * Parameters : none                                                           *
+ *____________________________________________________________________________*/   
 
 using namespace std;
 
@@ -12,43 +21,52 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 
-DrawGraph::DrawGraph(Graph graph) {
-    _graph = graph;
+DrawGraph::DrawGraph() {
 }
 
-string DrawGraph::generateTextToDraw() {
+void DrawGraph::drawGraph(Graph graph, list<int> vertexCover, char *pictureFile) {
 
     int first;
     string text = "";
     text.operator +=("graph G {");
-    for (map<int, set<int> >::const_iterator ii = _graph.getBeginGraph(); ii != _graph.getEndGraph(); ++ii) {
+    for (map<int, set<int> >::const_iterator ii = graph.getBeginGraph(); ii != graph.getEndGraph(); ++ii) {
 
         first = (*ii).first;
         set<int> neigh = (*ii).second;
+
+        for (list<int>::iterator ii = vertexCover.begin(); ii != vertexCover.end(); ++ii)
+            text.operator +=(convertToString(*ii) + " [color = red];\n");
+
         for (set<int>::iterator jj = neigh.begin(); jj != neigh.end(); ++jj) {
+
             text.operator +=(convertToString(first));
             text.operator +=(" -- ");
             text.operator +=(convertToString(*jj));
             text.operator +=(";\n");
+            graph.removeEdge(first, *jj);
         }
     }
     text.operator +=("}");
-    return text;
-}
 
-void DrawGraph::launchGraphViz(string file) {
-
-    ofstream graph("graph.dot", ios::out | ios::trunc);
-    if (graph) {
+    ofstream graphFile("graph.dot", ios::out | ios::trunc);
+    if (graphFile) {
         cout << "Success to open file !" << endl;
     } else cerr << "Failed to open file!";
 
-    graph << file;
-    graph.close();
-    system("dot -Tpng -o graph.png graph.dot");
+    graphFile << text;
+    graphFile.close();
+    string out = this->convertToString(pictureFile);
+    string launchGraphViz = "../../GraphViz/bin/dot -Tpng -o " + out + " graph.dot";
+    system(launchGraphViz.c_str());
 }
 
 string DrawGraph::convertToString(int toConvert) {
+    std::ostringstream oss;
+    oss << toConvert;
+    return oss.str();
+}
+
+string DrawGraph::convertToString(char* toConvert) {
     std::ostringstream oss;
     oss << toConvert;
     return oss.str();

@@ -10,6 +10,7 @@ Graph::Graph(int vertexCount) :
 		m_graph(), m_vertexCount(0), m_edgeCount(0), m_graphInitialSize(
 				vertexCount) {
 
+
 	srand(time(NULL));
 	for (int i = 0; i < vertexCount; i++)
 		addVertex();
@@ -91,7 +92,6 @@ list<int> Graph::getNeighboursList(int vertex) {
 set<int> Graph::getVertices() const {
 
 	set<int> vertices;
-
 	map<int, set<int> >::const_iterator it;
 	for (it = m_graph.begin(); it != m_graph.end(); ++it)
 		vertices.insert((*it).first);
@@ -99,7 +99,7 @@ set<int> Graph::getVertices() const {
 }
 
 int Graph::getVertexDegree(int vertex) {
-	return m_graph[vertex].size();
+    return m_graph[vertex].size();
 }
 
 map<int, set<int> >::const_iterator Graph::getBeginGraph() {
