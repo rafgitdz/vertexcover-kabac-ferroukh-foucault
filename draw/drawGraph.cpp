@@ -56,7 +56,7 @@ void DrawGraph::drawGraph(Graph graph, set<int> vertexCover, char *pictureFile) 
     graphFile << text;
     graphFile.close();
     string out = this->convertToString(pictureFile);
-    string launchGraphViz = "../../GraphViz/bin/dot -Tpng -o " + out + " graph.dot";
+    string launchGraphViz = "dot -Tpng -o " + out + " graph.dot";
     system(launchGraphViz.c_str());
 }
 

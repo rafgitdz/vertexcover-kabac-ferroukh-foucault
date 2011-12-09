@@ -4,16 +4,66 @@ VertexCover \- Gets a vertex cover from a randomly generated graph, or from a fo
 .SH SYNOPSIS
 .B VertexCover {[
 .I inputFile
-.B ] | [-g
+.B ] | [ -g
 .I graphType <args>
-.B ]}
+.B ]} [ -a
+.I algorithm <args>
+.B ]
 .SH DESCRIPTION
+This program, developed during an academic project at the university of bordeaux, returns a vertex cover of a generated (or given as input) graph, using one of the algorithms described below
 .SH OPTIONS
 .IP "-g, --generate-graph"
 Randomly generates a graph, using one of the algorithms, according to the first parameter:
 .br
+.br
 .B 0 n p
-: Generates a simple graph, with n vertices and a probability p to draw an edge between two vertices (p must be between 0 an 1)
+: Generates a graph with n vertices, and a probability  p to draw an edge between two vertices (p must be between 0 an 1)
+.br
+.B 1 n p c
+: Generates a graph with n vertices, a probability p to draw an edge between two vertices (p must be between 0 an 1), and with a vertex cover with c vertices
+.br
+.B 2 n p r
+: Generates a bipartite graph with n vertices,a probability p to draw an edge between two vertices, and a ratio r between the two parts of a graph (p and r must be between 0 an 1)
+.br
+.B 3 n
+: Generates a tree with n vertices
+.br
+.B 4 n s
+: Generates a tree with n vertices, where each vertex has s sons
+.IP "-a, --algorithm"
+Launches an algorithm for the generated graph or input graph,according to the first parameter
+.br 
+.br
+.B 0 
+: Uses the greedy algorithm
+.br
+.B 1
+: Uses the greedy simple algorithm
+.br
+.B 2
+: Uses the 2-approached "cover edges" algorithm
+.br
+.B 3
+: Uses the 2-approached algorithm based on a deep search tree
+.br
+.B 4
+: Uses the optimal algorithm for bipartite graphs (for now, it can only be used with a generated graph)
+.br
+.B 5
+: Uses the optimal algorithm for trees (for now, it can only be used with a generated tree)
+.br
+.B { 6 | 7 } s
+: Uses the first | second recursive algoritm, which will try to find a cover with at most s vertices (you should avoid the use of this algorithm for large covers)
+.br
+.B 8
+: Uses minisat to find a cover
+.br 
+.B 9 s
+: Uses minisat to try to find a cover with at most s vertices (you should avoid the use of this algorithm for large covers)
+.IP "-dot"
+Generates a visual result of the vertex cover, as a png file (generated with dot)
+.IP "-h, --help"
+prints usage and exits
 .IP "-t, --test"
 Launches a serie of tests to ensure that each algorithm returns a vertex cover
 .SH AUTHOR
@@ -23,6 +73,7 @@ Written by Milan Kabac, Rafik Ferroukh and Matthieu Foucault
 Masters Degrees at University of Bordeaux
 .SH COPYRIGHT
 Copyright (C) 2011  Milan Kabac, Rafik Ferroukh and Matthieu Foucault
+
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
