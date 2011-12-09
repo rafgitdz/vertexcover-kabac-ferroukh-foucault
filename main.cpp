@@ -25,38 +25,33 @@ void usage() {
 
 void testComplexMinisat() {
 
-	/*Minisat ms;
-	 //    TreeDynamicSons t(40);
-	 //    BipartiteGraph t(80, 0.2, 0.6);
-	 SimpleGraph t(100, 0.2);
-	 cout << "Edge count : " << t.getEdgeCount() << endl;
-	 list<int> vertexCoverComplex;
 
-	 vertexCoverComplex = ms.getMinisatCoverFromComplexSAT(t, 40,
-	 "instance/satComplex/satComplex.in",
-	 "instance/satComplex/vertexCoverFromSatComplex.out");
+    Minisat ms;
+    //    TreeDynamicSons t(40);
+    //    BipartiteGraph t(80, 0.2, 0.6);
+    //    SimpleGraph t(100, 0.2);
+    SmallCoverGraph t(20, 0.5, 10);
+    cout << "Edge count : " << t.getEdgeCount() << endl;
+    set<int> vertexCoverComplex;
 
-	 cout << "The complex minisat cover is :";
-	 for (list<int>::iterator ii = vertexCoverComplex.begin();
-	 ii != vertexCoverComplex.end(); ++ii) {
-	 cout << *ii << " , ";
-	 }
-	 cout << endl;
+    vertexCoverComplex = ms.getMinisatCoverFromComplexSAT(t, 10, "instance/satComplex/satComplex.in", "instance/satComplex/vertexCoverFromSatComplex.out");
 
-	 set<int> vertexCoverSimple = ms.getMinisatCoverFromSimpleSAT(t,
-	 "instance/satSimple/satSimple.in",
-	 "instance/satSimple/vertexCoverFromSatSimple.out");
-	 cout << "The simple minisat cover is :";
-	 for (list<int>::iterator ii = vertexCoverSimple.begin();
-	 ii != vertexCoverSimple.end(); ++ii) {
-	 cout << *ii << " , ";
-	 }
-	 cout << endl;
+    cout << "The complex minisat cover is :";
+    for (set<int>::iterator ii = vertexCoverComplex.begin(); ii != vertexCoverComplex.end(); ++ii) {
+        cout << *ii << " , ";
+    }
+    cout << endl;
 
-	 DrawGraph dg;
-	 dg.drawGraph(t, vertexCoverSimple, "instance/pictureGraph/graphSimple.png");
-	 dg.drawGraph(t, vertexCoverComplex,
-	 "instance/pictureGraph/graphComplex.png");*/
+    set<int> vertexCoverSimple = ms.getMinisatCoverFromSimpleSAT(t, "instance/satSimple/satSimple.in", "instance/satSimple/vertexCoverFromSatSimple.out");
+    cout << "The simple minisat cover is :";
+    for (set<int>::iterator ii = vertexCoverSimple.begin(); ii != vertexCoverSimple.end(); ++ii) {
+        cout << *ii << " , ";
+    }
+    cout << endl;
+
+    DrawGraph dg;
+    dg.drawGraph(t, vertexCoverSimple, "instance/pictureGraph/graphSimple.png");
+    dg.drawGraph(t, vertexCoverComplex, "instance/pictureGraph/graphComplex.png");
 }
 
 int main(int argc, char* argv[]) {

@@ -25,7 +25,7 @@ public:
     DrawGraph();
     virtual ~DrawGraph();
 
-    void drawGraph(Graph graph, std::list<int> vertexCover, char* pictureFile);
+    void drawGraph(Graph graph, std::set<int> vertexCover, char* pictureFile);
     std::string convertToString(int toConvert);
     std::string convertToString(char *toConvert);
 
