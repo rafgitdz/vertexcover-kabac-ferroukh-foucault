@@ -152,10 +152,6 @@ void SearchAlgorithm::depthFirstSearch(Graph graph, Graph &tree, int root) {
 
         }
     }
-    cout << endl;
-    for (list<int>::iterator ii = searchedVertices.begin(); ii != searchedVertices.end(); ++ii)
-    	cout << *ii << " ";
-    cout << endl;
 }// end of the depthFirstSearch (graph, &tree, root)
 
 list<int> SearchAlgorithm::getImprovingPath(Graph graph, int root, int target) {

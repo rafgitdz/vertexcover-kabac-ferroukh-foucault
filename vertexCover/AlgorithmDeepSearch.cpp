@@ -1,5 +1,4 @@
 #include "AlgorithmDeepSearch.h"
-#include "../draw/drawGraph.h"
 
 using namespace std;
 
@@ -15,13 +14,7 @@ set<int> AlgorithmDeepSearch::getCover(int treeRoot) {
     Graph tree;
     set<int> cover;
 
-    cout << m_graph << endl;
-
     depthFirstSearch(m_graph, tree, treeRoot);
-
-    DrawGraph dr(tree);
-
-    dr.launchGraphViz(dr.generateTextToDraw());
 
     set<int> vertices = tree.getVertices();
     

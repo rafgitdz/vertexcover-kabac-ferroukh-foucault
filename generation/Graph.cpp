@@ -26,7 +26,7 @@ Graph::Graph(const Graph& graph) :
 int Graph::addVertex() {
 
 	set<int> s;
-	int graphSize = m_graph.size();
+	int graphSize = m_graph.size() + 1;
 
 	int vertex = rand() % (max(m_graphInitialSize, graphSize) * 10);
 	while (m_graph.find(vertex) != m_graph.end()) {

@@ -1,13 +1,17 @@
 #include "Parametric.h"
-#include <cassert>
 
 using namespace std;
 
-Parametric::Parametric() {
-}
-Parametric::~Parametric() {
+Parametric::Parametric(const Graph &g) : m_graph(g) {
+	m_graph.trim();
 }
 
+bool Parametric::tryGetCover(unsigned maxCoverSize, std::set<int> &cover) {
+	return tryGetCover(m_graph, maxCoverSize, cover);
+}
+bool Parametric::tryGetCoverBis(unsigned maxCoverSize, std::set<int> &cover) {
+	return tryGetCoverBis(m_graph,maxCoverSize,cover);
+}
 
 bool Parametric::tryGetCover(Graph g, unsigned maxCoverSize, set<int> &cover) {
 
