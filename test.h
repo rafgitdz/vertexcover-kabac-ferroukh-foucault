@@ -1,7 +1,6 @@
 #ifndef TEST_H_
 #define TEST_H_
 
-
 #include <iostream>
 #include <cstring>
 #include <cassert>
@@ -17,6 +16,7 @@
 #include "vertexCover/AlgorithmGlouton.h"
 #include "vertexCover/AlgorithmGloutonSimple.h"
 #include "draw/drawGraph.h"
+#include "vertexCover/Minisat.h"
 #include "vertexCover/OptimalTreeAlgorithm.h"
 
 using namespace std;
@@ -151,19 +151,24 @@ bool testParametric() {
 }
 bool testMinisat() {
 
+	SmallCoverGraph g(10, 0.2, 5);
+	Minisat algo;
+	set<int> cover = algo.getMinisatCoverFromComplexSAT(g, 5, "a.in", "a.out");
+
+	if (!g.isCover(cover)) {
+		cout << "The minisat doesn't work" << endl;
+		return false;
+	}
+
 	return true;
+
 }
 
 bool testAll() {
 
-	return (testGreedy() &&
-	testGreedySimple() &&
-	testDeepSearch() &&
-	testCoverEdges() &&
-	testBipartiteOptimal() &&
-	testTreeOptimal() &&
-	testParametric() &&
-	testMinisat());
+	return (testGreedy() && testGreedySimple() && testDeepSearch()
+			&& testCoverEdges() && testBipartiteOptimal() && testTreeOptimal()
+			&& testParametric() && testMinisat());
 }
 
 #endif // TEST_H_

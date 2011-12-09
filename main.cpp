@@ -58,8 +58,8 @@ int main(int argc, char* argv[]) {
 			break;
 		}
 		case 3: { //TreeDynamic
+		break;
 
-			break;
 		}
 		case 4: { //TreeStatic
 
