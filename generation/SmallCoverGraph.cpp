@@ -6,7 +6,6 @@ using namespace std;
 
 SmallCoverGraph::SmallCoverGraph(unsigned vertexCount, float edgeProba, unsigned coverSize): SimpleGraph(coverSize, edgeProba) {
 
-	cout << "Size VC_In :" << getVertexCount() << endl;
 	verticesInVC = getVertices();
 	for(unsigned i = 0; i < (vertexCount - coverSize); i++)
 		verticesOutOfVC.insert(addVertex());
@@ -25,18 +24,6 @@ SmallCoverGraph::SmallCoverGraph(unsigned vertexCount, float edgeProba, unsigned
 			if (rand() % 100 < probability)
 				addEdge(*it1,*it2);
 		}
-
-	cout << "Vertices out of vertex cover" << endl;
-	for(set<int>::iterator it = verticesOutOfVC.begin(); it != verticesOutOfVC.end(); it++) {
-		cout << "" << *it << " , ";
-	}
-	cout << endl;
-
-	cout << "Vertices in vertex cover" << endl;
-		for(set<int>::iterator it2 = verticesInVC.begin(); it2 != verticesInVC.end(); it2++) {
-			cout << "" << *it2 << " , " ;
-		}
-	cout << endl << "End of set !" << endl << endl;
 }
 
 SmallCoverGraph::~SmallCoverGraph() {

@@ -16,8 +16,7 @@ using namespace std;
 class AlgorithmGloutonSimple : public AlgorithmGlouton {
 public:
 	AlgorithmGloutonSimple(Graph graph);
-	virtual ~AlgorithmGloutonSimple();
-	virtual void findMinimalVertexCover();
+	virtual std::set<int> getCover();
 private:
 	multimap<int, int> vertexDegree;
 };

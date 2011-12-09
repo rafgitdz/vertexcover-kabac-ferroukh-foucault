@@ -9,6 +9,7 @@
 #include <list>
 
 class Graph {
+
 public:
     Graph(int vertexCount = 0);
     Graph(const Graph&);
@@ -45,6 +46,7 @@ protected:
     std::map<int, std::set<int> > m_graph;
     int m_vertexCount;
     int m_edgeCount;
+    int m_graphInitialSize;
 };
 
 #endif /* GRAPH_H_ */

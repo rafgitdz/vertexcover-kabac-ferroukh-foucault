@@ -26,7 +26,7 @@ DrawGraph::DrawGraph() {
 
 void DrawGraph::drawGraph(Graph graph, list<int> vertexCover, char *pictureFile) {
 
-    int first, second;
+    int first;
     string text = "";
     text.operator +=("graph G {");
     for (map<int, set<int> >::const_iterator ii = graph.getBeginGraph(); ii != graph.getEndGraph(); ++ii) {
@@ -40,7 +40,6 @@ void DrawGraph::drawGraph(Graph graph, list<int> vertexCover, char *pictureFile)
         for (set<int>::iterator jj = neigh.begin(); jj != neigh.end(); ++jj) {
 
             text.operator +=(convertToString(first));
-            second = *jj;
             text.operator +=(" -- ");
             text.operator +=(convertToString(*jj));
             text.operator +=(";\n");
