@@ -1,0 +1,168 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of VertexCover</TITLE>
+</HEAD><BODY>
+<H1>VertexCover</H1>
+Section: User Commands  (1)<BR>Updated: 9/12/2011<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+VertexCover - Gets a vertex cover from a randomly generated graph, or from a formatted entry
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>VertexCover {[</B>
+
+<I>inputFile</I>
+
+<B>] | [ -g</B>
+
+<I>graphType &lt;args&gt;</I>
+
+<B>]} [ -a</B>
+
+<I>algorithm &lt;args&gt;</I>
+
+<B>]</B>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+This program, developed during an academic project at the university of bordeaux, returns a vertex cover of a generated (or given as input) graph, using one of the algorithms described below
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT>-g, --generate-graph<DD>
+Randomly generates a graph, using one of the algorithms, according to the first parameter:
+<BR>
+
+<BR>
+
+<B>0 n p</B>
+
+: Generates a graph with n vertices, and a probability  p to draw an edge between two vertices (p must be between 0 an 1)
+<BR>
+
+<B>1 n p c</B>
+
+: Generates a graph with n vertices, a probability p to draw an edge between two vertices (p must be between 0 an 1), and with a vertex cover with c vertices
+<BR>
+
+<B>2 n p r</B>
+
+: Generates a bipartite graph with n vertices,a probability p to draw an edge between two vertices, and a ratio r between the two parts of a graph (p and r must be between 0 an 1)
+<BR>
+
+<B>3 n</B>
+
+: Generates a tree with n vertices
+<BR>
+
+<B>4 n s</B>
+
+: Generates a tree with n vertices, where each vertex has s sons
+<DT>-a, --algorithm<DD>
+Launches an algorithm for the generated graph or input graph,according to the first parameter
+<BR>
+
+<BR>
+
+<B>0 </B>
+
+: Uses the greedy algorithm
+<BR>
+
+<B>1</B>
+
+: Uses the greedy simple algorithm
+<BR>
+
+<B>2</B>
+
+: Uses the 2-approached &quot;cover edges&quot; algorithm
+<BR>
+
+<B>3</B>
+
+: Uses the 2-approached algorithm based on a deep search tree
+<BR>
+
+<B>4</B>
+
+: Uses the optimal algorithm for bipartite graphs (for now, it can only be used with a generated graph)
+<BR>
+
+<B>5</B>
+
+: Uses the optimal algorithm for trees (for now, it can only be used with a generated tree)
+<BR>
+
+<B>{ 6 | 7 } s</B>
+
+: Uses the first | second recursive algoritm, which will try to find a cover with at most s vertices (you should avoid the use of this algorithm for large covers)
+<BR>
+
+<B>8</B>
+
+: Uses minisat to find a cover
+<BR>
+
+<B>9 s</B>
+
+: Uses minisat to try to find a cover with at most s vertices (you should avoid the use of this algorithm for large covers)
+<DT>-dot<DD>
+Generates a visual result of the vertex cover, as a png file (generated with dot)
+<DT>-h, --help<DD>
+prints usage and exits
+<DT>-t, --test<DD>
+Launches a serie of tests to ensure that each algorithm returns a vertex cover
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+<P>
+
+Written by Milan Kabac, Rafik Ferroukh and Matthieu Foucault 
+<BR>
+
+Masters Degrees at University of Bordeaux
+<A NAME="lbAG">&nbsp;</A>
+<H2>COPYRIGHT</H2>
+
+Copyright (C) 2011  Milan Kabac, Rafik Ferroukh and Matthieu Foucault
+<P>
+<P>
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+<P>
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+<P>
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;<A HREF="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</A>&gt;.
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">AUTHOR</A><DD>
+<DT><A HREF="#lbAG">COPYRIGHT</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 08:27:39 GMT, December 10, 2011
+</BODY>
+</HTML>

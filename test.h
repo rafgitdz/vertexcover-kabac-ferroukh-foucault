@@ -9,7 +9,7 @@
 #include "vertexCover/AlgorithmCoverEdges.h"
 #include "vertexCover/SearchAlgorithm.h"
 #include "vertexCover/AlgorithmDeepSearch.h"
-#include "vertexCover/BipartiteOptimalCover.h"
+#include "vertexCover/AlgorithmBipartiteOptimal.h"
 #include "generation/BipartiteGraph.h"
 #include "generation/SmallCoverGraph.h"
 #include "vertexCover/Parametric.h"
@@ -33,7 +33,7 @@ bool testGreedy() {
 			return false;
 		}
 	}
-
+	cout << "The Greedy algorithm works" << endl;
 	return true;
 }
 
@@ -49,7 +49,7 @@ bool testGreedySimple() {
 			return false;
 		}
 	}
-
+	cout << "The Greedy Simple algorithm works" << endl;
 	return true;
 }
 
@@ -65,7 +65,7 @@ bool testDeepSearch() {
 			return false;
 		}
 	}
-
+	cout << "The Deep Search algorithm works" << endl;
 	return true;
 }
 
@@ -77,11 +77,11 @@ bool testCoverEdges() {
 		set<int> cover = algo.getCover();
 
 		if (!g.isCover(cover)) {
-			cout << "The Cover Edges algorithm doesn't work" << endl;
+			cout << "The Cover Edges algorithm works" << endl;
 			return false;
 		}
 	}
-
+	cout << "The Cover Edges algorithm works" << endl;
 	return true;
 }
 
@@ -89,15 +89,15 @@ bool testBipartiteOptimal() {
 
 	for (int i = 0; i < 50; ++i) {
 		BipartiteGraph g(100, 0.2, 0.4);
-		BipartiteOptimalCover algo(g);
-		set<int> cover = algo.getCover(g);
+		AlgorithmBipartiteOptimal algo(g);
+		set<int> cover = algo.getCover();
 
 		if (!g.isCover(cover)) {
 			cout << "The Bipartite Optimal algorithm doesn't work" << endl;
 			return false;
 		}
 	}
-
+	cout << "The Bipartite Optimal algorithm works" << endl;
 	return true;
 }
 
@@ -123,7 +123,7 @@ bool testTreeOptimal() {
 			return false;
 		}
 	}
-
+	cout << "The Tree optimal algorithm doesn works" << endl;
 	return true;
 
 }
@@ -147,6 +147,7 @@ bool testParametric() {
 		}
 	}
 
+	cout << "The Parametric algorithm works" << endl;
 	return true;
 }
 bool testMinisat() {
@@ -160,6 +161,7 @@ bool testMinisat() {
 		return false;
 	}
 
+	cout << "The minisat works" << endl;
 	return true;
 
 }
