@@ -37,7 +37,7 @@ public:
     SearchAlgorithm();
     virtual ~SearchAlgorithm();
 
-    std::set<int> breadhtFirstSearch(Graph g, int root, int target);
+    std::set<int> breadthFirstSearch(Graph g, int root, int target);
     std::list<int> breadthFirstSearchWithoutLeaves(Graph g, int root);
     void depthFirstSearch(Graph g, Graph &tree, int vertex);
     std::list<int> getImprovingPath(Graph g, int root, int target);

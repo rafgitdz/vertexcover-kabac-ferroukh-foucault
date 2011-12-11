@@ -6,6 +6,7 @@ using namespace std;
 AlgorithmBipartiteOptimal::AlgorithmBipartiteOptimal(const BipartiteGraph &graph) :
 		m_graph(graph), m_flowGraph(), m_search() {
 
+	m_graph.trim();
 	set<int> vertices = m_graph.getVertices();
 	/*
 	 * we add to the flow graph the vertices of the bipartite graph
@@ -46,7 +47,7 @@ set<int> AlgorithmBipartiteOptimal::getCover() {
 	buildMaxFlow();
 
 	//on fait un dernier parcours en profondeur pour en déduire la coupe min
-	set<int> S = m_search.breadhtFirstSearch(m_flowGraph, m_sourceVertex,
+	set<int> S = m_search.breadthFirstSearch(m_flowGraph, m_sourceVertex,
 			m_targetVertex);
 
 	set<int> cover;

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdlib>
+#include <ctime>
 #include "SmallCoverGraph.h"
 
 using namespace std;

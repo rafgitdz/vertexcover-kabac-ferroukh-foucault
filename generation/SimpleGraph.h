@@ -6,7 +6,7 @@
 class SimpleGraph : public Graph {
 public:
     SimpleGraph(int vertexCount, float edgeProba);
-    virtual ~SimpleGraph();
+    virtual ~SimpleGraph(){};
 
 protected:
     int probability;

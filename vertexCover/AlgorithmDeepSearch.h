@@ -8,8 +8,8 @@
 
 class AlgorithmDeepSearch : public Algorithm, SearchAlgorithm {
 public:
-	AlgorithmDeepSearch(Graph graph);
-	virtual ~AlgorithmDeepSearch();
+	AlgorithmDeepSearch(const Graph &graph) : Algorithm(graph), SearchAlgorithm(){};
+	virtual ~AlgorithmDeepSearch() {};
 	std::set<int> getCover();
 	std::set<int> getCover(int treeRoot);
 

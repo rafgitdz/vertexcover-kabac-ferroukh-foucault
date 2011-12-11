@@ -23,8 +23,10 @@
 
 class Algorithm {
 public:
-    Algorithm(Graph graph);
-    virtual ~Algorithm();
+    Algorithm(const Graph& graph) : m_graph(graph) {
+    	m_graph.trim();
+    }
+    virtual ~Algorithm() {};
 
 protected:
     Graph m_graph;

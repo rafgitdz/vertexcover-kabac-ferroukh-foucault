@@ -56,19 +56,11 @@ void Graph::removeEdge(int vertex1, int vertex2) {
     --m_edgeCount;
 }
 
-void Graph::removeVertex(int vertex) {
-
-    set<int> neigh = m_graph[vertex];
-    for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {
-        m_graph[*ii].erase(vertex);
-        --m_edgeCount;
-    }
-    m_graph.erase(vertex);
-}
 
 void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
 
     set<int> neigh = m_graph[vertex];
+
     for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {
         m_graph[*ii].erase(vertex);
         if (m_graph[*ii].empty()) {
@@ -77,16 +69,6 @@ void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
         --m_edgeCount;
     }
     m_graph.erase(vertex);
-}
-
-list<int> Graph::getNeighboursList(int vertex) {
-
-    list<int> list;
-    for (set<int>::iterator it = m_graph[vertex].begin();
-            it != m_graph[vertex].end(); ++it)
-        list.push_front(*it);
-
-    return list;
 }
 
 set<int> Graph::getVertices() const {
@@ -98,19 +80,8 @@ set<int> Graph::getVertices() const {
     return vertices;
 }
 
-int Graph::getVertexDegree(int vertex) {
-    return m_graph[vertex].size();
-}
 
-map<int, set<int> >::const_iterator Graph::getBeginGraph() {
-    return m_graph.begin();
-}
-
-map<int, set<int> >::const_iterator Graph::getEndGraph() {
-    return m_graph.end();
-}
-
-bool Graph::isCover(set<int> cover) {
+bool Graph::isCover(set<int> cover) const {
 
     map<int, set<int> >::const_iterator ii;
     set<int>::const_iterator jj;
@@ -133,13 +104,6 @@ void Graph::trim() {
         }
         ++ii;
     }
-}
-
-int Graph::getEdgeCount() const {
-    return m_edgeCount;
-}
-
-Graph::~Graph() {
 }
 
 std::ostream &operator<<(std::ostream &out, const Graph& g) {

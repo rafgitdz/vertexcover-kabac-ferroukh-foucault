@@ -300,7 +300,6 @@ int main(int argc, char* argv[]) {
 						usage();
 						return EXIT_FAILURE;
 					}
-
 					break;
 				}
 				case 9: {
@@ -310,7 +309,6 @@ int main(int argc, char* argv[]) {
 					}
 					Minisat algo;
 					unsigned maxCoverSize = atoi(argv[i + 2]);
-					bool coverFound;
 
 					if (graph != NULL) {
 						cover = algo.getMinisatCoverFromComplexSAT(*graph,
@@ -326,7 +324,7 @@ int main(int argc, char* argv[]) {
 						return EXIT_FAILURE;
 					}
 
-					if (!coverFound)
+					if (cover.size() == 0)
 						cout << "Minisat failed to find a cover" << endl;
 
 					break;

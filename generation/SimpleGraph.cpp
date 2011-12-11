@@ -1,15 +1,10 @@
 #include "SimpleGraph.h"
-#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
 SimpleGraph::SimpleGraph(int vertexCount, float edgeProba) : Graph(vertexCount) {
 
-    // this is done in the parent constructor already
-    //for(int i = 0; i < vertexCount; i++)
-    //addVertex();
-
-    // Add restriction for edgeProba < 1 ! (Thanks Milan :D)
     srand((unsigned) time(0));
     probability = (int) (edgeProba * 100);
 
@@ -23,15 +18,4 @@ SimpleGraph::SimpleGraph(int vertexCount, float edgeProba) : Graph(vertexCount) 
                 addEdge(it1->first, it2->first);
         }
     }
-
-    /* because of creating random vertex indices i had to change this
-     * to the version above
-    for(int i = 1; i < vertexCount; i++)
-            for(int j = i+1; j <= vertexCount; j++)
-                    if (rand() % 100 < probability)
-                            addEdge(i,j);
-     */
-}
-
-SimpleGraph::~SimpleGraph() {
 }

@@ -26,9 +26,9 @@ using namespace std;
 SearchAlgorithm::SearchAlgorithm() : m_queue(), m_markedVertices() {
 }
 
-/* Get the breadht search of the graph given as enter, we launch from root and
+/* Get the breadth search of the graph given as enter, we launch from root and
    stop at the target (if different of -1) */
-set<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target) {
+set<int> SearchAlgorithm::breadthFirstSearch(Graph graph, int root, int target) {
 
     // init data
     m_queue.clear();
@@ -69,7 +69,7 @@ set<int> SearchAlgorithm::breadhtFirstSearch(Graph graph, int root, int target) 
         // get all the neighbours of the new BLACK vertex
         vertices = graph.getNeighbours(head);
 
-        /* sotck all the none-visited vertex (WHITE) for the new BLACK vertex, 
+        /* stock all the none-visited vertex (WHITE) for the new BLACK vertex,
          * to be treated. */
         for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
             /*  if the vertex hasn't a white color, it means that the vertex is 
@@ -134,10 +134,10 @@ void SearchAlgorithm::depthFirstSearch(Graph graph, Graph &tree, int root) {
             tree.addEdge(head, pi(head));
         }
         // get all the neighbours of the new BLACK vertex
-        list<int> verticesList = graph.getNeighboursList(head);
+        set<int> verticesList = graph.getNeighbours(head);
         /* sotck all the none-visited vertex (WHITE) for the new BLACK vertex, 
          * to be treated. */
-        for (list<int>::iterator ii = verticesList.begin(); ii != verticesList.end(); ++ii) {
+        for (set<int>::iterator ii = verticesList.begin(); ii != verticesList.end(); ++ii) {
             if (color(*ii) == WHITE) {
 
 
@@ -156,7 +156,7 @@ void SearchAlgorithm::depthFirstSearch(Graph graph, Graph &tree, int root) {
 
 list<int> SearchAlgorithm::getImprovingPath(Graph graph, int root, int target) {
 
-    breadhtFirstSearch(graph, root, target);
+    breadthFirstSearch(graph, root, target);
     list<int> path;
     if (pi(target) == -1)
         return path;

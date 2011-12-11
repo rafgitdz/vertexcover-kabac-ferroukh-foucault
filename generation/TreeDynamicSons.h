@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------*
- *            *Project of Complexity and Applicated Algorithms*                *
+ *            *Project of Complexity and Applied Algorithmic*                  *
  *-----------------------------------------------------------------------------*
  *        Authors :                                                            *
  *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *

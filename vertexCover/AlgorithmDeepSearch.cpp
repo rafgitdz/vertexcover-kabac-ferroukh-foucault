@@ -2,9 +2,6 @@
 
 using namespace std;
 
-AlgorithmDeepSearch::AlgorithmDeepSearch(Graph graph) : Algorithm(graph), SearchAlgorithm() {
-}
-
 set<int> AlgorithmDeepSearch::getCover() {
     return getCover(m_graph.getBeginGraph()->first);
 }
@@ -23,7 +20,3 @@ set<int> AlgorithmDeepSearch::getCover(int treeRoot) {
     }
     return cover;
 }
-
-AlgorithmDeepSearch::~AlgorithmDeepSearch() {
-}
-

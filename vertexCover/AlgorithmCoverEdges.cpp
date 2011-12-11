@@ -18,10 +18,6 @@
 
 using namespace std;
 
-// Constructor that copy the content of the graph in a temporary graph
-AlgorithmCoverEdges::AlgorithmCoverEdges(Graph graph) : Algorithm(graph) {
-    graphTemp = graph;
-}
 
 /* Get the cover from the graph given as enter, get already the two first 
    vertices of the graph, erase their neighbours and their edge link, and insert
@@ -34,19 +30,17 @@ std::set<int> AlgorithmCoverEdges::getCover() {
     int secondVertex = 0;
 
     // While the graph has a vertices, do!
-    while (graphTemp.getVertexCount() > 0) {
+    while (m_graph.getVertexCount() > 0) {
         // get the first vertex and the second (first neighbour of the first)
-        firstVertex = graphTemp.getBeginGraph()->first;
-        secondVertex = *(graphTemp.getBeginGraph()->second.begin());
+        firstVertex = m_graph.getBeginGraph()->first;
+        secondVertex = *(m_graph.getBeginGraph()->second.begin());
         // insert them in the cover
         cover.insert(firstVertex);
         cover.insert(secondVertex);
         // erase their neighbours and their edge link
-        graphTemp.removeVertexAndIsolatedNeighbour(firstVertex);
-        graphTemp.removeVertexAndIsolatedNeighbour(secondVertex);
+        m_graph.removeVertexAndIsolatedNeighbour(firstVertex);
+        m_graph.removeVertexAndIsolatedNeighbour(secondVertex);
     }
     return cover;
 } // end of getCover
 
-AlgorithmCoverEdges::~AlgorithmCoverEdges() {
-}

@@ -18,15 +18,20 @@
 
 #include "Algorithm.h"
 
-class AlgorithmCoverEdges : public Algorithm {
+class AlgorithmCoverEdges: public Algorithm {
 public:
-    AlgorithmCoverEdges(Graph graph);
-    virtual ~AlgorithmCoverEdges();
+	// Constructor that copy the content of the graph in a temporary graph
+	AlgorithmCoverEdges(const Graph &graph) :
+			Algorithm(graph) {
+	}
+	virtual ~AlgorithmCoverEdges() {};
 
-    std::set<int> getCover();
+	/* Get the cover from the graph given as enter, get already the two first
+	 *  vertices of the graph, erase their neighbours and their edge link, and insert
+	 *  them in the cover
+	 */
+	std::set<int> getCover();
 
-private:
-    Graph graphTemp; // Copy of the original graph
 };
 
 #endif /* ALGORITHMCOVEREDGES_H_ */

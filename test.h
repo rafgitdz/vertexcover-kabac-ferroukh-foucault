@@ -123,7 +123,7 @@ bool testTreeOptimal() {
 			return false;
 		}
 	}
-	cout << "The Tree optimal algorithm doesn works" << endl;
+	cout << "The Tree optimal algorithm works" << endl;
 	return true;
 
 }
@@ -152,13 +152,18 @@ bool testParametric() {
 }
 bool testMinisat() {
 
-	SmallCoverGraph g(10, 0.2, 5);
+	for (int i = 0; i < 50; ++i) {
+	SmallCoverGraph g(10, 0.6, 3);
 	Minisat algo;
-	set<int> cover = algo.getMinisatCoverFromComplexSAT(g, 5, "a.in", "a.out");
+	set<int> cover = algo.getMinisatCoverFromComplexSAT(g, 5, "minisat.in", "minisat.out");
 
 	if (!g.isCover(cover)) {
 		cout << "The minisat doesn't work" << endl;
 		return false;
+	}
+
+	set<int> cover2 = algo.getMinisatCoverFromSimpleSAT(g, "minisat.in", "minisat.out");
+
 	}
 
 	cout << "The minisat works" << endl;
