@@ -20,6 +20,7 @@ using namespace std;
 #include <sstream>
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 
 DrawGraph::DrawGraph() {
 }

@@ -1,4 +1,4 @@
-/*    *Project of Complexity and Applicated Algorithms*
+/*    *Project of Complexity and Applied Algorithms*
  * 
  * Authors : 
  *      Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)
@@ -27,7 +27,7 @@ public:
 	virtual ~AlgorithmCoverEdges() {};
 
 	/* Get the cover from the graph given as enter, get already the two first
-	 *  vertices of the graph, erase their neighbours and their edge link, and insert
+	 *  vertices of the graph, erase their neighbors and their edge link, and insert
 	 *  them in the cover
 	 */
 	std::set<int> getCover();

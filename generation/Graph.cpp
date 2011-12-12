@@ -1,8 +1,5 @@
 #include "Graph.h"
-#include <algorithm>
-#include <limits>
-#include <cassert>
-#include <cmath>
+#include <cstdlib>
 
 using namespace std;
 
@@ -39,7 +36,6 @@ int Graph::addVertex() {
 
 void Graph::addVertex(int vertexNum) {
 
-    assert(m_graph.find(vertexNum) == m_graph.end());
     set<int> s;
     m_graph[vertexNum] = s;
 }

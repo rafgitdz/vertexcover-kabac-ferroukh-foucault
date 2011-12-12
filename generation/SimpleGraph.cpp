@@ -1,21 +1,26 @@
 #include "SimpleGraph.h"
-#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
-SimpleGraph::SimpleGraph(int vertexCount, float edgeProba) : Graph(vertexCount) {
+SimpleGraph::SimpleGraph(int vertexCount, float edgeProba) : Graph() {
 
-    srand((unsigned) time(0));
     probability = (int) (edgeProba * 100);
+    std::map<int, std::set<int> >::iterator ii;
+    for (int i = 0; i < vertexCount; ++i) {
+        set<int> neigh;
+        int graphSize = m_graph.size() + 1;
 
-    std::map<int, std::set<int> >::const_iterator it1;
-    std::map<int, std::set<int> >::const_iterator it2;
-    for (it1 = getBeginGraph(); it1 != getEndGraph(); it1++) {
-        it2 = it1;
-        it2++;
-        for (; it2 != getEndGraph(); it2++) {
-            if (rand() % 100 < probability)
-                addEdge(it1->first, it2->first);
+        int vertex = rand() % (max(m_graphInitialSize, graphSize) * 10);
+        while (m_graph.find(vertex) != m_graph.end()) {
+            vertex = rand() % (max(m_graphInitialSize, graphSize) * 10);
         }
+        for (ii = m_graph.begin(); ii != getEndGraph(); ii++) {
+            if (rand() % 100 < probability) {
+            	ii->second.insert(vertex);
+            	neigh.insert(ii->first);
+            }
+        }
+        m_graph[vertex] = neigh;
     }
 }

@@ -1,7 +1,5 @@
 #include "BipartiteGraph.h"
 #include <cstdlib>
-#include <ctime>
-#include <cassert>
 
 using namespace std;
 
@@ -13,7 +11,7 @@ BipartiteGraph::BipartiteGraph(const BipartiteGraph &bGraph) :
 
 BipartiteGraph::BipartiteGraph(int graphSize, float edgeProba, float partRatio) :
 		Graph(), m_leftPart(), m_rightPart() {
-	srand(time(NULL));
+
 	int leftPartSize = graphSize * partRatio;
 	int rightPartSize = graphSize - leftPartSize;
 	for (int i = 0; i < leftPartSize; ++i) {

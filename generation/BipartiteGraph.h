@@ -28,7 +28,7 @@ class BipartiteGraph: public Graph {
 		 * Constructor
 		 * Parameters : the size of the graph, the probability to draw an edge
 		 * between two vertices, the ratio between the parts of the graph
-		 * Complexity : TODO
+		 * Complexity : O(nlog(n))²
 		 */
 		BipartiteGraph(int graphSize, float edgeProba, float partRatio = 0.5);
 		inline const std::set<int>& getLeftPart() const {return m_leftPart;}

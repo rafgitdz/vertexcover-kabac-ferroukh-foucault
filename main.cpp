@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <sys/time.h>
+#include <cstdlib>
 
 #include "generation/BipartiteGraph.h"
 #include "generation/SimpleGraph.h"
@@ -42,6 +43,7 @@ void generateDot(Graph g, set<int> cover) {
 
 int main(int argc, char* argv[]) {
 
+	set<int> cover;
 	bool visualizeGraph = false;
 	bool graphGenerated = false;
 	Graph* graph = NULL;
@@ -136,7 +138,6 @@ int main(int argc, char* argv[]) {
 				timeval t3, t4;
 
 				gettimeofday(&t3, NULL);
-				set<int> cover;
 				int algoType = atoi(argv[i + 1]);
 				switch (algoType) {
 				case 0: { //Greedy
@@ -338,19 +339,20 @@ int main(int argc, char* argv[]) {
 				gettimeofday(&t4, NULL);
 				cout << "cover found in " << diff_ms(t4, t3) << " milliseconds"
 						<< endl;
-				if (visualizeGraph)
-					if (graph != NULL)
-						generateDot(*graph, cover);
-					else if (bGraph != NULL)
-						generateDot(*bGraph, cover);
-					else if (tree != NULL)
-						generateDot(*tree, cover);
-					else {
-						usage();
-						return EXIT_FAILURE;
-					}
 
 			} // endif --algorithm
+
+		if (visualizeGraph)
+			if (graph != NULL)
+				generateDot(*graph, cover);
+			else if (bGraph != NULL)
+				generateDot(*bGraph, cover);
+			else if (tree != NULL)
+				generateDot(*tree, cover);
+			else {
+				usage();
+				return EXIT_FAILURE;
+			}
 
 		delete (graph);
 		delete (tree);
