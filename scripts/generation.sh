@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 echo "" > bench/gen.simpleGraph
 echo "" > bench/gen.smallCover
 echo "" > bench/gen.bipartite
@@ -22,5 +20,6 @@ do
 		echo "algo : $algo"
 		echo "$vertexCount `./VertexCover -g 0 $vertexCount 0.4 -a $algo | cut -d" " -f9`" >> bench/cover_simpleGraph_vCount.$algo
 	done
+	for cover
 	gnuplot gnuplot_vc_simpleGraph
 done

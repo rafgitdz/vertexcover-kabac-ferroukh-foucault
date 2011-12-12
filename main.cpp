@@ -124,7 +124,7 @@ int main(int argc, char* argv[]) {
 				gettimeofday(&t2, NULL);
 				graphGenerated = true;
 				cout << "graph generated in " << diff_ms(t2, t1)
-						<< " miliseconds" << endl;
+						<< " milliseconds" << endl;
 
 			} // endif --generate-graph
 			else if (strcmp(argv[i], "-a") == 0
