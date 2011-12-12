@@ -118,7 +118,7 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
 
     string in = this->convertToString(inFile);
     string out = this->convertToString(outFile);
-    string launchMinisat = "minisat -verb=0 " + in + " " + out;
+    string launchMinisat = "minisat " + in + " " + out;
     system(launchMinisat.c_str());
 
     set<int> vertexCover, vertexCoverFromMinisat;
@@ -191,7 +191,7 @@ set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
 
     string in = this->convertToString(inFile);
     string out = this->convertToString(outFile);
-    string launchMinisat = "minisat -verb=0 " + in + " " + out;
+    string launchMinisat = "minisat " + in + " " + out;
     system(launchMinisat.c_str());
 
     /* ------------------------------------*
