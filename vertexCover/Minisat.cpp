@@ -16,6 +16,7 @@
 
 #include "Minisat.h"
 #include <string>
+#include <cstdlib>
 #include <sstream>
 
 using namespace std;

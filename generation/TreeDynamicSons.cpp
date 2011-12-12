@@ -16,6 +16,7 @@
  *____________________________________________________________________________*/
 
 #include "TreeDynamicSons.h"
+#include <cstdlib>
 
 using namespace std;
 
