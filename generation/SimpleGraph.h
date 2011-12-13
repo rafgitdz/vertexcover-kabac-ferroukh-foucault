@@ -9,7 +9,7 @@
  *              University Bordeaux 1, Software Engineering, Master 2          *
  *                                *2011/2012*                                  *
  * ----------------------------------------------------------------------------*
- * Goal : Build a random graph										    	   *
+ * Goal : Build a random graph						       *
  * Constructor Parameters : the number of vertices that the graph will have,   *
  *  and the probability to draw an edge between two vertices                   *
  *____________________________________________________________________________*/

@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------*
- *            *Project of Complexity and Applied Algorithmic*                *
+ *            *Project of Complexity and Applied Algorithmic*                  *
  *-----------------------------------------------------------------------------*
  *        Authors :                                                            *
  *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
@@ -10,10 +10,10 @@
  *                                *2011/2012*                                  *
  * ----------------------------------------------------------------------------*
  * Goal : Represents a graph as an adjacent list, which is a STL map where we  *
- * have the number of a vertex as the key, 									   *
- * and a set of his neighbors as the value 								       *
+ * have the number of a vertex as the key, 				       *
+ * and a set of his neighbors as the value      			       *
  * Parameters : the number of vertices that the graph will have                *
- * It's a parent class for all classes representing a graph            		   *
+ * It's a parent class for all classes representing a graph                    *
  *____________________________________________________________________________*/
 
 #ifndef GRAPH_H_
@@ -42,7 +42,12 @@ public:
 	}
 	;
 
-	/*
+        /*
+         * Load a graph from a graphTextFile
+	 */
+        Graph(char* pathFile);
+        
+        /*
 	 * Complexity : logarithmic in the graph size
 	 */
 	int addVertex();
@@ -139,6 +144,8 @@ public:
 	const int& getEdgeCount() const {
 		return m_edgeCount;
 	}
+        
+        void saveGraph(char* pathFile) const;
 
 	friend std::ostream &operator<<(std::ostream &out, const Graph&);
 

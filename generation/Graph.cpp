@@ -1,12 +1,14 @@
 #include "Graph.h"
 #include <cstdlib>
+#include <sstream>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
 Graph::Graph(int vertexCount) :
 m_graph(), m_vertexCount(0), m_edgeCount(0), m_graphInitialSize(
 vertexCount) {
-
 
     srand(time(NULL));
     for (int i = 0; i < vertexCount; i++)
@@ -15,11 +17,46 @@ vertexCount) {
 
 Graph::Graph(const Graph& graph) :
 m_graph(), m_edgeCount(graph.getEdgeCount()) {
+
     set<int> vertices = graph.getVertices();
     for (set<int>::const_iterator ii = vertices.begin(); ii != vertices.end();
             ++ii)
         m_graph[*ii] = graph.getNeighbours(*ii);
 }
+
+/*
+ * Constructor of a graph that is built by passing the path of the file that
+ * contains the structure of the file
+ */
+Graph::Graph(char *pathFile) : m_graph(), m_vertexCount(0), m_edgeCount(0),
+m_graphInitialSize(0) {
+
+    string vertexFile;
+    int currentRoot;
+    int currentNeighbour;
+    set<int> neighbours;
+    string line;
+
+    ifstream file(pathFile, ios::in);
+
+    while (getline(file, line)) { // until it hasn't a line in the file
+
+        istringstream iss(line);
+
+        iss >> vertexFile; // get the root vertex of the line
+        currentRoot = atoi(vertexFile.c_str());
+        iss >> vertexFile; // avoid ":"
+
+        do {
+            iss >> vertexFile; // get the neighbours one bye one
+            currentNeighbour = atoi(vertexFile.c_str());
+            neighbours.insert(currentNeighbour);
+        } while (iss);
+
+        m_graph[currentRoot] = neighbours; // set the connections
+        neighbours.clear();
+    } // end while
+} // end constructor Graph(chr * File)
 
 int Graph::addVertex() {
 
@@ -52,7 +89,6 @@ void Graph::removeEdge(int vertex1, int vertex2) {
     --m_edgeCount;
 }
 
-
 void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
 
     set<int> neigh = m_graph[vertex];
@@ -75,7 +111,6 @@ set<int> Graph::getVertices() const {
         vertices.insert((*it).first);
     return vertices;
 }
-
 
 bool Graph::isCover(set<int> cover) const {
 
@@ -100,6 +135,16 @@ void Graph::trim() {
         }
         ++ii;
     }
+}
+
+/*
+ * get the the pathFile as parameter, to save the current built graph in it
+ */
+void Graph::saveGraph(char *pathFile) const {
+
+    ofstream file(pathFile, ios::out | ios::trunc);
+    file << *this;
+    file.close();
 }
 
 std::ostream &operator<<(std::ostream &out, const Graph& g) {

@@ -21,10 +21,14 @@
 using namespace std;
 
 // Constructor that build the tree with a dynamic number of sons 
-TreeDynamicSons::TreeDynamicSons(int vertexCnt) : Tree() {
+
+TreeDynamicSons::TreeDynamicSons(int vertexCnt, int maxSons, int minSons) : Tree() {
 
     // init the data
-    _vertexCount = vertexCnt;
+    m_vertexCount = vertexCnt;
+    m_maxSons = maxSons;
+    m_minSons = minSons;
+
     int numberOfSons = 0;
     vector<int> verticesToHaveSons(0);
     vector<int> newVerticesToHaveSons(0);
@@ -34,15 +38,15 @@ TreeDynamicSons::TreeDynamicSons(int vertexCnt) : Tree() {
 
     int limitCreateVertices = 1;
 
-    while (limitCreateVertices < _vertexCount) {
+    while (limitCreateVertices < m_vertexCount) {
         // control the limit of the vertices to create
         for (unsigned int i = 0; i < verticesToHaveSons.size(); ++i) {
-            
-            /* get a dynamic number of sons to link with the root "i" and
-             build the edges between them */
-            numberOfSons = rand() % limitCreateVertices + 1; 
-            buildEdgesTree(numberOfSons, _vertexCount, i, limitCreateVertices, verticesToHaveSons
-                    , newVerticesToHaveSons);
+
+            /* get a dynamic number of sons, between min and max, to link with 
+             * the root "i" and build the edges between them */
+            numberOfSons = m_minSons + (rand() % (m_maxSons - m_minSons));
+            buildEdgesTree(numberOfSons, m_vertexCount, i, limitCreateVertices,
+                    verticesToHaveSons, newVerticesToHaveSons);
         }
         /* put the vertices that don't has again a sons, the list of fixed 
          vertices */
