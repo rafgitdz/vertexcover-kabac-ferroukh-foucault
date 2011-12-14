@@ -274,6 +274,3 @@ string Minisat::convertToString(char* toConvert) {
     return oss.str();
 }
 
-Minisat::~Minisat() {
-}
-

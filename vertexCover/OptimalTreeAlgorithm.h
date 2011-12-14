@@ -9,8 +9,8 @@
  *              University Bordeaux 1, Software Engineering, Master 2          *
  *                                *2011/2012*                                  *
  * ----------------------------------------------------------------------------*
- * Goal : Gets the optimal cover of a bipartite graph				    	   *
- *_____________________________________________________________________________*/
+ * Goal : Optimal vertex cover algorithm for trees   	  	   				   *
+ *____________________________________________________________________________*/
 
 #ifndef OPTIMALTREEALGORITHM_H_
 #define OPTIMALTREEALGORITHM_H_
