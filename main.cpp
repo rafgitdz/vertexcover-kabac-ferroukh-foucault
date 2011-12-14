@@ -8,7 +8,6 @@
 #include "generation/SmallCoverGraph.h"
 #include "generation/Graph.h"
 #include "generation/TreeDynamicSons.h"
-#include "generation/TreeStaticSons.h"
 
 #include "vertexCover/AlgorithmCoverEdges.h"
 #include "vertexCover/SearchAlgorithm.h"
