@@ -167,6 +167,16 @@ list<int> SearchAlgorithm::getImprovingPath(const Graph &graph, int root,
 	return path;
 }
 
+/*
+ * This method provides the breadth first search algorithm for trees.
+ * The algorithm ignores the leaves of the tree.
+ * Parameters : graph - the graph to look over
+ * 				root - the root vertex of the graph
+ * Return : the list of found vertices
+ * Complexity :	O(n*log(n) + gray(log(n) + n(log(gray) + log(n))) )
+ * 					n -	number of vertices in the graph
+ * 					gray - number of vertice's marked as gray
+ */
 list<int> SearchAlgorithm::breadthFirstSearchWithoutLeaves(const Graph &graph,
 		int root) {
 
@@ -174,32 +184,46 @@ list<int> SearchAlgorithm::breadthFirstSearchWithoutLeaves(const Graph &graph,
 	int head;
 	list<int> searchedVertices;
 
+	// O(n*log(n))
 	set<int> vertices = graph.getVertices();
 
+	// O(n)
 	for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
+		// O(log(n))
 		setPi(*ii, NULLE);
+		// O(log(n))
 		setColor(*ii, WHITE);
 	}
 
+	// O(log(n))
 	setColor(root, GREY);
 	m_queue.push_back(root);
 
+	// O(gray)
 	while (m_queue.size() > 0) {
 
 		head = *(m_queue.begin());
 		m_queue.pop_front();
 
+		// O(log(n))
 		setColor(head, BLACK);
+		// O(log(n))
 		setNumVertexSearch(head, k);
+
+		// O(log(n))
 		if ((graph.getVertexDegree(head) > 1) || (root == head))
 			searchedVertices.push_back(head);
 		++k;
+		// O(log(n))
 		vertices = graph.getNeighbours(head);
 
+		// O(n)
 		for (set<int>::iterator ii = vertices.begin(); ii != vertices.end();
 				++ii) {
 			if (color(*ii) == WHITE) {
+				// O(log(gray))
 				setColor(*ii, GREY);
+				// O(log(n))
 				setPi(*ii, head);
 				m_queue.push_back(*ii);
 			}
@@ -208,11 +232,28 @@ list<int> SearchAlgorithm::breadthFirstSearchWithoutLeaves(const Graph &graph,
 	return searchedVertices;
 }
 
+/*
+ * Returns the parent of the vertex passed by parameter.
+ * Parameters : vertex - the vertex whose parent we need
+ * Return : the parent of the vertex
+ * Complexity : O(log(n)) where
+ *			 		n -	number of vertices in the graph
+ */
 int SearchAlgorithm::pi(int vertex) {
+	// O(log(n))
 	return m_numColorVertex[vertex].father;
 }
 
+/*
+ * Sets the parent of the vertex passed by parameter.
+ * Parameters : vertex - the vertex whose parent we need to set
+ * 				fath - the parent of the vertex
+ * Complexity : O(log(n)) where
+ *			 		n -	number of vertices in the graph
+ *
+ */
 void SearchAlgorithm::setPi(int vertex, int fath) {
+	// O(log(n))
 	m_numColorVertex[vertex].father = fath;
 }
 
@@ -220,7 +261,13 @@ int SearchAlgorithm::color(int vertex) {
 	return m_numColorVertex[vertex].color;
 }
 
+/*
+ * Sets the color of the vertex passed by parameter
+ * Complexity : O(log(n)) where
+ * 					n -	number of vertices in the graph
+ */
 void SearchAlgorithm::setColor(int vertex, int col) {
+	// O(log(n))
 	m_numColorVertex[vertex].color = col;
 }
 
@@ -228,6 +275,11 @@ int SearchAlgorithm::numVertexSearch(int vertex) {
 	return m_numColorVertex[vertex].vertexNumSearch;
 }
 
+/*
+ * Sets the number of vertex passed by parameter
+ * Complexity : O(log(n)) where
+ * 					n -	number of vertices in the graph
+ */
 void SearchAlgorithm::setNumVertexSearch(int vertex, int num) {
 	m_numColorVertex[vertex].vertexNumSearch = num;
 }

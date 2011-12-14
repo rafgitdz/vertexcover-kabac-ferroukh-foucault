@@ -24,7 +24,7 @@ public:
 
 	/*
 	 * Returns the found vertex cover
-	 * Return : std::set<int>
+	 * Return : the vertex cover
 	 * Complexity : addVertextoVC complexity +
 	 * 				O(n*(neigh*log(n) + log(n))) where
 	 * 					n -	number of vertices in the graph
@@ -35,6 +35,7 @@ public:
 	/*
 	 * Removes isolated vertices from the graph and adds the vertex
 	 * with the highest degree to the vertex cover
+	 * Return : the vertex added to the vertex cover
 	 * Complexity : O(n*(neigh*log(n) + log(n)) + log(n)) where
 	 * 					n - graph size
 	 * 					neigh - number of vertice's neighbours

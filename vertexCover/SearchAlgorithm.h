@@ -53,15 +53,53 @@ public:
      */
     void depthFirstSearch(const Graph &g, Graph &tree, int vertex);
 
+    /*
+     * This method provides the breadth first search algorithm for trees.
+     * The algorithm ignores the leaves of the tree.
+     * Parameters : graph - the graph to look over
+     * 				root - the root vertex of the graph
+     * Return : the list of found vertices
+     * Complexity :	O(n*log(n) + gray(log(n) + n(log(gray) + log(n))) )
+     * 					n -	number of vertices in the graph
+     * 					gray - number of vertice's marked as gray
+     */
     std::list<int> breadthFirstSearchWithoutLeaves(const Graph &g, int root);
     std::list<int> getImprovingPath(const Graph &g, int root, int target);
+
+    /*
+     * Returns the parent of the vertex passed by parameter.
+     * Parameters : vertex - the vertex whose parent we need
+     * Return : the parent of the vertex
+     * Complexity : O(log(n)) where
+     *			 		n -	number of vertices in the graph
+     */
     int pi(int vertex);
 
 private:
+    /*
+     * Sets the parent of the vertex passed by parameter.
+     * Parameters : vertex - the vertex whose parent we need to set
+     * 				fath - the parent of the vertex
+     * Complexity : O(log(n)) where
+     *			 		n -	number of vertices in the graph
+     *
+     */
     void setPi(int vertex, int father);
     int color(int vertex);
+
+    /*
+     * Sets the color of the vertex passed by parameter
+     * Complexity : O(log(n)) where
+     * 					n -	number of vertices in the graph
+     */
     void setColor(int vertex, int color);
     int numVertexSearch(int vertex);
+
+    /*
+     * Sets the number of vertex passed by parameter
+     * Complexity : O(log(n)) where
+     * 					n -	number of vertices in the graph
+     */
     void setNumVertexSearch(int vertex, int num);
 
     struct vertexInfo {

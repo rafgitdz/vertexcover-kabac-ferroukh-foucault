@@ -20,7 +20,7 @@ using namespace std;
 
 /*
  * Returns the found vertex cover
- * Return : std::set<int>
+ * Return : the found vertex cover
  * Complexity : O(n*log(n) + n*(log(n) + (neigh*log(n) + log(n)))) where
  * 					n -	number of vertices in the graph
  * 					neigh - number of vertice's neighbours

@@ -109,6 +109,10 @@ void Graph::removeVertexAndIsolatedNeighbour(int vertex) {
 	m_graph.erase(vertex);
 }
 
+/*
+ * O(n*log(n))
+ * Recuperates the vertices of the graph
+ */
 set<int> Graph::getVertices() const {
 
 	set<int> vertices;
