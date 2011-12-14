@@ -10,23 +10,26 @@
  *                                *2011/2012*                                  *
  * ----------------------------------------------------------------------------*
  * Minisat.cpp                                                                 *
- * Goal :                                                                      *
+ * Minisat is available at : http://minisat.se/                                *
+ * Goal : get a cover from a graph given based on minisat tool algorithm       *
  * Parameters : none                                                           *
  *____________________________________________________________________________*/
 
 #include "Minisat.h"
+#include "../generation/Graph.h"
+
 #include <string>
 #include <cstdlib>
 #include <sstream>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
-
-Minisat::Minisat() {
-}
 
 set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
         char * inFile, char *outFile) {
 
+    // init data
     map<int, int> indexVerticesMatrix;
     set<int> vertices = graph.getVertices();
     int vertexCount = graph.getVertexCount();
@@ -39,21 +42,33 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
     SAT.operator =("c this is the SAT instance from the graph \n");
     SAT.operator +=("p cnf ");
 
+    // calculate the number of clauses based on complixity
     unsigned int numberOfClauses = ((maxSizeCover * vertexCount *
             (vertexCount - 1)) / 2) + (((maxSizeCover * (maxSizeCover - 1)) *
             vertexCount) / 2) + (2 * maxSizeCover * graph.getEdgeCount());
 
+    // continue to build SAT file to be treaten by MINISAT
     this->buildingSAT(SAT, numberOfClauses, " ");
     this->buildingSAT(SAT, graph.getEdgeCount(), "\n");
 
     int jj = 1;
 
-    // build the SAT instance and the matrix
+    /*
+     * build the map for the correspondance between the vertices and the indices
+     * in the matrix
+     */
     for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
         indexVerticesMatrix[*ii] = jj;
         ++jj;
     }
 
+    /*
+     * build the edges in the SAT file by adding an edge between all the cases
+     * of the matrix, line bye line
+     *
+     * Note : the matrix doesn't exist, we calculate the index by math formula
+     * example : case [2,1] = ((2x vertexCount) + 1)+1)
+     */
     int k;
     for (int i = 0; i < maxSizeCover; ++i) {
         k = 0;
@@ -70,6 +85,13 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
         }
     }
 
+    /*
+     * build the edges in the SAT file by adding an edge between all the cases
+     * of the matrix, column by column
+     * 
+     * Note : the matrix doesn't exist, we calculate the index by math formula
+     * example : case [2,1] = ((2x vertexCount) + 1)+1)
+     */
     for (int j = 0; j < vertexCount; ++j) {
         k = 0;
         for (int i = k; i + 1 < maxSizeCover; ++i) {
@@ -85,16 +107,25 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
         }
     }
 
+    // init data to build the correspendant graph in the SAT file 
     int vertex, firstVertex, secondVertex;
     set<int> markedVertices;
-    Graph temporaryGraph = graph;
+    Graph temporaryGraph = graph; // set a copy of the original graph
 
+    /* 
+     * insert each edge of the graph in the SAT file, the edge is inserted with
+     * the indices, not by their true num of vertices 
+     */
     for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
 
         vertex = *ii;
         firstVertex = indexVerticesMatrix[*ii];
         markedVertices = temporaryGraph.getNeighbours(vertex);
 
+        /*
+         * for each edge, insert it and remove it in the TempGraph, to avoid
+         * repeated edges
+         */
         for (set<int>::iterator jj = markedVertices.begin();
                 jj != markedVertices.end(); ++jj) {
 
@@ -128,6 +159,7 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
     string get;
     int getInt;
 
+    // set the result of minisat in a list to be returned
     while (!fileOut.eof()) {
 
         fileOut >> get;
@@ -138,10 +170,12 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
 
     fileOut.close();
 
-    /* ------------------------------------*
-     * get the vertex cover returned by   *
-     * "minisat" if it exists                *
-     * ------------------------------------*/
+    /* ---------------------------------------*
+     * get the vertex cover returned by       *
+     * "minisat" if it exists                 *
+     * Note: in this part, we set the true num*
+     * of vertices, corresponding on the map  *
+     * ---------------------------------------*/
     for (set<int>::iterator ii = vertexCover.begin(); ii != vertexCover.end();
             ++ii) {
         for (map<int, int>::iterator hh = indexVerticesMatrix.begin();
@@ -151,9 +185,10 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
         }
     }
     return vertexCoverFromMinisat;
-}
 
-/*------------------------------------------- SIMPLE SAT --------------------------------------------------------------*/
+}// end handle of the complex SAT 
+
+/*-------------------------- SIMPLE SAT --------------------------------------*/
 set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
         char *outFile) {
 
@@ -220,9 +255,9 @@ set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
 
 void Minisat::buildingSAT(string &SAT, int toConvert, std::string toInsert) {
 
-    ostringstream oss;
-    oss << toConvert;
-    string converted = oss.str();
+    // convert the int to string
+    string converted = convertToString(toConvert);
+    // add the vertex 'converted' and the separator caracter
     SAT.operator +=(converted);
     SAT.operator +=(toInsert);
 }
@@ -230,14 +265,12 @@ void Minisat::buildingSAT(string &SAT, int toConvert, std::string toInsert) {
 string Minisat::convertToString(int toConvert) {
     std::ostringstream oss;
     oss << toConvert;
-
     return oss.str();
 }
 
 string Minisat::convertToString(char* toConvert) {
     std::ostringstream oss;
     oss << toConvert;
-
     return oss.str();
 }
 

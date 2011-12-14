@@ -1,10 +1,10 @@
 /*-----------------------------------------------------------------------------*
- *               *Project of Complexity and Applicated Algorithms*             *
+ *               *Project of Complexity and Applied Algorithmic*               *
  *-----------------------------------------------------------------------------*
  *        Authors :                                                            *
  *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
  *             Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)        *
- *                 Ferroukh Rafik (rafik.ferroukh@etu.u-bordeaux1.fr)          *
+ *                 Rafik Ferroukh (rafik.ferroukh@etu.u-bordeaux1.fr)          *
  *-----------------------------------------------------------------------------*
  *              University Bordeaux 1, Software Engineering, Master 2          *
  *                                *2011/2012*                                  *
@@ -23,12 +23,7 @@
 
 using namespace std;
 
-SearchAlgorithm::SearchAlgorithm() : m_queue(), m_markedVertices() {
-}
-
-/* Get the breadth search of the graph given as enter, we launch from root and
-   stop at the target (if different of -1) */
-set<int> SearchAlgorithm::breadthFirstSearch(Graph graph, int root, int target) {
+set<int> SearchAlgorithm::breadthFirstSearch(const Graph &graph, int root, int target) {
 
     // init data
     m_queue.clear();
@@ -84,11 +79,9 @@ set<int> SearchAlgorithm::breadthFirstSearch(Graph graph, int root, int target) 
     return searchedVertices;
 } // end of the breadhtFirstSearch (graph, root, target)
 
-/* Get the depth search of the graph given as enter, we launch from root and
- * build a tree at the same time */
-void SearchAlgorithm::depthFirstSearch(Graph graph, Graph &tree, int root) {
+void SearchAlgorithm::depthFirstSearch(const Graph &graph, Graph &tree, int root) {
 
-	m_queue.clear();
+    m_queue.clear();
     // init data
     int numOrderSearch = 0;
     int head;
@@ -138,23 +131,22 @@ void SearchAlgorithm::depthFirstSearch(Graph graph, Graph &tree, int root) {
         /* sotck all the none-visited vertex (WHITE) for the new BLACK vertex, 
          * to be treated. */
         for (set<int>::iterator ii = verticesList.begin(); ii != verticesList.end(); ++ii) {
+
             if (color(*ii) == WHITE) {
-
-
                 setColor(*ii, GREY);
-                setPi(*ii, head);// set the father for the none-visited vertex
+                setPi(*ii, head); // set the father for the none-visited vertex
                 m_queue.push_front(*ii);
-            } else if (color(*ii) == GREY) {
-            	setPi(*ii, head);
-            	m_queue.remove(*ii);
-            	m_queue.push_front(*ii);
-            }
 
+            } else if (color(*ii) == GREY) {
+                setPi(*ii, head);
+                m_queue.remove(*ii);
+                m_queue.push_front(*ii);
+            }
         }
     }
 }// end of the depthFirstSearch (graph, &tree, root)
 
-list<int> SearchAlgorithm::getImprovingPath(Graph graph, int root, int target) {
+list<int> SearchAlgorithm::getImprovingPath(const Graph &graph, int root, int target) {
 
     breadthFirstSearch(graph, root, target);
     list<int> path;
@@ -169,7 +161,7 @@ list<int> SearchAlgorithm::getImprovingPath(Graph graph, int root, int target) {
     return path;
 }
 
-list<int> SearchAlgorithm::breadthFirstSearchWithoutLeaves(Graph graph, int root) {
+list<int> SearchAlgorithm::breadthFirstSearchWithoutLeaves(const Graph &graph, int root) {
 
     int k = 0;
     int head;
@@ -232,7 +224,3 @@ int SearchAlgorithm::numVertexSearch(int vertex) {
 void SearchAlgorithm::setNumVertexSearch(int vertex, int num) {
     m_numColorVertex[vertex].vertexNumSearch = num;
 }
-
-SearchAlgorithm::~SearchAlgorithm() {
-}
-

@@ -1,10 +1,10 @@
 /*-----------------------------------------------------------------------------*
- *               *Project of Complexity and Applicated Algorithms*             *
+ *               *Project of Complexity and Applied Algorithmic*               *
  *-----------------------------------------------------------------------------*
  *        Authors :                                                            *
  *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
  *             Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)        *
- *                 Ferroukh Rafik (rafik.ferroukh@etu.u-bordeaux1.fr)          *
+ *                 Rafik Ferroukh (rafik.ferroukh@etu.u-bordeaux1.fr)          *
  *-----------------------------------------------------------------------------*
  *              University Bordeaux 1, Software Engineering, Master 2          *
  *                                *2011/2012*                                  *
@@ -33,8 +33,8 @@ TreeDynamicSons::TreeDynamicSons(int vertexCnt, int maxSons, int minSons) : Tree
     vector<int> verticesToHaveSons(0);
     vector<int> newVerticesToHaveSons(0);
 
-    _root = addVertex();
-    verticesToHaveSons.push_back(_root); // create the root and save it
+    m_root = addVertex();
+    verticesToHaveSons.push_back(m_root); // create the root and save it
 
     int limitCreateVertices = 1;
 

@@ -26,6 +26,7 @@ class Graph;
 #include <list>
 #include <set>
 
+// the constants for the state of a visited vertex in depth and breadht search
 #define WHITE 1
 #define BLACK 2
 #define GREY  3
@@ -34,13 +35,26 @@ class Graph;
 class SearchAlgorithm {
 public:
 
-    SearchAlgorithm();
-    virtual ~SearchAlgorithm();
+    SearchAlgorithm::SearchAlgorithm() : m_queue() {
+    }
 
-    std::set<int> breadthFirstSearch(Graph g, int root, int target);
-    std::list<int> breadthFirstSearchWithoutLeaves(Graph g, int root);
-    void depthFirstSearch(Graph g, Graph &tree, int vertex);
-    std::list<int> getImprovingPath(Graph g, int root, int target);
+    virtual ~SearchAlgorithm() {
+    };
+
+    /*
+     * Get the breadth search of the graph given as enter, we launch from root 
+     * and stop at the target (if different of -1) 
+     */
+    std::set<int> breadthFirstSearch(const Graph &g, int root, int target);
+
+    /* 
+     * Get the depth search of the graph given as enter, we launch from root and
+     * build a tree at the same time 
+     */
+    void depthFirstSearch(const Graph &g, Graph &tree, int vertex);
+
+    std::list<int> breadthFirstSearchWithoutLeaves(const Graph &g, int root);
+    std::list<int> getImprovingPath(const Graph &g, int root, int target);
     int pi(int vertex);
 
 private:
@@ -55,9 +69,7 @@ private:
         int father;
         int color;
     };
-    Graph graph;
     std::list<int> m_queue;
-    std::set<int> m_markedVertices;
     std::map<int, vertexInfo> m_numColorVertex;
 };
 
