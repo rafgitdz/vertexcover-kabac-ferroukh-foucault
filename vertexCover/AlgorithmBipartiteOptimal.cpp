@@ -1,9 +1,32 @@
+/*-----------------------------------------------------------------------------*
+ *            *Project of Complexity and Applied Algorithmic*                  *
+ *-----------------------------------------------------------------------------*
+ *        Authors :                                                            *
+ *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
+ *             Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)        *
+ *                 Rafik Ferroukh (rafik.ferroukh@etu.u-bordeaux1.fr)          *
+ *-----------------------------------------------------------------------------*
+ *              University Bordeaux 1, Software Engineering, Master 2          *
+ *                                *2011/2012*                                  *
+ * ----------------------------------------------------------------------------*
+ * Goal : Gets the optimal cover of a bipartite graph				    	   *
+ *____________________________________________________________________________*/
 #include "AlgorithmBipartiteOptimal.h"
 #include "SearchAlgorithm.h"
 
 using namespace std;
 
-AlgorithmBipartiteOptimal::AlgorithmBipartiteOptimal(const BipartiteGraph &graph) :
+/*
+ * To get the cover of a bipartite graph, we use an algorithm based on
+ * the max flow and min cut, of an oriented graph where all the vertices
+ * of the first part are connected to the source, and all the vertices of
+ * the second part are connected to the target
+ * Complexity : a bit less than the generation of a random bipartite graph,
+ * because we already know which edges to add,
+ * but basically O(nlog(n)+n²log(n))
+ */
+AlgorithmBipartiteOptimal::AlgorithmBipartiteOptimal(
+		const BipartiteGraph &graph) :
 		m_graph(graph), m_flowGraph(), m_search() {
 
 	m_graph.trim();
@@ -22,18 +45,25 @@ AlgorithmBipartiteOptimal::AlgorithmBipartiteOptimal(const BipartiteGraph &graph
 	m_sourceVertex = m_flowGraph.addVertex();
 	m_targetVertex = m_flowGraph.addVertex();
 
-	// on crée les aretes entre la source et la premiere partie
+	/*
+	 * We add an edge between the source vertex and each vertex of the first part
+	 */
 	for (set<int>::const_iterator ii = m_graph.getLeftPart().begin();
 			ii != m_graph.getLeftPart().end(); ++ii) {
 		m_flowGraph.addEdge(m_sourceVertex, *ii);
 	}
 
-	// on crée les aretes entre la deuxième partie et la destination
+	/*
+	 * We add an edge between each vertex of the second part and the target vertex
+	 */
 	for (set<int>::const_iterator ii = m_graph.getRightPart().begin();
 			ii != m_graph.getRightPart().end(); ++ii) {
 		m_flowGraph.addEdge(*ii, m_targetVertex);
 
-		//et on ajoute au passage les aretes entre les deux parties
+		/*
+		 *  we copy the edges of the bipartite graph, but only
+		 *  oriented from the first part to the second
+		 */
 		for (set<int>::const_iterator jj = m_graph.getNeighbours(*ii).begin();
 				jj != m_graph.getNeighbours(*ii).end(); ++jj) {
 			m_flowGraph.addEdge(*jj, *ii);
@@ -42,19 +72,27 @@ AlgorithmBipartiteOptimal::AlgorithmBipartiteOptimal(const BipartiteGraph &graph
 
 }
 
+
+/*
+ * Returns an optimal cover for the bipartite graph
+ */
 set<int> AlgorithmBipartiteOptimal::getCover() {
-	// on construit le flot max, en inversant les aretes remplies
+	/*
+	 * well, we build the max flow...
+	 */
 	buildMaxFlow();
 
-	//on fait un dernier parcours en profondeur pour en déduire la coupe min
+	/*
+	 * And a last breadth search to get the min cut
+	 */
 	set<int> S = m_search.breadthFirstSearch(m_flowGraph, m_sourceVertex,
 			m_targetVertex);
 
 	set<int> cover;
 
 	/*
-	 * On ajoute à la couverture les sommets
-	 * de la partie droite qui sont dans T
+	 * We add to the cover the vertices of
+	 * the right part that are in the ensemble S
 	 */
 	for (set<int>::const_iterator ii = S.begin(); ii != S.end(); ++ii) {
 		if (m_graph.getRightPart().find(*ii) != m_graph.getRightPart().end())
@@ -62,8 +100,8 @@ set<int> AlgorithmBipartiteOptimal::getCover() {
 	}
 
 	/*
-	 * plutot que de créer le sous ensemble T de la coupe min, on se contente
-	 * d'ajouter à la couverture les sommets de la partie gauche qui ne sont pas dans S
+	 * Rather than creating the T ensemble, we just add in the vertex cover
+	 * the vertices of the left part that aren't in S
 	 */
 	for (set<int>::const_iterator ii = m_graph.getLeftPart().begin();
 			ii != m_graph.getLeftPart().end(); ++ii)
