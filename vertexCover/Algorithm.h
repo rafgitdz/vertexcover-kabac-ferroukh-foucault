@@ -27,6 +27,7 @@ public:
     /*
      * Get a graph from the sons class, trim it (to erase all the lonely 
      * vertices
+     * Complexity => o(n*log(n))
      */
     Algorithm(const Graph& graph) : m_graph(graph) {
         m_graph.trim();

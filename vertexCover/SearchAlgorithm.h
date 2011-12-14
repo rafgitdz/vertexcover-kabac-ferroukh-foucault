@@ -16,7 +16,7 @@
  * It's a class that is used by the Algorithms classes to get some             *
  * course in the graph.                                                        *
  * Parameters => none                                                          *
- * Include => class Graph that enable inherits all methods and use them         *
+ * Include => class Graph that enable inherits all methods and use them        *
  *----------------------------------------------------------------------------*/
 
 #ifndef SEARCHALGORITHM_H

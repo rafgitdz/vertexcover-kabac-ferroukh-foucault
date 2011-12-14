@@ -17,11 +17,14 @@
 
 #include "TreeDynamicSons.h"
 #include <cstdlib>
+#include <vector>
 
 using namespace std;
 
-// Constructor that build the tree with a dynamic number of sons 
-
+/* 
+ * Constructor that build the tree with a dynamic number of sons 
+ * Complexity => o(n*(numberOfSons*log(n)))
+ */
 TreeDynamicSons::TreeDynamicSons(int vertexCnt, int maxSons, int minSons) : Tree() {
 
     // init the data
@@ -43,13 +46,15 @@ TreeDynamicSons::TreeDynamicSons(int vertexCnt, int maxSons, int minSons) : Tree
         for (unsigned int i = 0; i < verticesToHaveSons.size(); ++i) {
 
             /* get a dynamic number of sons, between min and max, to link with 
-             * the root "i" and build the edges between them */
+             * the root "i" and build the edges between them 
+             */
             numberOfSons = m_minSons + (rand() % (m_maxSons - m_minSons));
             buildEdgesTree(numberOfSons, m_vertexCount, i, limitCreateVertices,
                     verticesToHaveSons, newVerticesToHaveSons);
         }
         /* put the vertices that don't has again a sons, the list of fixed 
-         vertices */
+         * vertices 
+         */
         updateList(verticesToHaveSons, newVerticesToHaveSons);
     }
 } // end of TreeDynamicsSons constructor
