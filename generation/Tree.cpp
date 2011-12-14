@@ -13,7 +13,7 @@
  * Parameters : the number of vertex that the graph will have                  *
  * Is a parent class for TreeDynamicSons and TreeStaticDynamics                *
  * Has a methods to be used by the childs class                                *
- *____________________________________________________________________________*/        
+ *____________________________________________________________________________*/
 
 #include "Tree.h"
 
@@ -34,11 +34,13 @@ Tree::Tree(int vertexCount) : Graph(vertexCount) {
 void Tree::buildEdgesTree(int numberOfSons, int vertexCount, int indexOfRoot
         , int &end, vector<int> &listRoot, vector<int> &fixedVertices) {
 
+    int createdVertex;
+    
     for (int j = 0; j < numberOfSons; ++j) {
 
         if (end < vertexCount) {
-
-            int createdVertex = addVertex();
+            
+            createdVertex = addVertex();
             end++;
             addEdge(listRoot[indexOfRoot], createdVertex);
             fixedVertices.push_back(createdVertex);

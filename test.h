@@ -105,7 +105,7 @@ bool testTreeOptimal() {
 
 	for (int i = 0; i < 50; ++i) {
 
-		TreeDynamicSons t(100);
+		TreeDynamicSons t(100,100,0);
 		OptimalTreeAlgorithm algo(t);
 		set<int> cover = algo.getVertexCover();
 

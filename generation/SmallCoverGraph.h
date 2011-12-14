@@ -9,7 +9,7 @@
  *              University Bordeaux 1, Software Engineering, Master 2          *
  *                                *2011/2012*                                  *
  * ----------------------------------------------------------------------------*
- * Goal : Build a random graph with a small cover							   *
+ * Goal : Build a random graph with a small cover			       *
  *____________________________________________________________________________*/
 
 #ifndef SMALLCOVERGRAPH_H_

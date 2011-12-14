@@ -22,11 +22,13 @@
 
 class TreeDynamicSons : public Tree {
 public:
-    TreeDynamicSons(int VertexCount);
+    TreeDynamicSons(int vertexCount, int maxSons, int minSons);
     virtual ~TreeDynamicSons();
 
 private:
-    int _vertexCount;
+    int m_vertexCount;
+    int m_maxSons;
+    int m_minSons;
 };
 
 #endif	/* TREE_DYNAMIC_SONS_H_ */

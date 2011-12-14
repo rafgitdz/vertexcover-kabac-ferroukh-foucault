@@ -1,5 +1,4 @@
 #include "AlgorithmGlouton.h"
-#include <iostream>
 
 using namespace std;
 
@@ -33,7 +32,6 @@ set<int> AlgorithmGlouton::getCover() {
 	 */
 
 	while (m_graph.getEdgeCount() > 0) {
-		cout << m_graph.getEdgeCount() << endl;
 		m_graph.removeVertex(addVertexToVC());
 	}
 

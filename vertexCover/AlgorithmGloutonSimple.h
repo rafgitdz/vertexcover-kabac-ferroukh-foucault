@@ -15,7 +15,7 @@ using namespace std;
 
 class AlgorithmGloutonSimple : public AlgorithmGlouton {
 public:
-	AlgorithmGloutonSimple(Graph graph);
+	AlgorithmGloutonSimple(const Graph& graph) : AlgorithmGlouton(graph) {};
 	virtual std::set<int> getCover();
 private:
 	multimap<int, int> vertexDegree;
