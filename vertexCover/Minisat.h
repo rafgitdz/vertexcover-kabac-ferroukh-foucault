@@ -28,7 +28,7 @@ public:
     }
 
     virtual ~Minisat() {
-    };
+    }
 
     /*
      * get a cover from a graph given as enter base on MINISAT tool

@@ -9,9 +9,8 @@
  *              University Bordeaux 1, Software Engineering, Master 2          *
  *                                *2011/2012*                                  *
  * ----------------------------------------------------------------------------*
- * Goal : Build a random graph						       *
- * Constructor Parameters : the number of vertices that the graph will have,   *
- *  and the probability to draw an edge between two vertices                   *
+ * Goal : Builds a graph defined by the number of vertices and the			   *
+ * 		  probability of an edge between two vertices						   *
  *____________________________________________________________________________*/
 
 #ifndef SIMPLEGRAPH_H_
@@ -23,8 +22,11 @@ class SimpleGraph : public Graph {
 public:
 	/*
 	 * Generates a random graph, with vertexCount vertices,
-	 * and a probability edgeProba to draw and edge between two graphs
-	 * Complexity: TODO
+	 * and a probability edgeProba to draw and edge between two vertices
+	 * Parameters:	vertexCount - number of vertices in the graph
+	 * 			   	edgeProba - probability of drawing an edge between
+	 * 			   				two vertices
+	 * Complexity:	O(n²*log(n) + n*log(n))
 	 */
     SimpleGraph(int vertexCount, float edgeProba);
     virtual ~SimpleGraph(){};

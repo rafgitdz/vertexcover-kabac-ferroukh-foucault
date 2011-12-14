@@ -35,7 +35,7 @@ class Graph;
 class SearchAlgorithm {
 public:
 
-    SearchAlgorithm::SearchAlgorithm() : m_queue() {
+    SearchAlgorithm() : m_queue() {
     }
 
     virtual ~SearchAlgorithm() {

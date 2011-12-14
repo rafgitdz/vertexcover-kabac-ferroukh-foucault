@@ -9,7 +9,7 @@
  *              University Bordeaux 1, Software Engineering, Master 2          *
  *                                *2011/2012*                                  *
  * ----------------------------------------------------------------------------*
- * Goal : Build a random graph with a small cover			       *
+ * Goal : Build a SimpleGraph containing a vertex cover					       *
  *____________________________________________________________________________*/
 
 #ifndef SMALLCOVERGRAPH_H_
@@ -20,9 +20,13 @@
 class SmallCoverGraph : public SimpleGraph {
 public:
 	/*
-	 * Generates a random graph, with vertexCount vertices, a probability
-	 * edgeProba to draw an edge between two vertices, and a cover of
-	 * coverSize vertices
+	 * Generates a SimpleGraph containing a vertex cover
+	 * Parameters:	vertexCount - number of vertices in the graph
+	 * 			   	edgeProba - probability of drawing an edge between
+	 * 			   				two vertices
+	 * 			   	coverSize - size of the vertex cover to be generated
+	 * Complexity:	SimpleGraph complexity +
+	 * 				O(|cs| + |n-cs|*log(n-cs) + |n-cs|*|cs|*log(n))
 	 */
 	SmallCoverGraph(unsigned vertexCount, float edgeProba, unsigned coverSize);
 	~SmallCoverGraph(){};

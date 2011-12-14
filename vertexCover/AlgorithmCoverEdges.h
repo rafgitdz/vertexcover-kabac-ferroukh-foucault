@@ -30,7 +30,7 @@ public:
     }
 
     virtual ~AlgorithmCoverEdges() {
-    };
+    }
 
     /* Get the cover from the graph given as enter, get already the two first
      * vertices of the graph, erase their neighbors and their edge link, and insert

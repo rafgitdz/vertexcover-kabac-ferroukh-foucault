@@ -16,12 +16,7 @@ Graph::Graph(int vertexCount) :
 }
 
 Graph::Graph(const Graph& graph) :
-		m_graph(), m_edgeCount(graph.getEdgeCount()) {
-	set<int> vertices = graph.getVertices();
-	for (set<int>::const_iterator ii = vertices.begin(); ii != vertices.end();
-			++ii)
-		m_graph[*ii] = graph.getNeighbours(*ii);
-
+		m_graph(graph.m_graph), m_edgeCount(graph.getEdgeCount()) {
 }
 
 /*
@@ -79,6 +74,10 @@ void Graph::addVertex(int vertexNum) {
 	m_graph[vertexNum] = s;
 }
 
+/*
+ * Complexity : logarithmic in the graph size, plus logarithmic
+ * in the number of neighbors of each endpoint of the edge
+ */
 void Graph::addEdge(int vertex1, int vertex2) {
 	m_graph[vertex1].insert(vertex2);
 	m_graph[vertex2].insert(vertex1);
@@ -109,7 +108,9 @@ set<int> Graph::getVertices() const {
 
 	set<int> vertices;
 	map<int, set<int> >::const_iterator it;
+	// O(n)
 	for (it = m_graph.begin(); it != m_graph.end(); ++it)
+		// O(log(n))
 		vertices.insert((*it).first);
 	return vertices;
 }
