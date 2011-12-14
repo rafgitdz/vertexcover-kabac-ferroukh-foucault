@@ -16,12 +16,11 @@ Graph::Graph(int vertexCount) :
 }
 
 Graph::Graph(const Graph& graph) :
-		m_graph(), m_edgeCount(graph.getEdgeCount()) {
-	set<int> vertices = graph.getVertices();
+		m_graph(graph), m_edgeCount(graph.getEdgeCount()) {
+	/*set<int> vertices = graph.getVertices();
 	for (set<int>::const_iterator ii = vertices.begin(); ii != vertices.end();
 			++ii)
-		m_graph[*ii] = graph.getNeighbours(*ii);
-
+		m_graph[*ii] = graph.getNeighbours(*ii);*/
 }
 
 /*
