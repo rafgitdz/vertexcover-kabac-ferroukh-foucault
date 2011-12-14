@@ -11,24 +11,22 @@
  * ----------------------------------------------------------------------------*
  * Minisat.h                                                                   *
  * Minisat is available at : http://minisat.se/                                *
- * Goal :                                                                      *
- * Parameters :                                                                *
- * ...                                                                         *
+ * Goal : get a cover from a graph given based on minisat tool algorithm       *
+ * Parameters : none                                                           *
  * Include => class Graph, a Tree is a Graph, inherits all methods from Graph  *
  *____________________________________________________________________________*/
 
 #ifndef MINISAT_H
 #define	MINISAT_H
 
-#include <iostream>
-#include <string>
-#include <fstream>
-#include "../generation/Graph.h"
-
 class Minisat {
 public:
-    Minisat();
-    virtual ~Minisat();
+
+    Minisat() {
+    }
+
+    virtual ~Minisat() {
+    };
 
     std::set<int> getMinisatCoverFromSimpleSAT(Graph graph, char * inFile, char *outFile);
     std::set<int> getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover, char * inFile, char *outFile);

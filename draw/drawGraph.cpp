@@ -1,18 +1,19 @@
 /*-----------------------------------------------------------------------------*
- *               *Project of Complexity and Applicated Algorithms*             *
+ *               *Project of Complexity and Applied Algorithmic*               *
  *-----------------------------------------------------------------------------*
  *        Authors :                                                            *
  *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
  *             Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)        *
- *                 Ferroukh Rafik (rafik.ferroukh@etu.u-bordeaux1.fr)          *
+ *                 Rafik Ferroukh (rafik.ferroukh@etu.u-bordeaux1.fr)          *
  *-----------------------------------------------------------------------------*
  *              University Bordeaux 1, Software Engineering, Master 2          *
  *                                *2011/2012*                                  *
  * ----------------------------------------------------------------------------*
  * DrawGraph.cpp                                                               *
- * Goal :                                                                      *
+ * GraphViz (DOT) link : http://www.graphviz.org/                              *
+ * Goal : draw a graph and export it in a png format file with DOT             *
  * Parameters : none                                                           *
- *____________________________________________________________________________*/   
+ *____________________________________________________________________________*/
 
 using namespace std;
 
@@ -22,11 +23,9 @@ using namespace std;
 #include <fstream>
 #include <cstdlib>
 
-DrawGraph::DrawGraph() {
-}
-
 void DrawGraph::drawGraph(Graph graph, set<int> vertexCover, char *pictureFile) {
 
+    // Build the file ".dot" to be treated by dot to draw
     int first;
     string text = "";
     text.operator +=("graph G {");
@@ -35,9 +34,14 @@ void DrawGraph::drawGraph(Graph graph, set<int> vertexCover, char *pictureFile) 
         first = (*ii).first;
         set<int> neigh = (*ii).second;
 
+        // distinguish the vertices of the cover from the others
         for (set<int>::iterator ii = vertexCover.begin(); ii != vertexCover.end(); ++ii)
             text.operator +=(convertToString(*ii) + " [color = red];\n");
 
+        /*
+         * set in the file ".dot" all the connections in the graph
+         * note : an edge (a,b) is represented bye ("a -- b") in the file
+         */
         for (set<int>::iterator jj = neigh.begin(); jj != neigh.end(); ++jj) {
 
             text.operator +=(convertToString(first));
@@ -48,14 +52,16 @@ void DrawGraph::drawGraph(Graph graph, set<int> vertexCover, char *pictureFile) 
         }
     }
     text.operator +=("}");
+    // end building
 
+    // launch dot with the "graph.dot" where we set the "text" string in it
     ofstream graphFile("graph.dot", ios::out | ios::trunc);
 
     graphFile << text;
     graphFile.close();
     string out = this->convertToString(pictureFile);
     string launchGraphViz = "dot -Tpng -o " + out + " graph.dot";
-    system(launchGraphViz.c_str());
+    system(launchGraphViz.c_str()); // launch DOT
 }
 
 string DrawGraph::convertToString(int toConvert) {
@@ -69,7 +75,3 @@ string DrawGraph::convertToString(char* toConvert) {
     oss << toConvert;
     return oss.str();
 }
-
-DrawGraph::~DrawGraph() {
-}
-
