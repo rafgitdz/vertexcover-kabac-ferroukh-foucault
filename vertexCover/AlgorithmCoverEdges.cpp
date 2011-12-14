@@ -19,6 +19,7 @@
 
 using namespace std;
 
+// Complexity => o(n*log(n))
 std::set<int> AlgorithmCoverEdges::getCover() {
 
     // Init the data
@@ -29,25 +30,26 @@ std::set<int> AlgorithmCoverEdges::getCover() {
     // While the graph has a vertices, do!
     while (m_graph.getEdgeCount() > 0) {
 
-        /* get the first vertex and the second 
+        /* 
+         * get the first vertex and the second 
          * (first neighbour of the first vertex)
          */
         firstVertex = m_graph.getBeginGraph()->first;
 
+        // if the first vertex of the graph hasn't neighbours, delete it
         if (m_graph.getBeginGraph()->second.size() == 0) {
-
             m_graph.removeVertex(m_graph.getBeginGraph()->first);
-        } else {
 
+        }// if it has neighbours, take the first and delete them
+        else {
             secondVertex = *(m_graph.getBeginGraph()->second.begin());
             // insert them in the cover
             cover.insert(firstVertex);
             cover.insert(secondVertex);
-            // erase their neighbours and their edge link
+            // erase them => erase all their edges between them et their neigh.
             m_graph.removeVertex(firstVertex);
             m_graph.removeVertex(secondVertex);
         }
     }
     return cover;
 } // end of getCover
-

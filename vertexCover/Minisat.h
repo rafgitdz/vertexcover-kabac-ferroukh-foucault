@@ -10,7 +10,7 @@
  *                                *2011/2012*                                  *
  * ----------------------------------------------------------------------------*
  * Minisat.h                                                                   *
- * Minisat is available at : http://minisat.se/                                *
+ * MINISAT is available at : http://minisat.se/                                *
  * Goal : get a cover from a graph given based on minisat tool algorithm       *
  * Parameters : none                                                           *
  * Include => class Graph, a Tree is a Graph, inherits all methods from Graph  *
