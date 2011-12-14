@@ -54,8 +54,10 @@ Graph::Graph(char *pathFile) :
 		} while (iss);
 
 		m_graph[currentRoot] = neighbours; // set the connections
+		m_edgeCount += neighbours.size();
 		neighbours.clear();
 	} // end while
+	m_edgeCount /= 2;
 } // end constructor Graph(chr * File)
 
 int Graph::addVertex() {

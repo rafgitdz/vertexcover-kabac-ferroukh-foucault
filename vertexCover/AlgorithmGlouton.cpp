@@ -21,14 +21,12 @@ int AlgorithmGlouton::addVertexToVC() {
 }
 
 set<int> AlgorithmGlouton::getCover() {
-	m_graph.trim();
-
 	/* removing vertices from the graph choosing always the vertex with
 	 * the highest degree;
 	 * this vertex is written to the vertexCover set
 	 * when removing a vertex the program removes the reference from the
 	 * adjacent lists of the left vertices;
-	 * the program stops when there are no more vertices in the graph
+	 * the program stops when there are no more edges in the graph
 	 */
 
 	while (m_graph.getEdgeCount() > 0) {

@@ -73,6 +73,7 @@ int main(int argc, char* argv[]) {
 		if (strcmp(argv[i], "-in")==0) {
 			char* loadPath = argv[i+1];
 			graph = new Graph(loadPath);
+			graphGenerated = true;
 		}
 		else if (strcmp(argv[i], "-g") == 0
 				|| strcmp(argv[i], "--generate-graph") == 0) {
