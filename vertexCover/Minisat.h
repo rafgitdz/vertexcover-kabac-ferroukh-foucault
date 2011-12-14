@@ -19,6 +19,8 @@
 #ifndef MINISAT_H
 #define	MINISAT_H
 
+#include "../generation/Graph.h"
+
 class Minisat {
 public:
 
@@ -28,10 +30,29 @@ public:
     virtual ~Minisat() {
     };
 
-    std::set<int> getMinisatCoverFromSimpleSAT(Graph graph, char * inFile, char *outFile);
-    std::set<int> getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover, char * inFile, char *outFile);
+    /*
+     * get a cover from a graph given as enter base on MINISAT tool
+     * generate the SAT instance in the "inFile"
+     * generate the cover instance in the "outFile"
+     */
+
+    /*
+     * build a complex SAT instance, based on matrix and the graph
+     * <see the Minisat.cpp for more details> 
+     */
+    std::set<int> getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
+            char *outFile);
+    /*
+     * build a simple SAT instance, based the graph only, and the maximum size
+     * of the cover that the MINISAT will give
+     * if(UNSAT) ==> it returns a null set
+     * <see the Minisat.cpp for more details> 
+     */
+    std::set<int> getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
+            char * inFile, char *outFile);
 
 private:
+    // build the SAT instance (file) step by step
     void buildingSAT(std::string &SAT, int toConvert, std::string toInsert);
     std::string convertToString(int toConvert);
     std::string convertToString(char *toConvert);

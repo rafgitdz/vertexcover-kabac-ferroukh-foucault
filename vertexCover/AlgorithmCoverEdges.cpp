@@ -16,7 +16,6 @@
  *____________________________________________________________________________*/
 
 #include "AlgorithmCoverEdges.h"
-#include "Algorithm.h"
 
 using namespace std;
 
@@ -31,13 +30,13 @@ std::set<int> AlgorithmCoverEdges::getCover() {
     while (m_graph.getEdgeCount() > 0) {
 
         /* get the first vertex and the second 
-         * -first neighbour of the first vertex-
+         * (first neighbour of the first vertex)
          */
         firstVertex = m_graph.getBeginGraph()->first;
 
         if (m_graph.getBeginGraph()->second.size() == 0) {
-            m_graph.removeVertex(m_graph.getBeginGraph()->first);
 
+            m_graph.removeVertex(m_graph.getBeginGraph()->first);
         } else {
 
             secondVertex = *(m_graph.getBeginGraph()->second.begin());

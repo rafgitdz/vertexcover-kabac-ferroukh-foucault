@@ -16,7 +16,6 @@
  *____________________________________________________________________________*/
 
 #include "Minisat.h"
-#include "../generation/Graph.h"
 
 #include <string>
 #include <cstdlib>
@@ -25,6 +24,8 @@
 #include <fstream>
 
 using namespace std;
+
+/*___________________________ COMPLEX SAT ____________________________________*/
 
 set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
         char * inFile, char *outFile) {
@@ -188,10 +189,12 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
 
 }// end handle of the complex SAT 
 
-/*-------------------------- SIMPLE SAT --------------------------------------*/
+/*__________________________ SIMPLE SAT ______________________________________*/
+
 set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
         char *outFile) {
 
+    // SAME HANDLING AS IN THE COMPLEX SAT ABOVE...
     set<int> vertices = graph.getVertices();
     set<int> markedVertices;
     string SAT;
@@ -203,11 +206,20 @@ set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
     this->buildingSAT(SAT, vertices.size(), " ");
     this->buildingSAT(SAT, graph.getEdgeCount(), "\n");
 
+    /*
+     * THE DIFFERENCE FROM THE COMPLEX SAT
+     * it take all the edges and insert them in the SAT instance without 
+     * index the num of the vertex
+     */
     for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
 
         vertex = *ii;
         markedVertices = graph.getNeighbours(vertex);
 
+        /*
+         * add the edge in the SAT instance between the vertex ii and all their
+         * neighbours (set of jj)
+         */
         for (set<int>::iterator jj = markedVertices.begin();
                 jj != markedVertices.end(); ++jj) {
 
@@ -222,17 +234,18 @@ set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
 
     // Open the file inFile
     ofstream file(inFile, ios::out | ios::trunc);
-    file << SAT;
+    file << SAT; // set the built SAT instance in the file
     file.close();
 
     string in = this->convertToString(inFile);
     string out = this->convertToString(outFile);
+    // launch MINISAT and get a cover (or not) in the out file
     string launchMinisat = "minisat " + in + " " + out;
     system(launchMinisat.c_str());
 
     /* ------------------------------------*
-     * get the vertex cover returned bye   *
-     * "minisat" if it exists              *
+     * get the vertex cover returned by    *
+     * MINISAT if it exists              *
      * ------------------------------------*/
     set<int> vertexCover;
 
@@ -251,7 +264,7 @@ set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
     fileOut.close();
 
     return vertexCover;
-}
+} // end of SAT simple handling 
 
 void Minisat::buildingSAT(string &SAT, int toConvert, std::string toInsert) {
 
@@ -273,7 +286,3 @@ string Minisat::convertToString(char* toConvert) {
     oss << toConvert;
     return oss.str();
 }
-
-Minisat::~Minisat() {
-}
-

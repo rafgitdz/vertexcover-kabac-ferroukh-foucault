@@ -17,6 +17,8 @@
 #ifndef ALGORITHMCOVEREDGES_H_
 #define ALGORITHMCOVEREDGES_H_
 
+#include "Algorithm.h"
+
 class AlgorithmCoverEdges : public Algorithm {
 public:
     // Constructor that copy the content of the graph in a temporary graph
