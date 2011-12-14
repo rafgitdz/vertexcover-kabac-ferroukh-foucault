@@ -17,6 +17,7 @@ SimpleGraph::SimpleGraph(int vertexCount, float edgeProba) : Graph() {
         }
         for (ii = m_graph.begin(); ii != getEndGraph(); ii++) {
             if (rand() % 100 < probability) {
+            	++m_edgeCount;
             	ii->second.insert(vertex);
             	neigh.insert(ii->first);
             }

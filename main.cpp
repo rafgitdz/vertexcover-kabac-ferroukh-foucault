@@ -110,7 +110,7 @@ int main(int argc, char* argv[]) {
 				}
 				case 4: { //TreeStatic
 
-					int sonsCount = atoi(argv[i + 4]);
+					int sonsCount = atoi(argv[i + 3]);
 					tree = new TreeStaticSons(graphSize, sonsCount);
 					break;
 				}
@@ -337,9 +337,13 @@ int main(int argc, char* argv[]) {
 				} // end switch
 
 				gettimeofday(&t4, NULL);
-				cout << "cover found in " << diff_ms(t4, t3) << " milliseconds"
+				if (cover.size() == 0)
+					cout << "cover not found" << endl;
+				else {
+					cout << "cover found in " << diff_ms(t4, t3) << " milliseconds"
 						<< endl;
-
+					cout << "cover size : "<< cover.size() << endl;
+				}
 			} // endif --algorithm
 
 		if (visualizeGraph)

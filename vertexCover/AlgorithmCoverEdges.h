@@ -23,6 +23,7 @@ public:
 	// Constructor that copy the content of the graph in a temporary graph
 	AlgorithmCoverEdges(const Graph &graph) :
 			Algorithm(graph) {
+
 	}
 	virtual ~AlgorithmCoverEdges() {};
 
