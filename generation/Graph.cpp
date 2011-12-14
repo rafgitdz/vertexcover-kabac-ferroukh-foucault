@@ -112,7 +112,9 @@ set<int> Graph::getVertices() const {
 
 	set<int> vertices;
 	map<int, set<int> >::const_iterator it;
+	// O(n)
 	for (it = m_graph.begin(); it != m_graph.end(); ++it)
+		// O(log(n))
 		vertices.insert((*it).first);
 	return vertices;
 }

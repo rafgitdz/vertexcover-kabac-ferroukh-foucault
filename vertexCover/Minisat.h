@@ -19,6 +19,8 @@
 #ifndef MINISAT_H
 #define	MINISAT_H
 
+#include "../generation/Graph.h"
+
 class Minisat {
 public:
 
@@ -26,7 +28,7 @@ public:
     }
 
     virtual ~Minisat() {
-    };
+    }
 
     std::set<int> getMinisatCoverFromSimpleSAT(Graph graph, char * inFile, char *outFile);
     std::set<int> getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover, char * inFile, char *outFile);

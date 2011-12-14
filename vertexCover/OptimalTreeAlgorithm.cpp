@@ -1,12 +1,25 @@
+/*-----------------------------------------------------------------------------*
+ *            *Project of Complexity and Applied Algorithmic*                  *
+ *-----------------------------------------------------------------------------*
+ *        Authors :                                                            *
+ *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
+ *             Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)        *
+ *                 Rafik Ferroukh (rafik.ferroukh@etu.u-bordeaux1.fr)          *
+ *-----------------------------------------------------------------------------*
+ *              University Bordeaux 1, Software Engineering, Master 2          *
+ *                                *2011/2012*                                  *
+ * ----------------------------------------------------------------------------*
+ * Goal : Optimal vertex cover algorithm for trees   	  	   				   *
+ *____________________________________________________________________________*/
+
 #include "OptimalTreeAlgorithm.h"
 
 using namespace std;
 
 OptimalTreeAlgorithm::OptimalTreeAlgorithm(Tree tree) : Algorithm(tree) {
-    
     _algorithm = new SearchAlgorithm();
     _graphWithoutLeaves = _algorithm->breadthFirstSearchWithoutLeaves
-            (tree, tree.getRoot());
+            										(tree, tree.getRoot());
 }
 
 OptimalTreeAlgorithm::~OptimalTreeAlgorithm() {
