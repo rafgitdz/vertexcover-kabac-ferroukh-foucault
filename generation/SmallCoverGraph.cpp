@@ -32,25 +32,25 @@ SmallCoverGraph::SmallCoverGraph(unsigned vertexCount, float edgeProba,
 		SimpleGraph(coverSize, edgeProba) {
 
 	/*
-	 * O(cs) where
-	 * 	cs - size of the vertex cover
 	 * Recuperates the vertices in the vertex cover
+	 * O(cs) where
+	 * 		cs - size of the vertex cover
 	 */
 	verticesInVC = getVertices();
 
 	/*
-	 * O(|n-cs|*log(n-cs))
-	 * 	cs - size of the vertex cover
 	 * Adds vertices which are out of the vertex cover
+	 * O(|n-cs|*log(n-cs))
+	 * 		cs - size of the vertex cover
 	 */
 	for (unsigned i = 0; i < (vertexCount - coverSize); i++)
 		verticesOutOfVC.insert(addVertex());
 
 	/*
-	 * O(|n-cs|*|cs|*log(n))
-	 * 	cs - size of the vertex cover
 	 * Adds an edge between a vertex in the vertex cover
 	 * and a vertex out of the vertex cover
+	 *  O(|n-cs|*|cs|*log(n))
+	 * 		cs - size of the vertex cover
 	 */
 	set<int>::iterator it1;
 	set<int>::iterator it2;

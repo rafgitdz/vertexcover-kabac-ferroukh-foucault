@@ -63,11 +63,11 @@ int OptimalTreeAlgorithm::getParent(int vertex) {
 /*
  * Returns the found vertex cover
  * Return :	the found vertex cover
- * Complexity :	O(nl*(log(n) + neigh(log(neigh) + log(n) + log(n)))) where
- * 					nl - number of vertices without leaves
- * 					n - number of graph vertices
+ * Complexity :	O(nl*(log(n) + neigh(log(v) + log(n) + log(v)))) where
+ * 					nl - graph size without leaves
+ * 					n - graph size
  * 					neigh - number of vertex neighbours
- *
+ * 					v - vertex cover size
  */
 set<int> OptimalTreeAlgorithm::getVertexCover() {
 	set<int> vertexCoverSet;
@@ -83,11 +83,11 @@ set<int> OptimalTreeAlgorithm::getVertexCover() {
 		//O(neigh)
 		for (neighbourIterator = neighbours.begin();
 				neighbourIterator != neighbours.end(); neighbourIterator++) {
-			// O(log(n))
+			// O(log(v))
 			if ((!setContains(*neighbourIterator, vertexCoverSet))
 					// O(log(n))
 					&& (getParent(*graphIterator) != *neighbourIterator)) {
-				// O(log(n))
+				// O(log(v))
 				vertexCoverSet.insert(*graphIterator);
 				break;
 			}
