@@ -18,10 +18,12 @@
 #define	TREE_DYNAMIC_SONS_H_
 
 #include "Tree.h"
-#include <vector>
 
 class TreeDynamicSons : public Tree {
 public:
+    /*
+     * Complexity => o(n*(numberOfSons*log(n)))
+     */
     TreeDynamicSons(int vertexCount, int maxSons, int minSons);
     virtual ~TreeDynamicSons();
 

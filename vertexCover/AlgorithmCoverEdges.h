@@ -11,7 +11,7 @@
  * ----------------------------------------------------------------------------*
  * Goal => gives the vertex cover of the graph given as enter                  *
  * Parameters : the graph to be handled                                        *
- * Include => It's an algorithm, it inherit class Algorithm                    *
+ * Include => It's an algorithm, it inherits class Algorithm                    *
  *____________________________________________________________________________*/
 
 #ifndef ALGORITHMCOVEREDGES_H_
@@ -21,8 +21,11 @@
 
 class AlgorithmCoverEdges : public Algorithm {
 public:
-    // Constructor that copy the content of the graph in a temporary graph
 
+    /*
+     * Constructor that copy the content of the graph in a temporary graph
+     * Complexity => o(n*log(n))
+     */
     AlgorithmCoverEdges(const Graph &graph) : Algorithm(graph) {
     }
 
@@ -32,6 +35,7 @@ public:
     /* Get the cover from the graph given as enter, get already the two first
      * vertices of the graph, erase their neighbors and their edge link, and insert
      * them in the cover
+     * Complexity => o(n*log(n))
      */
     std::set<int> getCover();
 

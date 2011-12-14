@@ -25,6 +25,7 @@
 
 class Tree : public Graph {
 public:
+    // Complexity => o(n*log(n))
     Tree(int vertexCount = 0);
 
     virtual ~Tree() {
@@ -38,6 +39,7 @@ public:
      * "indexOfRoot", without exceed the limit that is "vertexCount" and it's 
      * controled by the "end" integer, each son that was created, it's stocked 
      * in the "fixedVertices"
+     * Complexity = o(numberOfSons * log(n)) 
      */
     void buildEdgesTree(int numberOfSons, int vertexCount, int indexOfRoot,
             int &end, std::vector<int> &list, std::vector<int> &list2);
@@ -47,6 +49,7 @@ public:
      * Goal => put the vertices that were fixed in the graph, in the list 
      * of the future roots to be handled
      * Description => none
+     * Complexity => o(n)
      */
     void updateList(std::vector<int> &list, std::vector<int> &list2);
 

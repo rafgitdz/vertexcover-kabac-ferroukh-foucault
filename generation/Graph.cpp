@@ -137,6 +137,7 @@ bool Graph::isCover(set<int> cover) const {
 	return true;
 }
 
+// Complexity => o(n*log(n))
 void Graph::trim() {
 	for (map<int, set<int> >::const_iterator ii = m_graph.begin();
 			ii != m_graph.end();) {

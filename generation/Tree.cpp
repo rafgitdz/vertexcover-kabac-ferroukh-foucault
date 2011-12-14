@@ -19,14 +19,17 @@
 
 using namespace std;
 
+// Complexity => o(n*log(n))
 Tree::Tree(int vertexCount) : Graph(vertexCount) {
 }
 
+/*
+ * Complexity = o(numberOfSons * log(n)) 
+ */
 void Tree::buildEdgesTree(int numberOfSons, int vertexCount, int indexOfRoot
         , int &limit, vector<int> &listRoot, vector<int> &fixedVertices) {
 
     int createdVertex;
-
     /* 
      * add an edge between the first vertex in the list root and and 
      * a number of sons fixed by numberOfSons
@@ -51,11 +54,14 @@ void Tree::buildEdgesTree(int numberOfSons, int vertexCount, int indexOfRoot
     }
 }
 
+/*
+ * Complexity = o(n) 
+ */
 void Tree::updateList(vector<int>& newRoots, vector<int>& markedVertices) {
     /* 
      * refresh the list of the vertices that are fixed by the list that will be 
      * fixed
      */
-    newRoots = markedVertices;
+    newRoots.swap(markedVertices);
     markedVertices.clear();
 }
