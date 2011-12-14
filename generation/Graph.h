@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------*
- *            *Project of Complexity and Applied Algorithmic*                *
+ *            *Project of Complexity and Applied Algorithmic*                  *
  *-----------------------------------------------------------------------------*
  *        Authors :                                                            *
  *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
@@ -10,10 +10,10 @@
  *                                *2011/2012*                                  *
  * ----------------------------------------------------------------------------*
  * Goal : Represents a graph as an adjacent list, which is a STL map where we  *
- * have the number of a vertex as the key, 									   *
- * and a set of his neighbors as the value 								       *
+ * have the number of a vertex as the key, 				       *
+ * and a set of his neighbors as the value      			       *
  * Parameters : the number of vertices that the graph will have                *
- * It's a parent class for all classes representing a graph            		   *
+ * It's a parent class for all classes representing a graph                    *
  *____________________________________________________________________________*/
 
 #ifndef GRAPH_H_
@@ -43,6 +43,11 @@ public:
 	;
 
 	/*
+	 * Load a graph from a graphTextFile
+	 */
+	Graph(char* pathFile);
+
+	/*
 	 * Complexity : logarithmic in the graph size
 	 */
 	int addVertex();
@@ -62,7 +67,7 @@ public:
 	 * Complexity : logarithmic in the graph size
 	 */
 	void removeVertexAndIsolatedNeighbour(int);
-
+	void removeVertex(int);
 	/*
 	 * Removes the vertices which degree is 0
 	 * i.e. the ones which have no neighbor,
@@ -76,7 +81,6 @@ public:
 	 * Complexity : TODO
 	 */
 	void removeEdge(int, int);
-
 
 	/*
 	 * Return the neighbors of a vertex
@@ -115,7 +119,6 @@ public:
 	 */
 	bool isCover(std::set<int> cover) const;
 
-
 	/*
 	 * Return an iterator to the first vertex of the graph
 	 * Complexity : constant
@@ -140,8 +143,9 @@ public:
 		return m_edgeCount;
 	}
 
-	friend std::ostream &operator<<(std::ostream &out, const Graph&);
+	void saveGraph(char* pathFile) const;
 
+	friend std::ostream &operator<<(std::ostream &out, const Graph&);
 
 protected:
 	std::map<int, std::set<int> > m_graph;

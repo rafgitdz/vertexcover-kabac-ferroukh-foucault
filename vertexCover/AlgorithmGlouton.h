@@ -20,7 +20,7 @@
 
 class AlgorithmGlouton : public Algorithm {
 public:
-	AlgorithmGlouton(Graph graph);
+	AlgorithmGlouton(const Graph& graph) : Algorithm(graph) {};
 	virtual std::set<int> getCover();
 	int addVertexToVC();
 

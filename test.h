@@ -5,7 +5,6 @@
 #include <cstring>
 #include <cassert>
 #include "generation/TreeDynamicSons.h"
-#include "generation/TreeStaticSons.h"
 #include "vertexCover/AlgorithmCoverEdges.h"
 #include "vertexCover/SearchAlgorithm.h"
 #include "vertexCover/AlgorithmDeepSearch.h"
@@ -105,20 +104,11 @@ bool testTreeOptimal() {
 
 	for (int i = 0; i < 50; ++i) {
 
-		TreeDynamicSons t(100);
+		TreeDynamicSons t(100,100,0);
 		OptimalTreeAlgorithm algo(t);
 		set<int> cover = algo.getVertexCover();
 
 		if (!t.isCover(cover)) {
-			cout << "The Tree optimal algorithm doesn't work" << endl;
-			return false;
-		}
-
-		TreeStaticSons t2(100, 2);
-		OptimalTreeAlgorithm algo2(t2);
-		set<int> cover2 = algo2.getVertexCover();
-
-		if (!t2.isCover(cover2)) {
 			cout << "The Tree optimal algorithm doesn't work" << endl;
 			return false;
 		}

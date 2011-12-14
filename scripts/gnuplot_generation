@@ -5,8 +5,3 @@ set ylabel 'Generation Time (in ms)'
 plot "bench/gen.simpleGraph"  using 1:2 title "Simple Graph" with lines,\
 "bench/gen.smallCover" using 1:2 title "Small Cover Graph" with lines,\
 "bench/gen.bipartite" using 1:2 title "Bipartite Graph" with lines
-set output "generation2.png"
-set xlabel 'Number of Vertices' 
-set ylabel 'Generation Time (in ms)' 
-plot "bench/gen.tree" using 1:2 title "Dynamic Tree" with lines,\
-"bench/gen.treeStat" using 1:2 title "Static Tree" with lines

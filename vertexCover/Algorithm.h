@@ -1,10 +1,10 @@
 /*-----------------------------------------------------------------------------*
- *               *Project of Complexity and Applicated Algorithms*             *
+ *               *Project of Complexity and Applied Algorithmic*               *
  *-----------------------------------------------------------------------------*
  *        Authors :                                                            *
  *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
  *             Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)        *
- *                 Ferroukh Rafik (rafik.ferroukh@etu.u-bordeaux1.fr)          *
+ *                 Rafik Ferroukh (rafik.ferroukh@etu.u-bordeaux1.fr)          *
  *-----------------------------------------------------------------------------*
  *              University Bordeaux 1, Software Engineering, Master 2          *
  *                                *2011/2012*                                  *
@@ -23,10 +23,17 @@
 
 class Algorithm {
 public:
+
+    /*
+     * Get a graph from the sons class, trim it (to erase all the lonely 
+     * vertices
+     */
     Algorithm(const Graph& graph) : m_graph(graph) {
-    	m_graph.trim();
+        m_graph.trim();
     }
-    virtual ~Algorithm() {};
+
+    virtual ~Algorithm() {
+    };
 
 protected:
     Graph m_graph;
