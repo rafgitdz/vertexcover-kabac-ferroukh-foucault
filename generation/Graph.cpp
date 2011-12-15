@@ -60,9 +60,10 @@ int Graph::addVertex() {
 	set<int> s;
 	int graphSize = m_graph.size() + 1;
 
-	int vertex = rand() % (max(m_graphInitialSize, graphSize) * 10);
+	int vertex = rand() % (max(m_graphInitialSize, graphSize) * 10) + 1;
 	while (m_graph.find(vertex) != m_graph.end()) {
-		vertex = rand() % (max(m_graphInitialSize, graphSize) * 10);
+		cout << "rand" << endl;
+		vertex = rand() % (max(m_graphInitialSize, graphSize) * 10) + 1;
 	}
 	m_graph[vertex] = s;
 	return vertex;
@@ -149,8 +150,8 @@ void Graph::trim() {
 			int vertex = ii->first;
 			++ii;
 			m_graph.erase(vertex);
-		}
-		++ii;
+		} else
+			++ii;
 	}
 }
 
