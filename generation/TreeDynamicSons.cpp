@@ -23,7 +23,7 @@ using namespace std;
 
 /* 
  * Constructor that build the tree with a dynamic number of sons 
- * Complexity => o(n*(numberOfSons*log(n)))
+ * Complexity => O(n² * log(n)))
  */
 TreeDynamicSons::TreeDynamicSons(int vertexCnt, int maxSons, int minSons) : Tree() {
 
@@ -61,7 +61,3 @@ TreeDynamicSons::TreeDynamicSons(int vertexCnt, int maxSons, int minSons) : Tree
         updateList(verticesToHaveSons, newVerticesToHaveSons);
     }
 } // end of TreeDynamicsSons constructor
-
-TreeDynamicSons::~TreeDynamicSons() {
-}
-

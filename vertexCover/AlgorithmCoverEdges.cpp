@@ -19,7 +19,7 @@
 
 using namespace std;
 
-// Complexity => o(n*log(n))
+// Complexity => O(n * log(n))
 std::set<int> AlgorithmCoverEdges::getCover() {
 
     // Init the data

@@ -19,12 +19,12 @@
 
 using namespace std;
 
-// Complexity => o(n*log(n))
+// Complexity => O(n*log(n))
 Tree::Tree(int vertexCount) : Graph(vertexCount) {
 }
 
 /*
- * Complexity = o(numberOfSons * log(n)) 
+ * Complexity = O(n * log(n)) 
  */
 void Tree::buildEdgesTree(int numberOfSons, int vertexCount, int indexOfRoot
         , int &limit, vector<int> &listRoot, vector<int> &fixedVertices) {
@@ -55,7 +55,7 @@ void Tree::buildEdgesTree(int numberOfSons, int vertexCount, int indexOfRoot
 }
 
 /*
- * Complexity = o(n) 
+ * Complexity = O(n) 
  */
 void Tree::updateList(vector<int>& newRoots, vector<int>& markedVertices) {
     /* 
