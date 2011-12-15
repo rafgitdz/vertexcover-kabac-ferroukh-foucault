@@ -47,7 +47,7 @@ void DrawGraph::drawGraph(Graph graph, set<int> vertexCover, char *pictureFile) 
             text.operator +=(convertToString((*ii).first));
             text.operator +=(";\n");
             graph.removeVertex((*ii).first);
-            
+
         } else {
             for (set<int>::iterator jj = neigh.begin(); jj != neigh.end(); ++jj) {
 

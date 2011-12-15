@@ -44,12 +44,14 @@ public:
     /*
      * Get the breadth search of the graph given as enter, we launch from root 
      * and stop at the target (if different of -1) 
+     * Complexity => o(vertexCount * moy(numberOfEdgesPerVertex * log(n))
      */
     std::set<int> breadthFirstSearch(const Graph &g, int root, int target);
 
     /* 
      * Get the depth search of the graph given as enter, we launch from root and
      * build a tree at the same time 
+     * Complexity => o(vertexCount * moy(numberOfEdgesPerVertex * log(n))
      */
     void depthFirstSearch(const Graph &g, Graph &tree, int vertex);
 

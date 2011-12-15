@@ -27,6 +27,8 @@ using namespace std;
 
 /*___________________________ COMPLEX SAT ____________________________________*/
 
+// Complexity => O(n² * log(n) + COMPLEXITY(MINISAT))
+
 set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
         char * inFile, char *outFile) {
 
@@ -181,6 +183,7 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
             ++ii) {
         for (map<int, int>::iterator hh = indexVerticesMatrix.begin();
                 hh != indexVerticesMatrix.end(); ++hh) {
+
             if ((*hh).second == ((*ii - 1) % vertexCount))
                 vertexCoverFromMinisat.insert((*hh).first);
         }
@@ -190,6 +193,8 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
 }// end handle of the complex SAT 
 
 /*__________________________ SIMPLE SAT ______________________________________*/
+
+// Complexity => O(n² * log(n) + COMPLEXITY(MINISAT))
 
 set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
         char *outFile) {
@@ -266,6 +271,8 @@ set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
     return vertexCover;
 } // end of SAT simple handling 
 
+// Complexity => constant
+
 void Minisat::buildingSAT(string &SAT, int toConvert, std::string toInsert) {
 
     // convert the int to string
@@ -275,11 +282,15 @@ void Minisat::buildingSAT(string &SAT, int toConvert, std::string toInsert) {
     SAT.operator +=(toInsert);
 }
 
+// Complexity => constant
+
 string Minisat::convertToString(int toConvert) {
     std::ostringstream oss;
     oss << toConvert;
     return oss.str();
 }
+
+// Complexity => constant
 
 string Minisat::convertToString(char* toConvert) {
     std::ostringstream oss;
