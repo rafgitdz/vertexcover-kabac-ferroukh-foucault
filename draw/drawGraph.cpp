@@ -29,28 +29,37 @@ void DrawGraph::drawGraph(Graph graph, set<int> vertexCover, char *pictureFile) 
     int first;
     string text = "";
     text.operator +=("graph G {");
+
+    // distinguish the vertices of the cover from the others
+    for (set<int>::iterator ii = vertexCover.begin(); ii != vertexCover.end(); ++ii)
+        text.operator +=(convertToString(*ii) + " [color = red];\n");
+
     for (map<int, set<int> >::const_iterator ii = graph.getBeginGraph(); ii != graph.getEndGraph(); ++ii) {
 
         first = (*ii).first;
         set<int> neigh = (*ii).second;
-
-        // distinguish the vertices of the cover from the others
-        for (set<int>::iterator ii = vertexCover.begin(); ii != vertexCover.end(); ++ii)
-            text.operator +=(convertToString(*ii) + " [color = red];\n");
-
         /*
          * set in the file ".dot" all the connections in the graph
          * note : an edge (a,b) is represented bye ("a -- b") in the file
          */
-        for (set<int>::iterator jj = neigh.begin(); jj != neigh.end(); ++jj) {
+        if ((ii->second).empty()) {
 
-            text.operator +=(convertToString(first));
-            text.operator +=(" -- ");
-            text.operator +=(convertToString(*jj));
+            text.operator +=(convertToString((*ii).first));
             text.operator +=(";\n");
-            graph.removeEdge(first, *jj);
+            graph.removeVertex((*ii).first);
+            
+        } else {
+            for (set<int>::iterator jj = neigh.begin(); jj != neigh.end(); ++jj) {
+
+                text.operator +=(convertToString(first));
+                text.operator +=(" -- ");
+                text.operator +=(convertToString(*jj));
+                text.operator +=(";\n");
+                graph.removeEdge(first, *jj);
+            }
         }
     }
+
     text.operator +=("}");
     // end building
 
