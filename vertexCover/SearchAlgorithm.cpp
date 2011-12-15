@@ -23,7 +23,7 @@
 
 using namespace std;
 
-// Complexity => o((vertexCount * log(n))*moy(numberOfEdegesPerVertex)))
+// Complexity => o(vertexCount * moy(numberOfEdgesPerVertex * log(n))
 
 set<int> SearchAlgorithm::breadthFirstSearch(const Graph &graph, int root,
         int target) {
@@ -85,7 +85,8 @@ set<int> SearchAlgorithm::breadthFirstSearch(const Graph &graph, int root,
     return searchedVertices;
 } // end of the breadhtFirstSearch (graph, root, target)
 
-// Complexity => o((vertexCount * log(n))*moy(numberOfEdegesPerVertex)))
+// Complexity => o(vertexCount * moy(numberOfEdgesPerVertex * log(n))
+
 void SearchAlgorithm::depthFirstSearch(const Graph &graph, Graph &tree,
         int root) {
 
