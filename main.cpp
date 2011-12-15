@@ -110,7 +110,7 @@ int main(int argc, char* argv[]) {
 
 				break;
 			}
-			case 3: { //TreeDynamic
+			case 3: { //Tree
 				if (argc < i + 5) {
 					usage();
 					return EXIT_FAILURE;
@@ -118,7 +118,7 @@ int main(int argc, char* argv[]) {
 
 				int minSons = atoi(argv[i + 3]);
 				int maxSons = atoi(argv[i + 4]);
-				tree = new TreeDynamicSons(graphSize, 0, 100);
+				tree = new TreeDynamicSons(graphSize, minSons, maxSons);
 				break;
 
 			}

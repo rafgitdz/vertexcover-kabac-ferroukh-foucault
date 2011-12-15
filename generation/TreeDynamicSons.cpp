@@ -48,7 +48,10 @@ TreeDynamicSons::TreeDynamicSons(int vertexCnt, int maxSons, int minSons) : Tree
             /* get a dynamic number of sons, between min and max, to link with 
              * the root "i" and build the edges between them 
              */
-            numberOfSons = m_minSons + (rand() % (m_maxSons - m_minSons));
+        	if (m_maxSons == m_minSons)
+        		numberOfSons = m_maxSons;
+        	else
+        		numberOfSons = m_minSons + (rand() % (m_maxSons - m_minSons));
             buildEdgesTree(numberOfSons, m_vertexCount, i, limitCreateVertices,
                     verticesToHaveSons, newVerticesToHaveSons);
         }

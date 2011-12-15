@@ -1,10 +1,42 @@
+/*-----------------------------------------------------------------------------*
+ *            *Project of Complexity and Applied Algorithmic*                  *
+ *-----------------------------------------------------------------------------*
+ *        Authors :                                                            *
+ *                  Milan Kabac (milan.kabac@etu.u-bordeaux1.fr)               *
+ *             Matthieu Foucault (matthieu.foucault@etu.u-bordeaux1.fr)        *
+ *                 Rafik Ferroukh (rafik.ferroukh@etu.u-bordeaux1.fr)          *
+ *-----------------------------------------------------------------------------*
+ *              University Bordeaux 1, Software Engineering, Master 2          *
+ *                                *2011/2012*                                  *
+ * ----------------------------------------------------------------------------*
+ * Goal : Gets the optimal cover of a graph. This algorithm is recursive, and  *
+ * can only be used on graphs with a small cover					    	   *
+ *_____________________________________________________________________________*/
 #include "Parametric.h"
 
 using namespace std;
 
+/*
+ * Uses a recursive algorithm to find an optimal cover.
+ * Complexity: O((2^(m+1) -1)*log(n))
+ * m = maxCoverSize
+ * n = m_graph.size()
+ * As the complexity of this algorithm is exponential, it should be used for
+ * small covers only
+ */
 bool Parametric::tryGetCover(unsigned maxCoverSize, std::set<int> &cover) {
 	return tryGetCover(m_graph, maxCoverSize, cover);
 }
+
+/*
+ * Uses an optimized version of the recursive algorithm to find an optimal cover.
+ * Complexity: O((2^(m+1) -1)*log(n))
+ * m = maxCoverSize
+ * n = m_graph.size()
+ * This algorithm is a bit faster than the first one, as there are less recursive calls,
+ * but its complexity is still exponential, so it should be used for
+ * small covers only
+ */
 bool Parametric::tryGetCoverBis(unsigned maxCoverSize, std::set<int> &cover) {
 	return tryGetCoverBis(m_graph, maxCoverSize, cover);
 }
