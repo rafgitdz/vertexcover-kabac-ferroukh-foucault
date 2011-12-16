@@ -124,6 +124,7 @@ set<int> Graph::getVertices() const {
 
 // O(neigh*log(neigh) + log(n) + neigh*log(n) + log(n))
 void Graph::removeVertex(int vertex) {
+    
     set<int> neigh = m_graph[vertex];
     for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {
         m_graph[*ii].erase(vertex);
