@@ -40,7 +40,7 @@ set<int> AlgorithmGloutonSimple::getCover() {
 		it1--;
 		// O(log(n))
 		vertexCover_.insert(it1->second);
-		// O((neigh*log(n) + log(n))
+		// O(neigh*log(neigh) + log(n) + neigh*log(n) + log(n))
 		m_graph.removeVertex(it1->second);
 	} while ((m_graph.getEdgeCount() > 0) && (it1 != vertexDegree.begin()));
 
