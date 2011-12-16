@@ -121,6 +121,7 @@ set<int> Graph::getVertices() const {
 }
 
 void Graph::removeVertex(int vertex) {
+    
     set<int> neigh = m_graph[vertex];
     for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {
         m_graph[*ii].erase(vertex);

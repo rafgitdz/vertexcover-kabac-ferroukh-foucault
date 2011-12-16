@@ -25,7 +25,7 @@
 
 using namespace std;
 
-/*___________________________ COMPLEX SAT ____________________________________*/
+/*______________________________ COMPLEX SAT _________________________________*/
 
 // Complexity => O(n² * log(n) + COMPLEXITY(MINISAT))
 
@@ -38,7 +38,7 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
     int vertexCount = graph.getVertexCount();
     string SAT;
 
-    // Open the file inFile
+    // Open the file "inFile"
     ofstream file(inFile, ios::out | ios::trunc);
 
     // Init of the SAT instance in the file
@@ -194,7 +194,7 @@ set<int> Minisat::getMinisatCoverFromComplexSAT(Graph graph, int maxSizeCover,
 
 /*__________________________ SIMPLE SAT ______________________________________*/
 
-// Complexity => O(n² * log(n) + COMPLEXITY(MINISAT))
+// Complexity => O(n * log(n) + COMPLEXITY(MINISAT))
 
 set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
         char *outFile) {

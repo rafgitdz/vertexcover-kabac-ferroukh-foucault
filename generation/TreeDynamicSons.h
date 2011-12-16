@@ -22,10 +22,12 @@
 class TreeDynamicSons : public Tree {
 public:
     /*
-     * Complexity => o(n*(numberOfSons*log(n)))
+     * Complexity => O(n² * log(n)))
      */
     TreeDynamicSons(int vertexCount, int maxSons, int minSons);
-    virtual ~TreeDynamicSons();
+
+    virtual ~TreeDynamicSons() {
+    };
 
 private:
     int m_vertexCount;
