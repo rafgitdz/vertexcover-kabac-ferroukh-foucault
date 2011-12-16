@@ -56,6 +56,8 @@ m_graph(), m_vertexCount(0), m_edgeCount(0), m_graphInitialSize(0) {
     m_edgeCount /= 2;
 } // end constructor Graph(chr * File)
 
+
+// log(n)
 int Graph::addVertex() {
 
     set<int> s;
@@ -120,6 +122,7 @@ set<int> Graph::getVertices() const {
     return vertices;
 }
 
+// O(neigh*log(neigh) + log(n) + neigh*log(n) + log(n))
 void Graph::removeVertex(int vertex) {
     set<int> neigh = m_graph[vertex];
     for (set<int>::iterator ii = neigh.begin(); ii != neigh.end(); ++ii) {

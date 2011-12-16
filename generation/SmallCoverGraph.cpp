@@ -24,7 +24,9 @@ using namespace std;
  * 			   				two vertices
  * 			   	coverSize - size of the vertex cover to be generated
  * Complexity:	SimpleGraph complexity +
- * 				O(|cs| + |n-cs|*log(n-cs) + |n-cs|*|cs|*log(n)) where
+ * 				O(cs*log(cs) + (|n-cs|*(log(n-cs) + log(n)))+
+ * 				 |n-cs|*|cs|*log(n)) where
+ * 					n - number of vertices in the graph
  * 					cs - size of the vertex cover
  */
 SmallCoverGraph::SmallCoverGraph(unsigned vertexCount, float edgeProba,
@@ -33,15 +35,13 @@ SmallCoverGraph::SmallCoverGraph(unsigned vertexCount, float edgeProba,
 
 	/*
 	 * Recuperates the vertices in the vertex cover
-	 * O(cs) where
-	 * 		cs - size of the vertex cover
+	 * O(cs*log(cs))
 	 */
 	verticesInVC = getVertices();
 
 	/*
 	 * Adds vertices which are out of the vertex cover
-	 * O(|n-cs|*log(n-cs))
-	 * 		cs - size of the vertex cover
+	 * O(|n-cs|*(log(n-cs) + log(n)))
 	 */
 	for (unsigned i = 0; i < (vertexCount - coverSize); i++)
 		verticesOutOfVC.insert(addVertex());
@@ -50,7 +50,6 @@ SmallCoverGraph::SmallCoverGraph(unsigned vertexCount, float edgeProba,
 	 * Adds an edge between a vertex in the vertex cover
 	 * and a vertex out of the vertex cover
 	 *  O(|n-cs|*|cs|*log(n))
-	 * 		cs - size of the vertex cover
 	 */
 	set<int>::iterator it1;
 	set<int>::iterator it2;
