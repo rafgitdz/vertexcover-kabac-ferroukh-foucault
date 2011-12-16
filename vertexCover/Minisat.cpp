@@ -245,7 +245,7 @@ set<int> Minisat::getMinisatCoverFromSimpleSAT(Graph graph, char * inFile,
     string in = this->convertToString(inFile);
     string out = this->convertToString(outFile);
     // launch MINISAT and get a cover (or not) in the out file
-    string launchMinisat = "minisat " + in + " " + out;
+    string launchMinisat = "minisat -grow=50 " + in + " " + out;
     system(launchMinisat.c_str());
 
     /* ------------------------------------*
