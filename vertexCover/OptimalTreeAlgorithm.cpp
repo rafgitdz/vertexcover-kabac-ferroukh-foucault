@@ -18,7 +18,7 @@ using namespace std;
 
 /*
  * Constructor
- * Parameters : tree - determine the optimal vertex cover for the specified tree
+ * Parameters : tree - determines the optimal vertex cover for the specified tree
  * Complexity : breadthFirtstSearchLeaves complexity
  */
 OptimalTreeAlgorithm::OptimalTreeAlgorithm(Tree tree) :

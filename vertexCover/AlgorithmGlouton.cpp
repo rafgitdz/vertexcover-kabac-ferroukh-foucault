@@ -20,7 +20,7 @@ using namespace std;
  * Removes isolated vertices from the graph and adds the vertex
  * with the highest degree to the vertex cover
  * Return : the vertex added to the vertex cover
- * Complexity : O(n*(neigh*log(n) + log(n)) + log(n)) where
+ * Complexity : O(n*(n + neigh*log(n) + log(n)) + log(n)) where
  * 					n - graph size
  * 					neigh - number of vertice's neighbours
  */
@@ -33,7 +33,7 @@ int AlgorithmGlouton::addVertexToVC() {
 	for (it = m_graph.getBeginGraph(); it != m_graph.getEndGraph(); it++) {
 		if (it->second.size() == 0)
 			// neigh = number of vertice's neighbours
-			// O((neigh*log(n) + log(n))
+			// O(neigh*log(neigh) + log(n) + neigh*log(n) + log(n))
 			m_graph.removeVertex(it->first);
 		else
 		if (maxDegree < ((it->second).size())) {
