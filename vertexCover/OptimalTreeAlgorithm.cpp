@@ -18,7 +18,7 @@ using namespace std;
 
 /*
  * Constructor
- * Parameters : tree - determines the optimal vertex cover for the specified tree
+ * Parameters : tree- determines the optimal vertex cover for the specified tree
  * Complexity : breadthFirtstSearchLeaves complexity
  */
 OptimalTreeAlgorithm::OptimalTreeAlgorithm(Tree tree) :
@@ -85,7 +85,7 @@ set<int> OptimalTreeAlgorithm::getVertexCover() {
 				neighbourIterator != neighbours.end(); neighbourIterator++) {
 			// O(log(v))
 			if ((!setContains(*neighbourIterator, vertexCoverSet))
-					// O(log(n))
+			// O(log(n))
 					&& (getParent(*graphIterator) != *neighbourIterator)) {
 				// O(log(v))
 				vertexCoverSet.insert(*graphIterator);

@@ -67,6 +67,11 @@ public:
 	 * Complexity : logarithmic in the graph size
 	 */
 	void removeVertexAndIsolatedNeighbour(int);
+	void removeIsolatedVertex(int vetex);
+
+	/*
+	 * Complexity : logarithmic in the graph size
+     */
 	void removeVertex(int);
 	/*
 	 * Removes the vertices which degree is 0
