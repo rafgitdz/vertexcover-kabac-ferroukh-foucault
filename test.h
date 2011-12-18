@@ -21,7 +21,7 @@
 using namespace std;
 
 bool testGreedy() {
-
+        
 	for (int i = 0; i < 50; ++i) {
 		SimpleGraph g(100, 0.2);
 		AlgorithmGlouton algo(g);
@@ -37,7 +37,6 @@ bool testGreedy() {
 }
 
 bool testGreedySimple() {
-
 	for (int i = 0; i < 50; ++i) {
 		SimpleGraph g(100, 0.2);
 		AlgorithmGloutonSimple algo(g);
@@ -53,7 +52,6 @@ bool testGreedySimple() {
 }
 
 bool testDeepSearch() {
-
 	for (int i = 0; i < 50; ++i) {
 		SimpleGraph g(10, 0.5);
 		AlgorithmDeepSearch algo(g);
@@ -69,7 +67,6 @@ bool testDeepSearch() {
 }
 
 bool testCoverEdges() {
-
 	for (int i = 0; i < 50; ++i) {
 		SimpleGraph g(100, 0.2);
 		AlgorithmCoverEdges algo(g);
@@ -85,7 +82,6 @@ bool testCoverEdges() {
 }
 
 bool testBipartiteOptimal() {
-
 	for (int i = 0; i < 50; ++i) {
 		BipartiteGraph g(100, 0.2, 0.4);
 		AlgorithmBipartiteOptimal algo(g);
@@ -101,7 +97,6 @@ bool testBipartiteOptimal() {
 }
 
 bool testTreeOptimal() {
-
 	for (int i = 0; i < 50; ++i) {
 
 		TreeDynamicSons t(100,100,0);
@@ -118,7 +113,6 @@ bool testTreeOptimal() {
 
 }
 bool testParametric() {
-
 	for (int i = 0; i < 50; ++i) {
 
 		SmallCoverGraph g(10, 0.2, 5);
@@ -141,7 +135,6 @@ bool testParametric() {
 	return true;
 }
 bool testMinisat() {
-
 	for (int i = 0; i < 50; ++i) {
 	SmallCoverGraph g(10, 0.6, 3);
 	Minisat algo;
@@ -162,8 +155,7 @@ bool testMinisat() {
 }
 
 bool testAll() {
-
-	return (testGreedy() && testGreedySimple() && testDeepSearch()
+	return ( testGreedy() && testGreedySimple() && testDeepSearch()
 			&& testCoverEdges() && testBipartiteOptimal() && testTreeOptimal()
 			&& testParametric() && testMinisat());
 }

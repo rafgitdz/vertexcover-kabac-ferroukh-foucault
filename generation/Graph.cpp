@@ -80,6 +80,7 @@ void Graph::addVertex(int vertexNum) {
 /*
  * Complexity : logarithmic in the graph size, plus logarithmic
  * in the number of neighbors of each endpoint of the edge
+ * Complexity = log(n)
  */
 void Graph::addEdge(int vertex1, int vertex2) {
     m_graph[vertex1].insert(vertex2);

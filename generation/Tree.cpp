@@ -19,49 +19,7 @@
 
 using namespace std;
 
-// Complexity => O(n*log(n))
-Tree::Tree(int vertexCount) : Graph(vertexCount) {
-}
-
-/*
- * Complexity = O(n * log(n)) 
- */
-void Tree::buildEdgesTree(int numberOfSons, int vertexCount, int indexOfRoot
-        , int &limit, vector<int> &listRoot, vector<int> &fixedVertices) {
-
-    int createdVertex;
-    /* 
-     * add an edge between the first vertex in the list root and and 
-     * a number of sons fixed by numberOfSons
-     */
-    for (int j = 0; j < numberOfSons; ++j) {
-
-        /* 
-         * while the limit doesn't reachs the number max of vertexCover to 
-         * create
-         */
-        if (limit < vertexCount) {
-
-            createdVertex = addVertex();
-            limit++;
-            addEdge(listRoot[indexOfRoot], createdVertex);
-            /* 
-             * add the created vertex in the list of vertices that will have 
-             * sons
-             */
-            fixedVertices.push_back(createdVertex);
-        }
-    }
-}
-
-/*
- * Complexity = O(n) 
- */
-void Tree::updateList(vector<int>& newRoots, vector<int>& markedVertices) {
-    /* 
-     * refresh the list of the vertices that are fixed by the list that will be 
-     * fixed
-     */
-    newRoots.swap(markedVertices);
-    markedVertices.clear();
+// Complexity => Constant
+Tree::Tree(int vertexCount) : Graph() {
+    m_vertexCountTree = vertexCount;
 }

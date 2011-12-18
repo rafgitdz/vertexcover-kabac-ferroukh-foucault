@@ -3,6 +3,10 @@
 #include <sys/time.h>
 #include <cstdlib>
 
+#include <sstream>
+#include <iostream>
+#include <fstream>
+
 #include "generation/BipartiteGraph.h"
 #include "generation/SimpleGraph.h"
 #include "generation/SmallCoverGraph.h"
