@@ -29,6 +29,7 @@ void DrawGraph::drawGraph(Graph graph, set<int> vertexCover, char *pictureFile) 
     int first;
     string text = "";
     text.operator +=("graph G {");
+    map <int, set<int> > index;
 
     // distinguish the vertices of the cover from the others
     for (set<int>::iterator ii = vertexCover.begin(); ii != vertexCover.end(); ++ii)
@@ -42,30 +43,47 @@ void DrawGraph::drawGraph(Graph graph, set<int> vertexCover, char *pictureFile) 
          * set in the file ".dot" all the connections in the graph
          * note : an edge (a,b) is represented bye ("a -- b") in the file
          */
-        if ((ii->second).empty()) {
+        if (neigh.empty()) {
 
             text.operator +=(convertToString((*ii).first));
             text.operator +=(";\n");
             graph.removeVertex((*ii).first);
 
         } else {
+
             for (set<int>::iterator jj = neigh.begin(); jj != neigh.end(); ++jj) {
 
-                text.operator +=(convertToString(first));
-                text.operator +=(" -- ");
-                text.operator +=(convertToString(*jj));
-                text.operator +=(";\n");
-                graph.removeEdge(first, *jj);
+                bool toAdd = true;
+                for (map<int, set<int> >::iterator kk = index.begin(); kk != index.end(); ++kk) {
+
+                    int A = (*kk).first;
+
+                    for (set<int>::iterator ll = (*kk).second.begin(); ll != (*kk).second.end(); ++ll) {
+                        int B = *ll;
+                        if (A == *jj && B == first) {
+                            toAdd = false;
+                            break;
+                        }
+                    }
+                    if (!toAdd) break;
+                }
+                if (toAdd) {
+                    text.operator +=(convertToString(first));
+                    text.operator +=(" -- ");
+                    text.operator +=(convertToString(*jj));
+                    text.operator +=(";\n");
+                    index[first].insert(*jj);
+                }
+                //      graph.removeEdge(first, *jj);
             }
         }
     }
 
     text.operator +=("}");
-    // end building
+    //     end building
 
     // launch dot with the "graph.dot" where we set the "text" string in it
     ofstream graphFile("graph.dot", ios::out | ios::trunc);
-
     graphFile << text;
     graphFile.close();
     string out = this->convertToString(pictureFile);

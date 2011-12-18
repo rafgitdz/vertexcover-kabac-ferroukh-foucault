@@ -1,0 +1,86 @@
+VertexCover release Note :
+
+C'est quoi VertexCover ?
+========================
+VertexCover est une application open-source écrite en C++ avec Eclipse et Netbeans comme IDE, elle permet de résoudre le problème de couverture par sommets des graphes. Ce projet est sous la licence GPL http://www.gnu.org/licenses/gpl.html .
+
+Pré-requis système 
+==================
+VertexCover est destinée à une execution sur un systéme Linux.
+
+L'installation de l'application open-source GraphViz qui contient dot est nécéssaire pour le dessin des graphes. On peut télécharger l'application sur : http://www.graphviz.org/Download..php
+
+Modules installés :
+L'application Minisat est contenu dans le projet, la version présente est la 1.4.
+
+Comment installer ?
+===================
+L'installation de VertexCover se fait en suivant les étapes suivantes :
+
+1. Décompresser le contenu de l'archive dans un répetoire donné.
+2. Se mettre sous le répertoire VertexCover.
+3. Exécuter le makefile en lançant la commande ''make'' dans une console.
+4. Lancer VertexCover avec la commande ''./VertexCover [Input_File] [options]'' (voir manuel utilisateur pour les détails).
+
+Lancement des programmes
+========================
+Consulter la manuel d'utilisateur se trouvant à la racine du programme.
+
+Lancement des tests
+===================
+Pour lancer les tests, il faut se placer sous le répertoire VertexCover/scripts. Un test est écrit en bash.
+
+Le script ''generation.sh'' englobe tous les tests de génération de graphes et contient :
+(il est à noter qu'a chaque itération, on créer un nouveau graphe).
+
+* Test de Comparaison sur le temps d'exécution entre le Graphe simple, le Graphe Bipartite et le Graphe avec une couverture minimale.
+
+Nombre maximal sommets est égale à 10000.
+Augmentation d'un taux de 100 sommets à chaque itération
+Probabilité de création d'une arête entre deux sommets fixée à 0.4
+Ratio de contenance de sommets des deux parties du Graphe Bipartite fixé à 0.5
+
+* Test d'analyse du temps d'exécution de la création du Graphe avec couverture minimale
+
+Nombre maximal de sommets fixé à 3000
+Augementation d'un taux de 10 (en partant de 10) le nombre minimal de la couverture.
+
+* Test de l'impact du nombre de fils sur la création d'un Arbre (profondeur)
+
+Nombre maximale de sommets à 30000.
+Augementation d'un taux de 100 sommets à chaque itération, en partant de 0.
+Augmentation d'un taux de 100 sommets fils en partant de 1, à chaque tour de génération.
+
+* Test d'analyse sur le temps d'exécution de la création d'un arbre (largueur)
+
+Nombre maximale de sommets à 30000.
+Augementation d'un taux de 100 sommets à chaque itération, en partant de 0.
+Fixer le nombre de sommets fils à ''nombre_sommets/ 10'' à chaque itération.
+
+Sûrete de fonctionnement
+========================
+Pour s'assurer que VertexCover fonctionne normalement, lancer ./VertexCover -t
+
+Web site projet VertexCover
+===========================
+Ici on retrouvera le projet en format zip, on pourra voir les sources, les analyser, compiler et exécuter 
+et apporter de nouveaux algorithmes pour une meilleur utilisation. Le report des bugs est à envoyer aux e-mails cités dans contact.
+
+http://milan.kabac.emi.u-bordeaux1.fr/ 
+
+http://matthieu.foucault.emi.u-bordeaux1.fr/
+ 
+http://rafik.ferroukh.emi.u-bordeaux1.fr/ 
+
+Contact
+=======
+Milan Kabac - milan.kabac@etu.u-bordeaux1.fr
+Matthieu Foucault - matthieu.foucault@etu.u-bordeaux1.fr
+Rafik Ferroukh - rafik.ferroukh@etu.u-bordeaux1.fr
+
+Etudiants Master 2 - Génie Logiciel - 
+Université Bordeaux 1
+2010 - 2011
+
+
+

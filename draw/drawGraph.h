@@ -35,12 +35,12 @@ public:
      */
     void drawGraph(Graph graph, std::set<int> vertexCover, char* pictureFile);
 
+private:
     // convert int to string
     std::string convertToString(int toConvert);
 
     // convert char* to string
     std::string convertToString(char *toConvert);
-
 };
 
 #endif	/* DRAWGRAPH_H */
