@@ -26,7 +26,7 @@ set<int> AlgorithmDeepSearch::getCover() {
  * Complexity: O(|E| * log(n))
  */
 set<int> AlgorithmDeepSearch::getCover(int treeRoot) {
-	cout << "test" << endl;
+	//cout << "test" << endl;
     set<int> cover = depthFirstSearch(m_graph, treeRoot);
     return cover;
 }

@@ -132,6 +132,7 @@ public:
 		return m_graph.begin();
 	}
 
+
 	/*
 	 * Return an iterator to the end of the graph
 	 * Complexity: constant
