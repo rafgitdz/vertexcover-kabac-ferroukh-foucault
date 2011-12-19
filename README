@@ -50,19 +50,19 @@ Ratio de contenance de sommets des deux parties du Graphe Bipartite fixé à 0.5
 Nombre maximal de sommets fixé à 3000
 Augementation d'un taux de 10 (en partant de 10) le nombre minimal de la couverture.
 
-* Test de l'impact du nombre de fils sur la création d'un Arbre (profondeur) 
-****************************************************************************
-
-Nombre maximale de sommets à 30000.
-Augementation d'un taux de 100 sommets à chaque itération, en partant de 0.
-Augmentation d'un taux de 100 sommets fils en partant de 1, à chaque tour de génération.
-
 * Test d'analyse sur le temps d'exécution de la création d'un arbre (largueur) 
 ******************************************************************************
 
-Nombre maximale de sommets à 30000.
+Nombre maximale de sommets fixé à 30000.
 Augementation d'un taux de 100 sommets à chaque itération, en partant de 0.
 Fixer le nombre de sommets fils à ''nombre_sommets/ 10'' à chaque itération.
+
+* Test d'analyse sur le temps d'exécution de la création d'un graphe bipartite
+*******************************************************************************
+
+Nombre maximale de sommets fixé à 3000
+Probabilité de création d'une arête entre deux sommets égale à 0.5
+Variation du ratio part de 0.5 à 1, avec une augementation d'un taux de 0.5 à chaque itération
 
 Test de recherche de couverture par sommets
 ===========================================
