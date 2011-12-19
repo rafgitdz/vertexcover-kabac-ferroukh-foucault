@@ -30,32 +30,72 @@ Lancement des tests
 ===================
 Pour lancer les tests, il faut se placer sous le répertoire VertexCover/scripts. Un test est écrit en bash.
 
+Test de génération 
+==================
+
 Le script ''generation.sh'' englobe tous les tests de génération de graphes et contient :
 (il est à noter qu'a chaque itération, on créer un nouveau graphe).
 
-* Test de Comparaison sur le temps d'exécution entre le Graphe simple, le Graphe Bipartite et le Graphe avec une couverture minimale.
+Test de Comparaison sur le temps d'exécution entre le Graphe simple, le Graphe Bipartite et le Graphe avec une couverture minimale. 
+*************************************************************************************************************************************
 
 Nombre maximal sommets est égale à 10000.
 Augmentation d'un taux de 100 sommets à chaque itération
 Probabilité de création d'une arête entre deux sommets fixée à 0.4
 Ratio de contenance de sommets des deux parties du Graphe Bipartite fixé à 0.5
 
-* Test d'analyse du temps d'exécution de la création du Graphe avec couverture minimale
+* Test d'analyse du temps d'exécution de la création du Graphe avec couverture minimale 
+***************************************************************************************
 
 Nombre maximal de sommets fixé à 3000
 Augementation d'un taux de 10 (en partant de 10) le nombre minimal de la couverture.
 
-* Test de l'impact du nombre de fils sur la création d'un Arbre (profondeur)
+* Test de l'impact du nombre de fils sur la création d'un Arbre (profondeur) 
+****************************************************************************
 
 Nombre maximale de sommets à 30000.
 Augementation d'un taux de 100 sommets à chaque itération, en partant de 0.
 Augmentation d'un taux de 100 sommets fils en partant de 1, à chaque tour de génération.
 
-* Test d'analyse sur le temps d'exécution de la création d'un arbre (largueur)
+* Test d'analyse sur le temps d'exécution de la création d'un arbre (largueur) 
+******************************************************************************
 
 Nombre maximale de sommets à 30000.
 Augementation d'un taux de 100 sommets à chaque itération, en partant de 0.
 Fixer le nombre de sommets fils à ''nombre_sommets/ 10'' à chaque itération.
+
+Test de recherche de couverture par sommets
+===========================================
+
+Le script "small_cover.sh" englobe tous les tests concernant la recherche de couverture sur un graphe avec couverture minimale.
+Il contient :
+
+* Test de comparaison entre 4 algorithmes de recherche de couverture sur un graphe avec couverture minimale  
+************************************************************************************************************
+(Variation de la probabilité de création d'une arête)
+
+Nombre de sommets est égal à 3000
+Taille couverture du graphe fixé a 300
+Variation de la probabilité de création d'une arête de 5 à 100 avec augementation d'un taux de 5 à chaque itération
+Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "recherche en profondeur".
+
+* Test de comparaison entre 4 algorithmes de recherche de couverture sur un graphe avec couverture minimale  
+************************************************************************************************************
+(Variation du nombre total de sommets du graphe)
+
+Probabilité de création d'une arête entre deux sommets fixée à 40.
+Taille couverture du graphe fixé a 100
+Variation du nombre total de sommets de 100 à 3000 avec augementation d'un taux de 100 à chaque itération
+Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "recherche en profondeur".
+
+* Test de comparaison entre 4 algorithmes de recherche de couverture sur un graphe avec couverture minimale
+************************************************************************************************************
+(Variation de la taille de la couverture à créer dans le graphe)
+
+Nombre de sommets est égal à 3000
+Probabilité de création d'une arête entre deux sommets fixée à 40.
+Variation de la taille de la couverture de 100 à 3000 avec augementation d'un taux de 100 à chaque itération
+Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "deep search".
 
 Sûrete de fonctionnement
 ========================
@@ -80,7 +120,7 @@ Rafik Ferroukh - rafik.ferroukh@etu.u-bordeaux1.fr
 
 Etudiants Master 2 - Génie Logiciel - 
 Université Bordeaux 1
-2010 - 2011
+2011 - 2012
 
 
 

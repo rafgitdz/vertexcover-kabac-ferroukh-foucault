@@ -38,7 +38,7 @@ std::set<int> AlgorithmCoverEdges::getCover() {
 
         // if the first vertex of the graph hasn't neighbours, delete it
         if (m_graph.getBeginGraph()->second.size() == 0) {
-            m_graph.removeVertex(m_graph.getBeginGraph()->first);
+            m_graph.removeVertex(firstVertex);
 
         }// if it has neighbours, take the first and delete them
         else {

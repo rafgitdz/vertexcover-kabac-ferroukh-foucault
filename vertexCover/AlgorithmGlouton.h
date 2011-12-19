@@ -43,7 +43,7 @@ public:
 	int addVertexToVC();
 
 protected:
-	std::set<int> vertexCover_;
+	std::set<int> m_vertexCover;
 };
 
 #endif /* ALGORITHMGLOUTON_H_ */
