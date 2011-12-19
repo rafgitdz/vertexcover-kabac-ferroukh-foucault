@@ -31,11 +31,12 @@ int AlgorithmGlouton::addVertexToVC() {
         std::map<int, std::set<int> >::const_iterator it;
         // O(n)
         for (it = m_graph.getBeginGraph(); it != m_graph.getEndGraph(); it++) {
-                if (it->second.size() == 0)
+            /*
+        	if (it->second.size() == 0)
                         // neigh = number of vertice's neighbours
                         // O((neigh*log(n) + log(n))
                         m_graph.removeVertex(it->first);
-                else
+                else*/
                 if (maxDegree < ((it->second).size())) {
                         maxDegree = ((it->second).size());
                         vertexPosition = it->first;
