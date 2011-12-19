@@ -26,9 +26,10 @@ using namespace std;
 int AlgorithmGlouton::addVertexToVC() {
 	int vertexPosition(0);
 	unsigned int maxDegree(0);
-
+/*
 	std::map<int, std::set<int> >::const_iterator it;
 	// O(n)
+
 	for (it = m_graph.getBeginGraph(); it != m_graph.getEndGraph(); it++) {
 		if (it->second.size() == 0)
 			// O(log(n))
@@ -39,6 +40,25 @@ int AlgorithmGlouton::addVertexToVC() {
 			vertexPosition = it->first;
 		}
 	}
+*/
+
+	std::map<int, std::set<int> >::const_iterator it = m_graph.getBeginGraph();
+	while(it != m_graph.getEndGraph()) {
+		if (it->second.size() == 0)
+					// O(log(n))
+					//tmp = itr;
+					m_graph.removeIsolatedVertex((it->first));
+
+
+				else
+				if (maxDegree < ((it->second).size())) {
+					maxDegree = ((it->second).size());
+					vertexPosition = it->first;
+				}
+		++it;
+	}
+
+
 	// O(log(n))
 	vertexCover_.insert(vertexPosition);
 	return vertexPosition;
