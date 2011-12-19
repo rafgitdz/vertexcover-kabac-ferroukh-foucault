@@ -4,7 +4,6 @@ C'est quoi VertexCover ?
 ========================
 VertexCover est une application open-source écrite en C++ avec Eclipse et Netbeans comme IDE, elle permet de résoudre le problème de couverture par sommets des graphes. Ce projet est sous la licence GPL http://www.gnu.org/licenses/gpl.html .
 
-
 Pré-requis système 
 ==================
 VertexCover est destinée à une execution sur un systéme Linux.
@@ -29,7 +28,7 @@ Consulter la manuel d'utilisateur se trouvant à la racine du programme.
 
 Lancement des tests
 ===================
-Pour lancer les tests, il faut se placer sous le répertoire VertexCover/scripts. Un test est écrit en bash et pour chacun.
+Pour lancer les tests, il faut se placer sous le répertoire VertexCover/scripts. Un test est écrit en bash.
 
 Le script ''generation.sh'' englobe tous les tests de génération de graphes et contient :
 (il est à noter qu'a chaque itération, on créer un nouveau graphe).
@@ -64,7 +63,8 @@ Pour s'assurer que VertexCover fonctionne normalement, lancer ./VertexCover -t
 
 Web site projet VertexCover
 ===========================
-Ici on retrouvera le projet en format zip, on pourra voir les sources, les analyser, compiler et exécuter et modification pour une meilleur utilisation. Le report des bugs est à envoyer aux e-mails cité dans contact.
+Ici on retrouvera le projet en format zip, on pourra voir les sources, les analyser, compiler et exécuter 
+et apporter de nouveaux algorithmes pour une meilleur utilisation. Le report des bugs est à envoyer aux e-mails cités dans contact.
 
 http://milan.kabac.emi.u-bordeaux1.fr/ 
 
@@ -78,6 +78,9 @@ Milan Kabac - milan.kabac@etu.u-bordeaux1.fr
 Matthieu Foucault - matthieu.foucault@etu.u-bordeaux1.fr
 Rafik Ferroukh - rafik.ferroukh@etu.u-bordeaux1.fr
 
+Etudiants Master 2 - Génie Logiciel - 
+Université Bordeaux 1
+2010 - 2011
 
 
 

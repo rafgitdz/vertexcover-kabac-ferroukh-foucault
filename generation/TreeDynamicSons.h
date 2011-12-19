@@ -22,7 +22,7 @@
 class TreeDynamicSons : public Tree {
 public:
     /*
-     * Complexity => O(n² * log(n)))
+     * Complexity => O((n-1)*log(n))
      */
     TreeDynamicSons(int vertexCount, int maxSons, int minSons);
 
@@ -30,7 +30,7 @@ public:
     };
 
 private:
-    int m_vertexCount;
+//    int m_vertexCountTree;
     int m_maxSons;
     int m_minSons;
 };
