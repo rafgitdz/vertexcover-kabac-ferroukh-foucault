@@ -12,7 +12,7 @@
  * Goal : Uses the covering tree based on a deep search to find a vertex cover *
  *____________________________________________________________________________*/
 #include "AlgorithmDeepSearch.h"
-
+#include <iostream>
 using namespace std;
 
 set<int> AlgorithmDeepSearch::getCover() {
@@ -26,6 +26,7 @@ set<int> AlgorithmDeepSearch::getCover() {
  * Complexity: O(|E| * log(n))
  */
 set<int> AlgorithmDeepSearch::getCover(int treeRoot) {
+	cout << "test" << endl;
     set<int> cover = depthFirstSearch(m_graph, treeRoot);
     return cover;
 }

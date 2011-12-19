@@ -20,6 +20,7 @@
 
 #include "../generation/Graph.h"
 #include "SearchAlgorithm.h"
+#include <iostream>
 
 using namespace std;
 
@@ -112,27 +113,30 @@ set<int> SearchAlgorithm::depthFirstSearch(const Graph &graph, int root) {
 
         // BLACK means that the vertex is inserted in the search and is treated
         setColor(head, BLACK);
-        // insert the BLACK vertex in the set of the searched vertices
-        if ((graph.getVertexDegree(head) > 1) || (root == head))
-        	searchedVertices.insert(head);
 
         // get all the neighbours of the new BLACK vertex
         set<int> vertices = graph.getNeighbours(head);
         /* Stock all the none-visited vertex (WHITE) for the new BLACK vertex,
          * to be treated. */
+        bool isLeaf = true;
         for (set<int>::iterator ii = vertices.begin();
                 ii != vertices.end(); ++ii) {
 
             if (color(*ii) == WHITE) {
                 setColor(*ii, GREY);
                 m_queue.push_front(*ii);
-
+                isLeaf = false;
             } else if (color(*ii) == GREY) {
                 m_queue.remove(*ii);
                 m_queue.push_front(*ii);
+                isLeaf = false;
             }
         }
+        if (!isLeaf) {
+        	searchedVertices.insert(head);
+        }
     }
+
     return searchedVertices;
 } // end of the depthFirstSearch (graph, &tree, root)
 
