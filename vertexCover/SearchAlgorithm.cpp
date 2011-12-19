@@ -11,7 +11,7 @@
  * ----------------------------------------------------------------------------*
  * Goal => has a functions that gives different type of research               *
  *      => DEAPTH SEARCH                                                       *
- *      => BREADHT SEARCH                                                      *
+ *      => BREADTH SEARCH                                                      *
  *                                                                             *
  * It's a class that is used by the Algorithms classes to get a set or a list  *
  * course in the graph.                                                        *
@@ -20,17 +20,17 @@
 
 #include "../generation/Graph.h"
 #include "SearchAlgorithm.h"
+#include <iostream>
 
 using namespace std;
 
-// Complexity => o(vertexCount * moy(numberOfEdgesPerVertex * log(n))
+// Complexity => O(|E| * log(n))
 
 set<int> SearchAlgorithm::breadthFirstSearch(const Graph &graph, int root,
         int target) {
 
     // init data
     m_queue.clear();
-    int numOrderSearch = 0;
     int head;
     set<int> searchedVertices;
     set<int> vertices = graph.getVertices(); // o(n*log(n))
@@ -56,11 +56,8 @@ set<int> SearchAlgorithm::breadthFirstSearch(const Graph &graph, int root,
 
         // BLACK means that the vertex is inserted in the search and is treated
         setColor(head, BLACK);
-        // set the order number in the search of the new BLACK vertex
-        setNumVertexSearch(head, numOrderSearch);
         // insert the BLACK vertex in the set of the searched vertices
         searchedVertices.insert(head);
-        ++numOrderSearch;
 
         // if it attempt the target, it leaves the algorithm
         // if target == -1, it executes normally
@@ -85,34 +82,29 @@ set<int> SearchAlgorithm::breadthFirstSearch(const Graph &graph, int root,
     return searchedVertices;
 } // end of the breadhtFirstSearch (graph, root, target)
 
-// Complexity => o(vertexCount * moy(numberOfEdgesPerVertex * log(n))
+// Complexity => O(|E| * log(n))
 
-void SearchAlgorithm::depthFirstSearch(const Graph &graph, Graph &tree,
-        int root) {
+set<int> SearchAlgorithm::depthFirstSearch(const Graph &graph, int root) {
 
     m_queue.clear();
     // init data
-    int numOrderSearch = 0;
     int head;
-    list<int> searchedVertices; // the list of the depth search order
+    set<int> searchedVertices; // the list of the depth search order
     set<int> vertices = graph.getVertices();
 
     /* Init all vertices that they haven't any father and the color to white
      * that indicate that the vertex hasn't not yet been treated in the search
      */
     for (set<int>::iterator ii = vertices.begin(); ii != vertices.end(); ++ii) {
-        setPi(*ii, NULLE);
         setColor(*ii, WHITE);
     }
 
     /* GREY indicates that the vertex is visited but it hasn't yet been
      * fixed in the search */
     setColor(root, GREY);
-    /* push at the front, it's the difference in comparison with the breadht
+    /* push at the front, it's the difference in comparison with the breadth
      * search, where we put at the back */
     m_queue.push_front(root);
-    // add the root vertex to the tree
-    tree.addVertex(root);
 
     while (m_queue.size() > 0) {
 
@@ -121,39 +113,31 @@ void SearchAlgorithm::depthFirstSearch(const Graph &graph, Graph &tree,
 
         // BLACK means that the vertex is inserted in the search and is treated
         setColor(head, BLACK);
-        // set the order number in the search of the new BLACK vertex
-        setNumVertexSearch(head, numOrderSearch);
-        ++numOrderSearch;
-        // insert the BLACK vertex in the set of the searched vertices
-        searchedVertices.push_back(head);
 
-        /* the root can't have a parent, we should avoid this case by comparing
-         * the new BLACK vertex and the root variable, after, we add an edge
-         * between new BLACK vertex and his parent to build a tree in a
-         * depth way */
-        if (head != root) {
-            tree.addVertex(head);
-            tree.addEdge(head, pi(head));
-        }
         // get all the neighbours of the new BLACK vertex
-        set<int> verticesList = graph.getNeighbours(head);
-        /* sotck all the none-visited vertex (WHITE) for the new BLACK vertex,
+        set<int> vertices = graph.getNeighbours(head);
+        /* Stock all the none-visited vertex (WHITE) for the new BLACK vertex,
          * to be treated. */
-        for (set<int>::iterator ii = verticesList.begin();
-                ii != verticesList.end(); ++ii) {
+        bool isLeaf = true;
+        for (set<int>::iterator ii = vertices.begin();
+                ii != vertices.end(); ++ii) {
 
             if (color(*ii) == WHITE) {
                 setColor(*ii, GREY);
-                setPi(*ii, head); // set the father for the none-visited vertex
                 m_queue.push_front(*ii);
-
+                isLeaf = false;
             } else if (color(*ii) == GREY) {
-                setPi(*ii, head);
                 m_queue.remove(*ii);
                 m_queue.push_front(*ii);
+                isLeaf = false;
             }
         }
+        if (!isLeaf) {
+        	searchedVertices.insert(head);
+        }
     }
+
+    return searchedVertices;
 } // end of the depthFirstSearch (graph, &tree, root)
 
 list<int> SearchAlgorithm::getImprovingPath(const Graph &graph, int root,
@@ -178,14 +162,11 @@ list<int> SearchAlgorithm::getImprovingPath(const Graph &graph, int root,
  * Parameters : graph - the graph to look over
  * 				root - the root vertex of the graph
  * Return : the list of found vertices
- * Complexity :	O(n*log(n) + gray(log(n) + n(log(gray) + log(n))) )
- * 					n -	number of vertices in the graph
- * 					gray - number of vertice's marked as gray
+ * Complexity :O(|E| * log(n))
  */
 list<int> SearchAlgorithm::breadthFirstSearchWithoutLeaves(const Graph &graph,
         int root) {
 
-    int k = 0;
     int head;
     list<int> searchedVertices;
 
@@ -212,13 +193,10 @@ list<int> SearchAlgorithm::breadthFirstSearchWithoutLeaves(const Graph &graph,
 
         // O(log(n))
         setColor(head, BLACK);
-        // O(log(n))
-        setNumVertexSearch(head, k);
 
         // O(log(n))
         if ((graph.getVertexDegree(head) > 1) || (root == head))
             searchedVertices.push_back(head);
-        ++k;
         // O(log(n))
         vertices = graph.getNeighbours(head);
 
@@ -274,17 +252,4 @@ int SearchAlgorithm::color(int vertex) {
 void SearchAlgorithm::setColor(int vertex, int col) {
     // O(log(n))
     m_numColorVertex[vertex].color = col;
-}
-
-int SearchAlgorithm::numVertexSearch(int vertex) {
-    return m_numColorVertex[vertex].vertexNumSearch;
-}
-
-/*
- * Sets the number of vertex passed by parameter
- * Complexity : O(log(n)) where
- * 					n -	number of vertices in the graph
- */
-void SearchAlgorithm::setNumVertexSearch(int vertex, int num) {
-    m_numColorVertex[vertex].vertexNumSearch = num;
 }

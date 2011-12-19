@@ -95,20 +95,20 @@ int main(int argc, char* argv[]) {
 			switch (graphType) {
 
 			case 0: { //SimpleGraph
-				float edgeProba = atof(argv[i + 3]);
+				float edgeProba = atof(argv[i + 3])/100;
 				graph = new SimpleGraph(graphSize, edgeProba);
 
 				break;
 			}
 			case 1: { //SmallCoverGraph
-				float edgeProba = atof(argv[i + 3]);
+				float edgeProba = atof(argv[i + 3])/100;
 				int coverSize = atoi(argv[i + 4]);
 				graph = new SmallCoverGraph(graphSize, edgeProba, coverSize);
 
 				break;
 			}
 			case 2: { //BipartiteGraph
-				float edgeProba = atof(argv[i + 3]);
+				float edgeProba = atof(argv[i + 3])/100;
 				float partRatio = atof(argv[i + 4]);
 				bGraph = new BipartiteGraph(graphSize, edgeProba, partRatio);
 

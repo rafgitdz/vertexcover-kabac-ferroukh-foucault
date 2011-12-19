@@ -2,7 +2,7 @@
 .SH NAME
 VertexCover \- Gets a vertex cover from a randomly generated graph, or from a formatted entry
 .SH SYNOPSIS
-.B VertexCover {[
+.B VertexCover {[ -in
 .I inputFile
 .B ] | [ -g
 .I graphType <args>
@@ -12,6 +12,9 @@ VertexCover \- Gets a vertex cover from a randomly generated graph, or from a fo
 .SH DESCRIPTION
 This program, developed during an academic project at the university of bordeaux, returns a vertex cover of a generated (or given as input) graph, using one of the algorithms described below
 .SH OPTIONS
+.IP -in
+.I path
+Loads a graph from a text file, where the graph is stored as an adjacency list (see the examples section for more details)
 .IP "-g, --generate-graph"
 Randomly generates a graph, using one of the algorithms, according to the first parameter:
 .br
@@ -25,11 +28,8 @@ Randomly generates a graph, using one of the algorithms, according to the first 
 .B 2 n p r
 : Generates a bipartite graph with n vertices,a probability p to draw an edge between two vertices, and a ratio r between the two parts of a graph (p and r must be between 0 an 1)
 .br
-.B 3 n
-: Generates a tree with n vertices
-.br
-.B 4 n s
-: Generates a tree with n vertices, where each vertex has s sons
+.B 3 n min max
+: Generates a tree with n vertices, and where each vertex has between min and max sons
 .IP "-a, --algorithm"
 Launches an algorithm for the generated graph or input graph,according to the first parameter
 .br 
@@ -60,6 +60,9 @@ Launches an algorithm for the generated graph or input graph,according to the fi
 .br 
 .B 9 s
 : Uses minisat to try to find a cover with at most s vertices (you should avoid the use of this algorithm for large covers)
+.IP "-out"
+.I path
+: Saves the generated graph into a text file
 .IP "-dot"
 Generates a visual result of the vertex cover, as a png file (generated with dot)
 .IP "-h, --help"
@@ -69,6 +72,7 @@ Launches a serie of tests to ensure that each algorithm returns a vertex cover
 .SH AUTHOR
 .P
 Written by Milan Kabac, Rafik Ferroukh and Matthieu Foucault 
+{milan.kabac|rafik.ferroukh|matthieu.foucault}@etu.u-bordeaux1.fr
 .br
 Masters Degrees at University of Bordeaux
 .SH COPYRIGHT

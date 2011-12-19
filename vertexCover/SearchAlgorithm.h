@@ -53,7 +53,7 @@ public:
      * build a tree at the same time 
      * Complexity => o(vertexCount * moy(numberOfEdgesPerVertex * log(n))
      */
-    void depthFirstSearch(const Graph &g, Graph &tree, int vertex);
+    std::set<int> depthFirstSearch(const Graph &g, int vertex);
 
     /*
      * This method provides the breadth first search algorithm for trees.
@@ -95,17 +95,8 @@ private:
      * 					n -	number of vertices in the graph
      */
     void setColor(int vertex, int color);
-    int numVertexSearch(int vertex);
-
-    /*
-     * Sets the number of vertex passed by parameter
-     * Complexity : O(log(n)) where
-     * 					n -	number of vertices in the graph
-     */
-    void setNumVertexSearch(int vertex, int num);
 
     struct vertexInfo {
-        int vertexNumSearch;
         int father;
         int color;
     };
