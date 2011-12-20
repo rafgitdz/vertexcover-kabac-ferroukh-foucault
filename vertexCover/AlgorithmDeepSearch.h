@@ -16,7 +16,6 @@ public:
 	 * complexity: O(|E| * log(n))
 	 */
 	std::set<int> getCover();
-	std::set<int> getCover(int treeRoot);
 
 private:
 

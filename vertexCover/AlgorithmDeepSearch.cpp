@@ -24,7 +24,7 @@ set<int> AlgorithmDeepSearch::getCover() {
 	if (m_graph.getVertexCount() > 0) {
 		int root = m_graph.getBeginGraph()->first;
 		//cout << "test" << endl;
-		set<int> cover = depthFirstSearch(m_graph, root);
+		cover = depthFirstSearch(m_graph, root);
 	}
 	return cover;
 
