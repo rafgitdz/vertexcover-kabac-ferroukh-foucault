@@ -12,8 +12,7 @@ VertexCover \- Gets a vertex cover from a randomly generated graph, or from a fo
 .SH DESCRIPTION
 This program, developed during an academic project at the university of bordeaux, returns a vertex cover of a generated (or given as input) graph, using one of the algorithms described below
 .SH OPTIONS
-.IP -in
-.I path
+.IP "-in path"
 Loads a graph from a text file, where the graph is stored as an adjacency list (see the examples section for more details)
 .IP "-g, --generate-graph"
 Randomly generates a graph, using one of the algorithms, according to the first parameter:
@@ -64,9 +63,8 @@ Launches an algorithm for the generated graph or input graph,according to the fi
 .br 
 .B 9 s
 : Uses minisat to try to find a cover with at most s vertices (you should avoid the use of this algorithm for large covers)
-.IP "-out"
-.I path
-: Saves the generated graph into a text file
+.IP "-out path"
+Saves the generated graph into a text file
 .IP "-dot"
 Generates a visual result of the vertex cover, as a png file (generated with dot)
 .IP "-h, --help"
@@ -74,12 +72,13 @@ prints usage and exits
 .IP "-t, --test"
 Launches a serie of tests to ensure that each algorithm returns a vertex cover
 .SH AUTHOR
-.P
-Written by Milan Kabac - milan.kabac@etu.u-bordeaux1.fr
+Written by 
+.IP
+.B Milan Kabac - milan.kabac@etu.u-bordeaux1.fr
 .br
-		  .B Rafik Ferroukh - rafik.ferroukh@etu.u-bordeaux1.fr
+.B Rafik Ferroukh - rafik.ferroukh@etu.u-bordeaux1.fr
 .br
-		  .B Matthieu Foucault - matthieu.foucault@etu.u-bordeaux1.fr
+.B Matthieu Foucault - matthieu.foucault@etu.u-bordeaux1.fr
 .br
 .br
 Masters Degrees at University of Bordeaux
