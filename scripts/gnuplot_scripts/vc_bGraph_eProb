@@ -1,0 +1,19 @@
+set terminal png
+set output "tests_results/vc_bGraph_eProb_time.png"
+set title "Time to find a vertex cover in a bipartite graph"
+set xlabel "Edge Proba"
+set ylabel "Time to find a cover (in ms)"
+plot "bench/vc_bGraph_eProb_time_0" using 1:2 title "Greedy" with lines,\
+"bench/vc_bGraph_eProb_time_1" using 1:2 title "Greedy Simple" with lines,\
+"bench/vc_bGraph_eProb_time_2" using 1:2 title "Cover Edges" with lines,\
+"bench/vc_bGraph_eProb_time_3" using 1:2 title "Deep Search" with lines,\
+"bench/vc_bGraph_eProb_time_4" using 1:2 title "Optimal" with lines
+set output "tests_results/vc_bGraph_eProb_size.png"
+set title "Size of the found vertex cover, on a bipatite graph"
+set xlabel "Edge Proba"
+set ylabel "Size of the cover"
+plot "bench/vc_bGraph_eProb_size_0" using 1:2 title "Greedy" with lines,\
+"bench/vc_bGraph_eProb_size_1" using 1:2 title "Greedy Simple" with lines,\
+"bench/vc_bGraph_eProb_size_2" using 1:2 title "Cover Edges" with lines,\
+"bench/vc_bGraph_eProb_size_3" using 1:2 title "Deep search" with lines,\
+"bench/vc_bGraph_eProb_size_4" using 1:2 title "Optimal" with lines

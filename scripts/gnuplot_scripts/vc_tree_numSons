@@ -1,0 +1,18 @@
+set terminal png
+set output "tests_results/vc_tree_numSons_time.png"
+set title "Time to find a vertex cover in a tree"
+set xlabel "Minimum number of sons (max = min*2)"
+set ylabel "Time to find a cover (in ms)"
+plot "bench/vc_tree_numSons_time_0" using 1:2 title "Greedy" with lines,\
+"bench/vc_tree_numSons_time_1" using 1:2 title "Greedy Simple" with lines,\
+"bench/vc_tree_numSons_time_2" using 1:2 title "Cover Edges" with lines,\
+"bench/vc_tree_numSons_time_3" using 1:2 title "Deep search" with lines,\
+"bench/vc_tree_numSons_time_5" using 1:2 title "Optimal" with lines
+set output "tests_results/vc_tree_numSons_size.png"
+set title "Size of the found vertex cover"
+set ylabel "Size of the cover"
+plot "bench/vc_tree_numSons_size_0" using 1:2 title "Greedy" with lines,\
+"bench/vc_tree_numSons_size_1" using 1:2 title "Greedy Simple" with lines,\
+"bench/vc_tree_numSons_size_2" using 1:2 title "Cover Edges" with lines,\
+"bench/vc_tree_numSons_size_3" using 1:2 title "Deep search" with lines,\
+"bench/vc_tree_numSons_size_5" using 1:2 title "Optimal" with lines

@@ -34,6 +34,14 @@ class BipartiteGraph: public Graph {
 		inline const std::set<int>& getLeftPart() const {return m_leftPart;}
 		inline const std::set<int>& getRightPart() const {return m_rightPart;}
 
+		/*
+		 * Removes the vertices which degree is 0
+		 * i.e. the ones which have no neighbor,
+		 * and therefore no interest for the vertex cover
+		 * Complexity : n * log(n)
+		 */
+		virtual void trim();
+
 	private:
 		std::set<int> m_leftPart;
 		std::set<int> m_rightPart;

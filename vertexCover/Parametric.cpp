@@ -13,7 +13,6 @@
  * can only be used on graphs with a small cover					    	   *
  *_____________________________________________________________________________*/
 #include "Parametric.h"
-#include <iostream>
 using namespace std;
 
 /*

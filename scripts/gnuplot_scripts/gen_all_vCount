@@ -1,0 +1,11 @@
+set terminal png
+set output "tests_results/gen_all_vCount.png"
+set title "Generation of graphs"
+set xlabel "Number of vertices"
+set ylabel "Generation time (in ms)"
+plot "bench/gen_simple_vCount" using 1:2 title "Simple graph" with lines,\
+"bench/gen_smallCover_vCount" using 1:2 title "Small Cover Graph" with lines,\
+"bench/gen_bipart_vCount" using 1:2 title "Bipartite graph" with lines
+ 
+ 
+ 

@@ -1,0 +1,19 @@
+set terminal png
+set output "tests_results/vc_bGraph_vCount_time.png"
+set title "Time to find a vertex cover in a bipartite graph"
+set xlabel "Number of vertices"
+set ylabel "Time to find a cover (in ms)"
+plot "bench/vc_bGraph_vCount_time_0" using 1:2 title "Greedy" with lines,\
+"bench/vc_bGraph_vCount_time_1" using 1:2 title "Greedy Simple" with lines,\
+"bench/vc_bGraph_vCount_time_2" using 1:2 title "Cover Edges" with lines,\
+"bench/vc_bGraph_vCount_time_3" using 1:2 title "Deep search" with lines,\
+"bench/vc_bGraph_vCount_time_4" using 1:2 title "Optimal" with lines
+set output "tests_results/vc_bGraph_vCount_size.png"
+set title "Size of the found vertex cover"
+set xlabel "Number of vertices"
+set ylabel "Size of the cover"
+plot "bench/vc_bGraph_vCount_size_0" using 1:2 title "Greedy" with lines,\
+"bench/vc_bGraph_vCount_size_1" using 1:2 title "Greedy Simple" with lines,\
+"bench/vc_bGraph_vCount_size_2" using 1:2 title "Cover Edges" with lines,\
+"bench/vc_bGraph_vCount_size_3" using 1:2 title "Deep search" with lines,\
+"bench/vc_bGraph_vCount_size_4" using 1:2 title "Optimal" with lines

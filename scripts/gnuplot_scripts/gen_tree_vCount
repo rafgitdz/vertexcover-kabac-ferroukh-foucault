@@ -1,0 +1,7 @@
+set terminal png
+set output "tests_results/gen_tree_vCount.png"
+set title "Generation of a tree"
+set nokey
+set xlabel "Number of vertices"
+set ylabel "Generation time (in ms)"
+plot "bench/gen_tree_vCount" using 1:2 with lines

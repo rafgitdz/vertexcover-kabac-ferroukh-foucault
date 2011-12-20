@@ -79,7 +79,7 @@ public:
 	 * and therefore no interest for the vertex cover
 	 * Complexity : n * log(n)
 	 */
-	void trim();
+	virtual void trim();
 
 	/*
 	 * Removes the edge with the endpoints given in parameter
