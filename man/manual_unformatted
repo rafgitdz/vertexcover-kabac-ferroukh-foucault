@@ -20,16 +20,20 @@ Randomly generates a graph, using one of the algorithms, according to the first 
 .br
 .br
 .B 0 n p
-: Generates a graph with n vertices, and a probability  p to draw an edge between two vertices (p must be between 0 an 1)
+: Generates a graph with n vertices, and a probability  p to draw an edge between two vertices (p must be between 0 and 100)
 .br
 .B 1 n p c
-: Generates a graph with n vertices, a probability p to draw an edge between two vertices (p must be between 0 an 1), and with a vertex cover with c vertices
+: Generates a graph with n vertices, a probability p to draw an edge between two vertices (p must be between 0 an 100), and with a vertex cover with c vertices
 .br
 .B 2 n p r
-: Generates a bipartite graph with n vertices,a probability p to draw an edge between two vertices, and a ratio r between the two parts of a graph (p and r must be between 0 an 1)
+: Generates a bipartite graph with n vertices,a probability p to draw an edge between two vertices, and a ratio r between the two parts of a graph (p and r must be between 0 an 100)
 .br
 .B 3 n min max
 : Generates a tree with n vertices, and where each vertex has between min and max sons
+.br
+.B 4 n p r c rc
+: Generates a bipartite graph with n vertices,a probability p to draw an edge between two vertices, and a ratio r between the two parts of a graph (p and r must be between 0 an 100), size of the cover c and the ratio part of the cover rc between the two parts of the bipartit graph
+.br
 .IP "-a, --algorithm"
 Launches an algorithm for the generated graph or input graph,according to the first parameter
 .br 
@@ -71,8 +75,12 @@ prints usage and exits
 Launches a serie of tests to ensure that each algorithm returns a vertex cover
 .SH AUTHOR
 .P
-Written by Milan Kabac, Rafik Ferroukh and Matthieu Foucault 
-{milan.kabac|rafik.ferroukh|matthieu.foucault}@etu.u-bordeaux1.fr
+Written by Milan Kabac - milan.kabac@etu.u-bordeaux1.fr
+.br
+		  .B Rafik Ferroukh - rafik.ferroukh@etu.u-bordeaux1.fr
+.br
+		  .B Matthieu Foucault - matthieu.foucault@etu.u-bordeaux1.fr
+.br
 .br
 Masters Degrees at University of Bordeaux
 .SH COPYRIGHT

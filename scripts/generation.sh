@@ -5,27 +5,6 @@
 # We use gnuplot to draw performance graphs
 
 
-# We monitor the impact of the part ratio on the generation time of a bipartite graph
-# TODO : verify the correctness of this test
-echo "" > bench/gen_bipart_ratio
-vertexCount=3000
-for partRatio in `seq 5 5 95`
-do
-	echo "$partRatio `../VertexCover -g 2 $vertexCount 50 $partRatio | grep "^graph" | cut -d" " -f4`" >> bench/gen_bipart_ratio
-	gnuplot gnuplot_scripts/gen_bipart_ratio
-done
-
-
-
-# We monitor the generation time of a tree, with a satic depth
-echo "" > bench/gen_tree_vCount
-for vertexCount in `seq 0 100 30000`
-do
-	let "numSons =  vertexCount / 10"
-	echo "$vertexCount `../VertexCover -g 3 $vertexCount $numSons $numSons | grep "^graph" | cut -d" " -f4`" >> bench/gen_tree_vCount
-	gnuplot gnuplot_scripts/gen_tree_vCount
-done
-
 
 # We monitor the generation time of the simple, small cover, and bipartite graph,
 # for a number of vertices from 0 to 10000
@@ -52,10 +31,23 @@ do
 	gnuplot gnuplot_scripts/gen_smallCover_cSize
 done
 
+# We monitor the generation time of a tree, with a satic depth
+echo "" > bench/gen_tree_vCount
+for vertexCount in `seq 0 100 30000`
+do
+	let "numSons =  vertexCount / 10"
+	echo "$vertexCount `../VertexCover -g 3 $vertexCount $numSons $numSons | grep "^graph" | cut -d" " -f4`" >> bench/gen_tree_vCount
+	gnuplot gnuplot_scripts/gen_tree_vCount
+done
 
-
-
-
-
+# We monitor the impact of the part ratio on the generation time of a bipartite graph
+# TODO : verify the correctness of this test
+echo "" > bench/gen_bipart_ratio
+vertexCount=3000
+for partRatio in `seq 5 5 95`
+do
+	echo "$partRatio `../VertexCover -g 2 $vertexCount 50 $partRatio | grep "^graph" | cut -d" " -f4`" >> bench/gen_bipart_ratio
+	gnuplot gnuplot_scripts/gen_bipart_ratio
+done
 
 echo "done!"
