@@ -4,7 +4,6 @@
 #include <cstdlib>
 
 #include <sstream>
-#include <iostream>
 #include <fstream>
 
 #include "generation/BipartiteGraph.h"
@@ -109,7 +108,7 @@ int main(int argc, char* argv[]) {
 			}
 			case 2: { //BipartiteGraph
 				float edgeProba = atof(argv[i + 3])/100;
-				float partRatio = atof(argv[i + 4]);
+				float partRatio = atof(argv[i + 4])/100;
 				bGraph = new BipartiteGraph(graphSize, edgeProba, partRatio);
 
 				break;

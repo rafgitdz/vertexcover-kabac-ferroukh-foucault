@@ -63,3 +63,18 @@ BipartiteGraph::BipartiteGraph(int graphSize, float edgeProba, float partRatio) 
 	}
 }
 
+void BipartiteGraph::trim() {
+	for (map<int, set<int> >::const_iterator ii = m_graph.begin();
+			ii != m_graph.end();) {
+		if (ii->second.size() == 0) {
+			int vertex = ii->first;
+			++ii;
+			m_graph.erase(vertex);
+			m_leftPart.erase(vertex);
+			m_rightPart.erase(vertex);
+		} else
+			++ii;
+
+	}
+}
+

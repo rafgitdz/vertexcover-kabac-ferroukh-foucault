@@ -1,0 +1,9 @@
+set terminal png
+set output "tests_results/gen_smallCover_cSize.png"
+set title "Generation of a small cover graph with 3000 vertices"
+set nokey
+set xlabel "Cover Size"
+set ylabel "Generation time (in ms)"
+plot "bench/gen_smallCover_cSize" using 1:2 with lines
+ 
+ 

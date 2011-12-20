@@ -1,57 +1,61 @@
 #!/bin/bash
 
-Usage() {
-	echo "$0 : prog_name"
-}
+# This scripts launches a serie of graph generations, to monitor their 
+# generation time, and the impact of various parameters on this time
+# We use gnuplot to draw performance graphs
 
-if [ $# -ne 1 ]
-then
-	Usage
-	exit 1
-fi
 
-echo "" > bench/cover_bGraph.optimal
-echo "test algos on bipartite graphs"
-for vertexCount in `seq 0 100 5000`
+# We monitor the impact of the part ratio on the generation time of a bipartite graph
+# TODO : verify the correctness of this test
+echo "" > bench/gen_bipart_ratio
+vertexCount=3000
+for partRatio in `seq 5 5 95`
 do
-	r1 = `$1 -g 2 $vertexCount 0.5 0.5 -a 4`
-	r2 = `$1 -g 2 $vertexCount 0.5 0.5 -a 4`
-	r3 = `$1 -g 2 $vertexCount 0.5 0.5 -a 4`
-	r4 = `$1 -g 2 $vertexCount 0.5 0.5 -a 4`
-	for result in r1, r2, r3, r4
-	do
-		echo "$vertexCount `grep -E "^cover found" $result | cut -d " " -f4`" >> bench/cover_bGraph.optimal
-	done
+	echo "$partRatio `../VertexCover -g 2 $vertexCount 50 $partRatio | grep "^graph" | cut -d" " -f4`" >> bench/gen_bipart_ratio
+	gnuplot gnuplot_scripts/gen_bipart_ratio
 done
 
 
-echo "" > bench/gen.simpleGraph
-echo "" > bench/gen.smallCover
-echo "" > bench/gen.bipartite
-echo "" > bench/gen.tree
-echo "" > bench/gen.treeStat
-for vertexCount in `seq 0 100 10000`
+
+# We monitor the generation time of a tree, with a satic depth
+echo "" > bench/gen_tree_vCount
+for vertexCount in `seq 0 100 30000`
 do
-	echo "$vertexCount `$1 -g 3 $vertexCount | cut -d" " -f4`" >> bench/gen.tree
-	echo "$vertexCount `$1 -g 3 $vertexCount 10 | cut -d" " -f4`" >> bench/gen.treeStat
-	gnuplot gnuplot_generation_tree
+	let "numSons =  vertexCount / 10"
+	echo "$vertexCount `../VertexCover -g 3 $vertexCount $numSons $numSons | grep "^graph" | cut -d" " -f4`" >> bench/gen_tree_vCount
+	gnuplot gnuplot_scripts/gen_tree_vCount
 done
 
+
+# We monitor the generation time of the simple, small cover, and bipartite graph,
+# for a number of vertices from 0 to 10000
+echo "" > bench/gen_simple_vCount
+echo "" > bench/gen_smallCover_vCount
+echo "" > bench/gen_bipart_vCount
 for vertexCount in `seq 0 100 10000`
 do
-	echo "$vertexCount"
-	echo "$vertexCount `$1 -g 0 $vertexCount 0.4 | cut -d" " -f4`" >> bench/gen.simpleGraph
+	echo "vertex count: $vertexCount"
+	echo "$vertexCount `../VertexCover -g 0 $vertexCount 40 | grep "^graph" | cut -d" " -f4`" >> bench/gen_simple_vCount
 	let "cover = vertexCount / 2"
-	echo "$vertexCount `$1 -g 1 $vertexCount 0.4 $cover | cut -d" " -f4`" >> bench/gen.smallCover
-	echo "$vertexCount `$1 -g 2 $vertexCount 0.4 0.6 | cut -d" " -f4`" >> bench/gen.bipartite
-	gnuplot gnuplot_generation
-	for algo in `seq 0 3`
-	do
-		echo "algo : $algo"
-		echo "$vertexCount `./VertexCover -g 0 $vertexCount 0.4 -a $algo | grep -E "^cover" | cut -d" " -f4`" >> bench/cover_simpleGraph_vCount.$algo
-	done
-	for cover
-	gnuplot gnuplot_vc_simpleGraph
+	echo "$vertexCount `../VertexCover -g 1 $vertexCount 40 $cover | grep "^graph" | cut -d" " -f4`" >> bench/gen_smallCover_vCount
+	echo "$vertexCount `../VertexCover -g 2 $vertexCount 40 50 | grep "^graph" | cut -d" " -f4`" >> bench/gen_bipart_vCount
+	gnuplot gnuplot_scripts/gen_all_vCount
+done
+
+# We monitor the impact of the size of the cover on the generation time of a small cover graph
+echo "" > bench/gen_smallCover_cSize
+vertexCount=3000
+for coverSize in `seq 10 10 $vertexCount`
+do
+	echo "cover size: $coverSize"
+	echo "$coverSize `../VertexCover -g 1 $vertexCount 10 $coverSize | grep "^graph" | cut -d" " -f4`" >> bench/gen_smallCover_cSize
+	gnuplot gnuplot_scripts/gen_smallCover_cSize
 done
 
 
+
+
+
+
+
+echo "done!"

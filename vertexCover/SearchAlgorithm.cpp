@@ -20,7 +20,6 @@
 
 #include "../generation/Graph.h"
 #include "SearchAlgorithm.h"
-#include <iostream>
 
 using namespace std;
 
@@ -142,7 +141,6 @@ set<int> SearchAlgorithm::depthFirstSearch(const Graph &graph, int root) {
 
 list<int> SearchAlgorithm::getImprovingPath(const Graph &graph, int root,
         int target) {
-
     breadthFirstSearch(graph, root, target);
     list<int> path;
     if (pi(target) == -1)

@@ -1,0 +1,8 @@
+set terminal png
+set output "tests_results/gen_bipart_ratio.png"
+set title "Generation of a bipartite graph with 3000 vertices"
+set nokey
+set xlabel "Part ratio"
+set ylabel "Generation time (in ms)"
+plot "bench/gen_bipart_ratio" using 1:2 with lines
+ 

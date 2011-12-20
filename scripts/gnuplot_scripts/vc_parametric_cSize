@@ -1,0 +1,7 @@
+set terminal png
+set output "tests_results/vc_parametric_cSize.png"
+set title "Time to find a vertex cover"
+set xlabel "Size of the cover"
+set ylabel "Time to find a cover (in ms)"
+plot "bench/parametric_cs" using 1:2 title "Parametric" with lines,\
+"bench/parametricbis_cs" using 1:2 title "Parametric Bis" with lines

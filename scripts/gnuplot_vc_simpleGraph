@@ -1,8 +1,0 @@
-set terminal png
-set output "algos1.png"
-set xlabel 'Number of Vertices' 
-set ylabel 'Time to find a Cover (in ms)' 
-plot "bench/cover_simpleGraph_vCount.0"  using 1:2 title "Greedy" with lines,\
-"bench/cover_simpleGraph_vCount.1"  using 1:2 title "Greedy Simple" with lines,\
-"bench/cover_simpleGraph_vCount.2"  using 1:2 title "Cover Edges" with lines,\
-"bench/cover_simpleGraph_vCount.3"  using 1:2 title "Deep Search Based" with lines

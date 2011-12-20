@@ -26,23 +26,24 @@ using namespace std;
  * 					neigh - number of vertice's neighbours
  */
 set<int> AlgorithmGloutonSimple::getCover() {
-	map<int, set<int> >::const_iterator it;
-	multimap<int, int>::const_iterator it1;
+	if (m_graph.getVertexCount() > 0) {
+		map<int, set<int> >::const_iterator it;
+		multimap<int, int>::const_iterator it1;
 
-	// O(n)
-	for (it = m_graph.getBeginGraph(); it != m_graph.getEndGraph(); it++)
-		// O(log(n))
-		vertexDegree.insert(pair<int, int>((it->second).size(), it->first));
+		// O(n)
+		for (it = m_graph.getBeginGraph(); it != m_graph.getEndGraph(); it++)
+			// O(log(n))
+			vertexDegree.insert(pair<int, int>((it->second).size(), it->first));
 
-	it1 = vertexDegree.end();
-	// O(n)
-	do {
-		it1--;
-		// O(log(n))
-		m_vertexCover.insert(it1->second);
-		// O(neigh*log(neigh) + log(n) + neigh*log(n) + log(n))
-		m_graph.removeVertex(it1->second);
-	} while ((m_graph.getEdgeCount() > 0) && (it1 != vertexDegree.begin()));
-
+		it1 = vertexDegree.end();
+		// O(n)
+		do {
+			it1--;
+			// O(log(n))
+			m_vertexCover.insert(it1->second);
+			// O(neigh*log(neigh) + log(n) + neigh*log(n) + log(n))
+			m_graph.removeVertex(it1->second);
+		} while ((m_graph.getEdgeCount() > 0) && (it1 != vertexDegree.begin()));
+	}
 	return m_vertexCover;
 }

@@ -12,10 +12,10 @@ public:
 	virtual ~AlgorithmDeepSearch() {};
 
 	/*
-	 * TODO
+	 * returns a 2-approached cover, based on a deep search of the graph
+	 * complexity: O(|E| * log(n))
 	 */
 	std::set<int> getCover();
-	std::set<int> getCover(int treeRoot);
 
 private:
 
