@@ -18,12 +18,16 @@ L'installation de VertexCover se fait en suivant les étapes suivantes :
 
 1. Décompresser le contenu de l'archive dans un répetoire donné.
 2. Se mettre sous le répertoire VertexCover.
-3. Exécuter le makefile en lançant la commande ''make'' dans une console.
+3. Exécuter le makefile en lançant la commande "make all" dans une console.
 4. Lancer VertexCover avec la commande ''./VertexCover [Input_File] [options]'' (voir manuel utilisateur pour les détails).
+
+Post-Installation
+=================
+Pour s'assurer que VertexCover fonctionne normalement, se mettre dans le répertoire "VertexCover" et lancer ./VertexCover -t
 
 Lancement des programmes
 ========================
-Consulter la manuel d'utilisateur se trouvant à la racine du programme.
+Consulter la manuel d'utilisation se trouvant à la racine du programme (répertoire VertexCover)
 
 Lancement des tests
 ===================
@@ -78,6 +82,7 @@ Il contient :
 Nombre de sommets est égal à 3000
 Taille couverture du graphe fixé a 300
 Variation de la probabilité de création d'une arête de 5 à 100 avec augementation d'un taux de 5 à chaque itération
+
 Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "recherche en profondeur".
 
 * Test de comparaison entre 4 algorithmes de recherche de couverture sur un graphe avec couverture minimale  
@@ -87,6 +92,7 @@ Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme 
 Probabilité de création d'une arête entre deux sommets fixée à 40.
 Taille couverture du graphe fixé a 100
 Variation du nombre total de sommets de 100 à 3000 avec augementation d'un taux de 100 à chaque itération
+
 Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "recherche en profondeur".
 
 * Test de comparaison entre 4 algorithmes de recherche de couverture sur un graphe avec couverture minimale
@@ -96,6 +102,7 @@ Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme 
 Nombre de sommets est égal à 3000
 Probabilité de création d'une arête entre deux sommets fixée à 40.
 Variation de la taille de la couverture de 100 à 3000 avec augementation d'un taux de 100 à chaque itération
+
 Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "deep search".
 
 * Test de comparaison entre 5 algorithmes de recherche de couverture sur un arbre
@@ -106,6 +113,7 @@ Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme 
 Nombre de sommets fixé à 10000
 Nombre minumum de fils varie de de 2 à 100
 Nombre maximum de fils  égal à 2*Min
+
 Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "deep search",
 Algorithme "Optimal pour les arbres".
 
@@ -114,6 +122,7 @@ Algorithme "Optimal pour les arbres".
 Nombre de sommets varie de 10 à 10010 avec augmentation d'un taux de 200 à chaque itération
 Nombre minumum de fils fixé à 2
 Nombre maximum de fils  fixé à 4
+
 Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "deep search",
 Algorithme "Optimal pour les arbres".
 
@@ -123,11 +132,69 @@ Algorithme "Optimal pour les arbres".
 Nombre de sommets fixé à 100
 Probabilité de créer une arête fixé à 0.4
 La taille de la couverture du graphe créé varie de 5 à 20 (pas de 1).
+
 Algorithme testé : Alogrithme paramétrique itératif et Alogrithme paramétrique récursif
 
-Sûrete de fonctionnement
-========================
-Pour s'assurer que VertexCover fonctionne normalement, lancer ./VertexCover -t
+* Test de comparaison entre 5 algorithmes de recherche de couverture sur un graphe bipartite avec couverture minimale
+*********************************************************************************************************************
+(Variation de la probabilité de création d'une arête)
+
+Nombre de sommets fixé à 500
+Taille de la couverture fixé à 100
+Ratio de la couverture fixé à 20
+Ratio part du bipartit fixé à 20
+Variation de de la probabilité de création d'une arête de 1 à 100 avec une augmentation de 5 à chaque itération
+
+Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "deep search",
+Algorithme "Optimal pour les graphes bipartit".
+
+* Test de comparaison entre 5 algorithmes de recherche de couverture sur un graphe bipartite avec couverture minimale
+*********************************************************************************************************************
+(Variation de la du ration part du graph bipartite)
+
+Nombre de sommets fixé à 500
+Taille de la couverture fixé à 100
+Ratio de la couverture fixé à 50
+Probabilité de création d'une arête fixé à 15
+Variation du ratio part de 5 à 95 avec une augmentation de 5 à chaque itération
+
+Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "deep search",
+Algorithme "Optimal pour les graphes bipartit".
+
+* Test de comparaison entre 5 algorithmes de recherche de couverture sur un graphe bipartite avec couverture minimale
+*********************************************************************************************************************
+(Variation de la probabilité de création d'une arête)
+
+Taille de la couverture fixé à 200
+Ratio de la couverture fixé à 20
+Ratio part du bipartit fixé à 20
+Probabilité de création d'une arête fixé à 15
+Variation du nombre de sommets total du graphe de 100 à 1000 avec une augmentation de 50 à chaque itération
+
+Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "deep search",
+Algorithme "Optimal pour les graphes bipartit".
+
+* Test de comparaison entre 5 algorithmes de recherche de couverture sur un graphe bipartite avec couverture minimale
+*********************************************************************************************************************
+(Variation de la probabilité de création d'une arête)
+
+Nombre de sommets fixé à 500
+Taille de la couverture fixé à 200
+Ratio part du bipartit fixé à 20
+Probabilité de création d'une arête fixé à 15
+Variation du ratio de la couverture entre les sommets du graphe de 10 à 90 avec une augmentation de 1 à chaque itération
+
+Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "deep search",
+Algorithme "Optimal pour les graphes bipartit".
+
+* Test de comparaison entre 5 algorithmes de recherche de couverture sur un arbre 
+**********************************************************************************
+
+Nombre de fils par sommet fixé à 1
+Variation du nombre total de sommets de 100 à 16000 avec augmentation d'un taux de 100 à chaque itération
+
+Algorithmes testés : Algorithme "cover edges", Algorithme "glouton", Algorithme "glouton simple", Algorithme "deep search",
+Algorithme "Optimal pour les arbres".
 
 Web site projet VertexCover
 ===========================
