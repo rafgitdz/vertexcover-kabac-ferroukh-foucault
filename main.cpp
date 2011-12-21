@@ -11,6 +11,7 @@
 #include "generation/SmallCoverGraph.h"
 #include "generation/Graph.h"
 #include "generation/TreeDynamicSons.h"
+#include "generation/SmallCoverBipartiteGraph.h"
 
 #include "vertexCover/AlgorithmCoverEdges.h"
 #include "vertexCover/SearchAlgorithm.h"
@@ -72,12 +73,11 @@ int main(int argc, char* argv[]) {
 	}
 
 	for (int i = 1; i < argc; ++i)
-		if (strcmp(argv[i], "-in")==0) {
-			char* loadPath = argv[i+1];
+		if (strcmp(argv[i], "-in") == 0) {
+			char* loadPath = argv[i + 1];
 			graph = new Graph(loadPath);
 			graphGenerated = true;
-		}
-		else if (strcmp(argv[i], "-g") == 0
+		} else if (strcmp(argv[i], "-g") == 0
 				|| strcmp(argv[i], "--generate-graph") == 0) {
 
 			if (argc < i + 3 || graphGenerated) {
@@ -94,21 +94,21 @@ int main(int argc, char* argv[]) {
 			switch (graphType) {
 
 			case 0: { //SimpleGraph
-				float edgeProba = atof(argv[i + 3])/100;
+				float edgeProba = atof(argv[i + 3]) / 100;
 				graph = new SimpleGraph(graphSize, edgeProba);
 
 				break;
 			}
 			case 1: { //SmallCoverGraph
-				float edgeProba = atof(argv[i + 3])/100;
+				float edgeProba = atof(argv[i + 3]) / 100;
 				int coverSize = atoi(argv[i + 4]);
 				graph = new SmallCoverGraph(graphSize, edgeProba, coverSize);
 
 				break;
 			}
 			case 2: { //BipartiteGraph
-				float edgeProba = atof(argv[i + 3])/100;
-				float partRatio = atof(argv[i + 4])/100;
+				float edgeProba = atof(argv[i + 3]) / 100;
+				float partRatio = atof(argv[i + 4]) / 100;
 				bGraph = new BipartiteGraph(graphSize, edgeProba, partRatio);
 
 				break;
@@ -124,6 +124,19 @@ int main(int argc, char* argv[]) {
 				tree = new TreeDynamicSons(graphSize, minSons, maxSons);
 				break;
 
+			}
+			case 4: { //Bipartite with a small cover
+				if (argc < i + 7) {
+					usage();
+					return EXIT_FAILURE;
+				}
+				float edgeProba = atof(argv[i + 3]) / 100;
+				float partRatio = atof(argv[i + 4]) / 100;
+				int coverSize = atoi(argv[i + 5]);
+				float coverRatio = atof(argv[i + 6]) / 100;
+				bGraph = new SmallCoverBipartiteGraph(graphSize,
+						edgeProba, partRatio, coverSize, coverRatio);
+				break;
 			}
 			default: {
 				usage();

@@ -42,7 +42,7 @@ class BipartiteGraph: public Graph {
 		 */
 		virtual void trim();
 
-	private:
+	protected:
 		std::set<int> m_leftPart;
 		std::set<int> m_rightPart;
 };

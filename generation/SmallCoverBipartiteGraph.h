@@ -15,11 +15,15 @@
 #define SMALLCOVERBIPARTITEGRAPH_H_
 
 #include "BipartiteGraph.h"
+#include <set>
 
 class SmallCoverBipartiteGraph : public BipartiteGraph {
 public:
 	SmallCoverBipartiteGraph(int graphSize, float edgeProba, float partRatio, int coverSize, float coverRatio);
 	virtual ~SmallCoverBipartiteGraph(){};
+private:
+	std::set<int> m_vcLeft;
+	std::set<int> m_vcRight;
 };
 
 #endif /* SMALLCOVERBIPARTITEGRAPH_H_ */
