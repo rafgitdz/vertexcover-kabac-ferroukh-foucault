@@ -100,7 +100,7 @@ bool Parametric::tryGetCoverBis(Graph g, unsigned maxCoverSize,
 	if (!tryC1 && !tryC2)
 		return false;
 
-	if ((tryC1 && !tryC2) || (tryC1 && tryC2 && (c1.size() < c2.size()))) {
+	if ((tryC1 && !tryC2) || (tryC1 && tryC2 && ((c1.size()+1) < (c2.size() + vertices.size())))) {
 		cover = c1;
 		cover.insert(v1);
 
